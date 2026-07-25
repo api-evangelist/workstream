@@ -1,0 +1,247 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Workstream Public Applicants Locations API
+  termsOfService: https://workstream.us/terms/
+  contact:
+    email: help@workstream.is
+    url: https://help.workstream.us/en/
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: workstream-logo.svg
+    href: '#'
+  description: '# API Reference
+
+
+    The Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
+
+
+    **Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.
+
+    '
+servers:
+- url: https://{tenant}
+  variables:
+    tenant:
+      default: public-api.workstream.us
+      description: Public API URI
+tags:
+- name: Locations
+  description: Locations represent store locations within your company.
+paths:
+  /locations/{uuid}:
+    get:
+      operationId: GetLocation
+      tags:
+      - Locations
+      summary: Retrieve an existing Location
+      description: Retrieves an existing Location.
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: embed
+        in: query
+        schema:
+          type: string
+          example: (custom_fields)
+        description: Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated.
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+              description: A randomly generated request-id to uniquely identify each request sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/location-4'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+  /locations:
+    get:
+      operationId: GetLocations
+      tags:
+      - Locations
+      summary: List existing Locations
+      description: Lists existing Locations with the input parameters.
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: name
+        in: query
+        schema:
+          type: string
+          example: San Francisco
+        description: Returns locations with the input `name`.
+      - name: embed
+        in: query
+        schema:
+          type: string
+          example: (custom_fields)
+        description: Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated.
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+              description: A randomly generated request-id to uniquely identify each request sent.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/location-4'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+components:
+  responses:
+    '422':
+      description: Unprocessable Entity - Invalid query params or request body.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13422
+              message:
+                type: string
+                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13403
+              message:
+                type: string
+                example: Forbidden - The user is not authorized to use this resource.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
+    '429':
+      description: Too many requests.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13429
+              message:
+                type: string
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+    '404':
+      description: Not found - The requested resource is not found.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13404
+              message:
+                type: string
+                example: The requested resource is not found.
+  schemas:
+    custom_field:
+      type: array
+      title: custom field
+      description: Need to embed **custom_fields** in request query params.
+      items:
+        type: object
+        properties:
+          uuid:
+            description: Custom field uuid
+            type: string
+            example: 509a251a-93af-41e3-8416-23b29dc293cc
+          title:
+            description: Custom field title
+            type: string
+            example: custom field title
+          value:
+            description: Custom field value
+            type: string
+            example: custom field value
+    location-4:
+      type: object
+      title: Location
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          example: 8b9ad790-2584-11ee-be56-0242ac120002
+        name:
+          type: string
+          example: San Francisco store
+        custom_fields:
+          $ref: '#/components/schemas/custom_field'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://public-api.workstream.us/
+          scopes:
+            Applicants: Read Applicant records
+            Employees: Read Employee records
+            Company Users: Read Company User records
+            Company Roles: Read Company Role records
+            Positions: Read Position records
+            TeamMember: Read Team Member records
+            Locations: Read Location records
+            Departments: Read Department records
+            Imported Employee Infos: Read Imported Employee Info records
+            Custom Field: Read, update custom field and custom field values
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

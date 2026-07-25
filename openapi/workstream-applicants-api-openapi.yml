@@ -1,0 +1,558 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Workstream Public Applicants API
+  termsOfService: https://workstream.us/terms/
+  contact:
+    email: help@workstream.is
+    url: https://help.workstream.us/en/
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: workstream-logo.svg
+    href: '#'
+  description: '# API Reference
+
+
+    The Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
+
+
+    **Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.
+
+    '
+servers:
+- url: https://{tenant}
+  variables:
+    tenant:
+      default: public-api.workstream.us
+      description: Public API URI
+tags:
+- name: Applicants
+  description: Applicants represent people who have applied for positions within your company.
+paths:
+  /position_applications/{uuid}:
+    get:
+      operationId: GetApplicant
+      tags:
+      - Applicants
+      summary: Retrieve an existing Applicant
+      description: Retrieves an existing Applicant.
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - $ref: '#/components/parameters/applicant_embed'
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+              description: A randomly generated request-id to uniquely identify each request sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/applicant'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+  /position_applications/{uuid}/forms:
+    get:
+      operationId: GetApplicantForm
+      tags:
+      - Applicants
+      summary: List Applicant's custom forms
+      description: Returns the questions and answers of forms filled in by an existing Applicant.
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+              description: A randomly generated request-id to uniquely identify each request sent.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/form'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+  /position_applications:
+    get:
+      operationId: GetApplicants
+      tags:
+      - Applicants
+      summary: List existing Applicants
+      description: Lists existing Applicants with the input parameters.
+      security:
+      - bearerAuth: []
+      parameters:
+      - $ref: '#/components/parameters/applicant_embed'
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - in_progress
+          - hired
+          - rejected
+          example: in_progress
+        description: Returns applicants with the input `status`.
+      - name: first_name
+        in: query
+        schema:
+          type: string
+          example: Andy
+        description: Returns applicants with the input `first_name`.
+      - name: last_name
+        in: query
+        schema:
+          type: string
+          example: Lee
+        description: Returns applicants with the input `last_name`.
+      - name: name
+        in: query
+        schema:
+          type: string
+          example: Andy%20Lee
+        description: Returns applicants with the input `name`.
+      - name: current_stage
+        in: query
+        schema:
+          type: string
+          example: Onsite%20Interview
+        description: Returns applicants with the input position stage.
+      - name: position[uuid]
+        in: query
+        schema:
+          type: string
+          format: uuid
+          example: 67161b3c-2584-11ee-be56-0242ac120002
+        description: Returns applicants with the input position's UUID.
+      - name: location[name]
+        in: query
+        schema:
+          type: string
+          example: SF%20store
+        description: Returns applicants with the input location's name.
+      - name: tag[name]
+        in: query
+        schema:
+          type: string
+          example: cook
+        description: Returns applicants with the input applicant tag's name.
+      - name: note[content]
+        in: query
+        schema:
+          type: string
+          example: He is a good applicant
+        description: Returns applicants with the input applicant note's content.
+      - name: created_at.gte
+        in: query
+        schema:
+          type: string
+          format: timestamp
+          example: '2020-09-30 00:00:00.000Z'
+        description: Returns applicants created after or equals to the input date.
+      - name: created_at.lte
+        in: query
+        schema:
+          type: string
+          format: timestamp
+          example: '2022-09-30 00:00:00.000Z'
+        description: Returns applicants created before or equals to the input date.
+      - name: hired_at.gte
+        in: query
+        schema:
+          type: string
+          format: timestamp
+          example: '2022-09-30 00:00:00.000Z'
+        description: Returns applicants hired after or equals to the input date.
+      - name: hired_at.lte
+        in: query
+        schema:
+          type: string
+          format: timestamp
+          example: '2022-09-30 00:00:00.000Z'
+        description: Returns applicants hired before or equals to the input date.
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+              description: A randomly generated request-id to uniquely identify each request sent.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/applicant'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+components:
+  parameters:
+    applicant_embed:
+      name: embed
+      in: query
+      schema:
+        type: string
+        example: (position, location, department, notes, tags, candidate_info, pay_info)
+      description: Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated
+  responses:
+    '422':
+      description: Unprocessable Entity - Invalid query params or request body.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13422
+              message:
+                type: string
+                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13403
+              message:
+                type: string
+                example: Forbidden - The user is not authorized to use this resource.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
+    '404':
+      description: Not found - The requested resource is not found.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13404
+              message:
+                type: string
+                example: The requested resource is not found.
+    '429':
+      description: Too many requests.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13429
+              message:
+                type: string
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+  schemas:
+    tags:
+      type: array
+      title: Applicant Tags
+      description: Need to embed **tags** in request query params
+      items:
+        properties:
+          name:
+            description: The name of the tag
+            type: string
+            example: cook
+    application_notes:
+      type: array
+      title: Applicant Notes
+      description: Need to embed **notes** in request query params
+      items:
+        properties:
+          content:
+            description: Content of note
+            type: string
+            example: He is a good applicant!
+    location-2:
+      type: object
+      title: Location
+      description: Need to embed **location** in request query params
+      properties:
+        uuid:
+          description: Location uuid
+          type: string
+          format: uuid
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        name:
+          description: location name
+          type: string
+          example: SF store
+    position-2:
+      type: object
+      title: Position
+      description: Need to embed **position** in request query params
+      properties:
+        uuid:
+          description: Position uuid
+          type: string
+          format: uuid
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        title:
+          description: Position title
+          type: string
+          example: Cook
+    applicant:
+      type: object
+      title: Applicant
+      properties:
+        uuid:
+          description: Applicant uuid
+          type: string
+          format: uuid
+          example: 509a251a-93af-41e3-8416-23b29dc293cc
+        digest_key:
+          description: Applicant digest_key
+          type: string
+          example: 108eeee1
+        referer_source:
+          description: Applicant referer_source
+          type: string
+          example: Others
+        email:
+          description: Applicant email
+          type: string
+          example: joblexxx@gmail.com
+        phone:
+          description: Applicant phone
+          type: string
+          example: '4321012345'
+        first_name:
+          description: Applicant first_name
+          type: string
+          example: Joey
+        last_name:
+          description: Applicant last_name
+          type: string
+          example: White
+        name:
+          description: Applicant name
+          type: string
+          example: Joey White
+        status:
+          description: Applicant status
+          type: string
+          enum:
+          - in_progress
+          - rejected
+          - hired
+          example: in_progress
+        global_phone_number:
+          description: Applicant global_phone_number
+          type: string
+          example: '+15151515151'
+        sms_notification:
+          description: Applicant sms_notification
+          type: boolean
+          example: true
+        current_stage:
+          description: Applicant current_stage
+          type: string
+          example: Application
+        hired_at:
+          description: Applicant hired_at
+          type: string
+          format: datetime
+          example: '2022-12-01 08:00:00'
+        application_date:
+          description: Applicant application_date
+          type: string
+          format: date
+        latest_interview_date:
+          description: Applicant latest_interview_date
+          type: string
+          format: date
+          example: '2022-12-01'
+        position:
+          $ref: '#/components/schemas/position-2'
+        location:
+          $ref: '#/components/schemas/location-2'
+        department:
+          $ref: '#/components/schemas/department'
+        notes:
+          $ref: '#/components/schemas/application_notes'
+        tags:
+          $ref: '#/components/schemas/tags'
+        candidate_info:
+          $ref: '#/components/schemas/candidate_info'
+        pay_info:
+          $ref: '#/components/schemas/pay_info'
+    form:
+      type: object
+      title: Form Submission
+      properties:
+        uuid:
+          description: The uuid of the form submission.
+          type: string
+          format: uuid
+          example: d404e957-af95-4776-af16-bae088e49165
+        name:
+          description: The name of the form.
+          type: string
+          example: Additional Information
+        answers:
+          type: array
+          description: An array of form questions and answers.
+          items:
+            type: object
+            title: Form question and answer
+            properties:
+              question_uuid:
+                description: The uuid of the question.
+                type: string
+                format: uuid
+                example: d404e957-af95-4776-af16-bae088e49165
+              question_type:
+                description: The type of the question.
+                type: string
+                example: multiple_choice
+              question:
+                description: The text of the question.
+                type: string
+                example: Are you at least 18 years old with a valid Driver's license?
+              answer_uuid:
+                description: The uuid of the answer.
+                type: string
+                format: uuid
+                example: d404e957-af95-4776-af16-bae088e49165
+              answer:
+                description: The answer to the question.
+                type: string
+                example: 'yes'
+    pay_info:
+      type: object
+      title: Applicant Pay Info
+      description: Need to embed **pay_info** in request query params
+      properties:
+        pay_amount:
+          description: Pay amount
+          type: number
+          example: 20
+        pay_frequency:
+          description: Pay frequency
+          type: string
+          enum:
+          - hour
+          - day
+          - week
+          - month
+          - year
+          example: hour
+    candidate_info:
+      type: array
+      title: Applicant Candidate Info
+      description: Need to embed **candidate_info** in request query params
+      items:
+        properties:
+          question:
+            description: Name of field
+            type: string
+            example: Street Address
+          answer:
+            description: Value of field
+            type: string
+            example: 110 W 5 st
+    department:
+      type: object
+      title: Department
+      description: Need to embed **department** in request query params
+      properties:
+        name:
+          description: Department name
+          type: string
+          example: Marketing
+        description:
+          description: Department description
+          type: string
+          example: The marketing department
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://public-api.workstream.us/
+          scopes:
+            Applicants: Read Applicant records
+            Employees: Read Employee records
+            Company Users: Read Company User records
+            Company Roles: Read Company Role records
+            Positions: Read Position records
+            TeamMember: Read Team Member records
+            Locations: Read Location records
+            Departments: Read Department records
+            Imported Employee Infos: Read Imported Employee Info records
+            Custom Field: Read, update custom field and custom field values
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

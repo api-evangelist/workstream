@@ -1,0 +1,271 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Workstream Public Applicants Authorization API
+  termsOfService: https://workstream.us/terms/
+  contact:
+    email: help@workstream.is
+    url: https://help.workstream.us/en/
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: workstream-logo.svg
+    href: '#'
+  description: '# API Reference
+
+
+    The Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
+
+
+    **Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.
+
+    '
+servers:
+- url: https://{tenant}
+  variables:
+    tenant:
+      default: public-api.workstream.us
+      description: Public API URI
+tags:
+- name: Authorization
+  description: 'The Workstream API uses OAuth 2.0 Bearer access tokens to authenticate requests. You can view and manage your access tokens in the [Workstream Dashboard](https://hr.workstream.us/#/company?currentPanel=integrations&integrationItem=accesstoken).
+
+
+    To generate an access token, simply click on `Generate token`, give it a name, and select the permissions(i.e. Applicants, Employees, Positions) to attach to it. **The token expires in 7 days.**
+
+
+    You can also manage your tokens through API, as shown in the next section.'
+paths:
+  /tokens:
+    post:
+      operationId: CreateAnAccessToken
+      tags:
+      - Authorization
+      summary: Create a new access token
+      description: Creates a new access token.
+      parameters:
+      - name: grant_type
+        description: Grant type of access token, please use `client_credentials`.
+        in: query
+        required: true
+        schema:
+          type: string
+          example: client_credentials
+      - name: client_id
+        description: Client credentials provided as part of your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`.
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: client_secret
+        description: The password used to authenticate your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`.
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: name
+        description: Name of the access token displayed in the Dashboard.
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: scopes
+        description: Permission scopes of access token.
+        in: query
+        required: true
+        schema:
+          type: array
+          items:
+            type: string
+            enum:
+            - positions
+            - company_users
+            - company_roles
+            - position_applications
+            - employees
+            - locations
+            - departments
+            - team_members
+            - imported_employee_infos
+        style: spaceDelimited
+        explode: false
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/access_token'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: integer
+                    example: 13401
+                  message:
+                    type: string
+                    example: Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method.
+  /tokens/refresh_token:
+    post:
+      operationId: RefreshAnAccessToken
+      tags:
+      - Authorization
+      summary: Refresh the access token
+      description: Refresh the access token.
+      parameters:
+      - name: grant_type
+        description: Grant type of access token, please use `client_credentials`.
+        in: query
+        required: true
+        schema:
+          type: string
+          example: client_credentials
+      - name: client_id
+        description: Client credentials provided as part of your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`.
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: client_secret
+        description: The password used to authenticate your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`.
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: token
+        description: The access token needs to be refreshed
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/access_token'
+        '401':
+          description: Unauthorized
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  error_code:
+                    type: integer
+                    example: 13401
+                  message:
+                    type: string
+                    example: Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method.
+  /revoke:
+    post:
+      operationId: RevokeAnAccessToken
+      tags:
+      - Authorization
+      summary: Revoke an existing access token
+      description: Revokes an existing access token.
+      parameters:
+      - name: token
+        description: The access token to revoke.
+        in: query
+        required: true
+        schema:
+          type: string
+          example: AqrqBVwadstAdr_Ens0j5iHLug3gVKkOnTnDXvSDhmo
+      - name: client_id
+        description: Client credentials provided as part of your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`.
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: client_secret
+        description: The password used to authenticate your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`.
+        in: query
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                example: {}
+        '403':
+          description: Unauthorized Client
+          content:
+            application/problem+json:
+              schema:
+                type: object
+                properties:
+                  error:
+                    type: string
+                    example: unauthorized_client
+                  error_description:
+                    type: string
+                    example: You are not authorized to revoke this token.
+components:
+  schemas:
+    access_token:
+      type: object
+      title: Access Token
+      properties:
+        name:
+          description: Token name
+          type: string
+          example: token1
+        token:
+          description: Token value
+          type: string
+          example: OtrQV4Gz7nwLouCm-ZLqiSxdwJEMEAFGx___GcNxES8
+        created_at:
+          description: Token creation date
+          type: string
+          format: date-time
+        expires_in:
+          description: Token expiry time
+          type: integer
+          example: 604800
+        scopes:
+          description: Token data access permissions
+          type: array
+          items:
+            type: string
+          example:
+          - positions
+          - company_users
+          - company_roles
+          - position_applications
+          - employees
+          - locations
+          - departments
+          - team_members
+          - imported_employee_infos
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://public-api.workstream.us/
+          scopes:
+            Applicants: Read Applicant records
+            Employees: Read Employee records
+            Company Users: Read Company User records
+            Company Roles: Read Company Role records
+            Positions: Read Position records
+            TeamMember: Read Team Member records
+            Locations: Read Location records
+            Departments: Read Department records
+            Imported Employee Infos: Read Imported Employee Info records
+            Custom Field: Read, update custom field and custom field values
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

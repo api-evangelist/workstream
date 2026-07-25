@@ -1,0 +1,332 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Workstream Public Applicants Employee Documents API
+  termsOfService: https://workstream.us/terms/
+  contact:
+    email: help@workstream.is
+    url: https://help.workstream.us/en/
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: workstream-logo.svg
+    href: '#'
+  description: '# API Reference
+
+
+    The Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
+
+
+    **Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.
+
+    '
+servers:
+- url: https://{tenant}
+  variables:
+    tenant:
+      default: public-api.workstream.us
+      description: Public API URI
+tags:
+- name: Employee Documents
+  description: Employee Documents represent documents that are associated with employees within your company.
+paths:
+  /employee/docs/{document_id}:
+    get:
+      operationId: GetEmployeeDocument
+      summary: Download a employee document
+      description: 'Download employee document with document id.
+
+        **Note:** This endpoint requires the `document-public-api` feature flag. Please contact our [support team](https://help.workstream.us/en/) to request access.'
+      tags:
+      - Employee Documents
+      servers:
+      - url: https://documents-api.workstream.us
+      parameters:
+      - name: document_id
+        in: path
+        required: true
+        schema:
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+        description: The document id to download the file.
+      - name: token
+        in: query
+        schema:
+          type: string
+          example: token123
+        description: The authorization token to access the document.
+      responses:
+        '200':
+          description: OK
+          headers:
+            content-type:
+              schema:
+                type: string
+              description: The document type.
+          content:
+            application/pdf:
+              schema:
+                type: string
+                description: The document file content.
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+  /employee/docs:
+    get:
+      operationId: GetEmployeeDocuments
+      summary: List existing Employee Documents
+      description: 'Lists existing employee documents with the input parameters.
+
+        **Note:** This endpoint requires the `document-public-api` feature flag. Please contact our [support team](https://help.workstream.us/en/) to request access.'
+      tags:
+      - Employee Documents
+      security:
+      - bearerAuth: []
+      servers:
+      - url: https://documents-api.workstream.us
+      parameters:
+      - name: employee_uuid
+        in: query
+        schema:
+          type: string
+          example: 123e4567-e89b-12d3-a456-426614174000
+        description: Returns employee docs with the input `employee_uuid`.
+      - name: first_name
+        in: query
+        schema:
+          type: string
+          example: Andy
+        description: Returns employee docs with the input `first_name`.
+      - name: last_name
+        in: query
+        schema:
+          type: string
+          example: Lee
+        description: Returns employee docs with the input `last_name`.
+      - name: onboarding_status
+        in: query
+        schema:
+          type: string
+          enum:
+          - not_started
+          - in_progress
+          - completed
+          - suspended
+          example: completed
+        description: Returns employee docs with the input `onboarding_status`.
+      - name: start_date.gte
+        in: query
+        schema:
+          type: string
+          format: date
+          example: '2022-09-30'
+        description: Returns employee docs with `start_date` after or equals to the input date.
+      - name: start_date.lte
+        in: query
+        schema:
+          type: string
+          format: date
+          example: '2022-09-30'
+        description: Returns employee docs with `start_date` before or equals to the input date.
+      - name: hired_date.gte
+        in: query
+        schema:
+          type: string
+          format: date
+          example: '2022-09-30'
+        description: Returns employee docs with `hired_date` after or equals to the input date.
+      - name: hired_date.lte
+        in: query
+        schema:
+          type: string
+          format: date
+          example: '2022-09-30'
+        description: Returns employee docs with `hired_date` before or equals to the input date.
+      - name: applied_date.gte
+        in: query
+        schema:
+          type: string
+          format: date
+          example: '2022-09-30'
+        description: Returns employee docs with `applied_date` after or equals to the input date.
+      - name: applied_date.lte
+        in: query
+        schema:
+          type: string
+          format: date
+          example: '2022-09-30'
+        description: Returns employee docs with `applied_date` before or equals to the input date.
+      - name: onboard_date.gte
+        in: query
+        schema:
+          type: string
+          format: timestamp
+          example: '2022-09-30T00:00:00.000Z'
+        description: Returns employee docs with `onboard_date` after or equals to the input date.
+      - name: onboard_date.lte
+        in: query
+        schema:
+          type: string
+          format: timestamp
+          example: '2022-09-30T00:00:00.000Z'
+        description: Returns employee docs with `onboard_date` before or equals to the input date.
+      - name: embed
+        in: query
+        schema:
+          type: string
+          example: (w4_doc, state_tax_docs, i9_docs, company_docs)
+        description: Specifies the names of document types that should be embedded in the response. Resources to embed must have parentheses and be comma-separated.
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/document'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+components:
+  responses:
+    '422':
+      description: Unprocessable Entity - Invalid query params or request body.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13422
+              message:
+                type: string
+                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13403
+              message:
+                type: string
+                example: Forbidden - The user is not authorized to use this resource.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
+    '429':
+      description: Too many requests.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13429
+              message:
+                type: string
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+    '404':
+      description: Not found - The requested resource is not found.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13404
+              message:
+                type: string
+                example: The requested resource is not found.
+  schemas:
+    document:
+      type: object
+      title: Document
+      properties:
+        employee_uuid:
+          description: Employee uuid
+          type: string
+          format: uuid
+          example: d404e957-af95-4776-af16-bae088e49165
+        documents:
+          type: array
+          items:
+            type: object
+            title: Document_info
+            properties:
+              url:
+                description: Document url
+                type: string
+                example: https://example.com/employee/docs/123
+              type:
+                description: Document type
+                type: string
+                enum:
+                - w4
+                - state_tax
+                - i9
+                - i9_supplement_b
+                - company_docs
+                - adhoc_docs
+                example: w4
+              created_at:
+                description: Document created_at
+                type: string
+                format: date-time
+                example: '2022-09-30T00:00:00.000Z'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://public-api.workstream.us/
+          scopes:
+            Applicants: Read Applicant records
+            Employees: Read Employee records
+            Company Users: Read Company User records
+            Company Roles: Read Company Role records
+            Positions: Read Position records
+            TeamMember: Read Team Member records
+            Locations: Read Location records
+            Departments: Read Department records
+            Imported Employee Infos: Read Imported Employee Info records
+            Custom Field: Read, update custom field and custom field values
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

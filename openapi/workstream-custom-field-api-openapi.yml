@@ -1,0 +1,455 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Workstream Public Applicants Custom Field API
+  termsOfService: https://workstream.us/terms/
+  contact:
+    email: help@workstream.is
+    url: https://help.workstream.us/en/
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: workstream-logo.svg
+    href: '#'
+  description: '# API Reference
+
+
+    The Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
+
+
+    **Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.
+
+    '
+servers:
+- url: https://{tenant}
+  variables:
+    tenant:
+      default: public-api.workstream.us
+      description: Public API URI
+tags:
+- name: Custom Field
+  description: Custom field config for location, department, job posting and employee within your company.
+paths:
+  /custom_fields:
+    get:
+      operationId: ListCustomFields
+      tags:
+      - Custom Field
+      summary: List existing Custom Fields
+      description: List existing Custom Fields
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: entity_type
+        in: query
+        schema:
+          type: string
+          enum:
+          - location
+          - department
+          - job_posting_template
+          - employee_record
+        description: Entity type of the custom field.
+      responses:
+        '200':
+          description: Returns all custom field values for an entity
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+              description: A randomly generated request_id to uniquely identify each request sent.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  custom_fields:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/show-2'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+    post:
+      operationId: CreateCustomField
+      tags:
+      - Custom Field
+      summary: Create Custom Field
+      description: Create Custom Field
+      security:
+      - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_field:
+                  type: object
+                  description: Custom field create or update content
+                  properties:
+                    entity_type:
+                      type: string
+                      enum:
+                      - location
+                      - department
+                      - job_posting_template
+                      - employee_record
+                      description: Custom field value data type.
+                    title:
+                      type: string
+                      description: Custom field title.
+                    field_type:
+                      type: string
+                      enum:
+                      - text
+                      - select
+                      - number
+                      - date
+                      description: Custom field value data type.
+                    is_required:
+                      type: boolean
+                      description: If this custom field is required.
+                    options:
+                      type: array
+                      description: Array of custom field option (when field_type is select)
+                      example:
+                      - option1
+                      - option2
+                    config:
+                      type: object
+                      example:
+                        character_blacklist: true
+                        digit_length: 2
+                      description: When field_type is text or number, could set if need blacklist for text or decimal digit for number
+                  required:
+                  - entity_type
+                  - title
+                  - field_type
+      responses:
+        '200':
+          description: Returns new created custom field
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+              description: A randomly generated request_id to uniquely identify each request sent.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  custom_field:
+                    type: object
+                    $ref: '#/components/schemas/show-2'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+  /custom_fields/{id}:
+    put:
+      operationId: UpdateCustomField
+      tags:
+      - Custom Field
+      summary: Update an existing Custom Field
+      description: Update an existing Custom Field
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 509a251a-93af-41e3-8416-23b29dc293cc
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_field:
+                  type: object
+                  description: Custom field create or update content
+                  properties:
+                    entity_type:
+                      type: string
+                      enum:
+                      - location
+                      - department
+                      - job_posting_template
+                      - employee_record
+                      description: Custom field value data type.
+                    title:
+                      type: string
+                      description: Custom field title.
+                    field_type:
+                      type: string
+                      enum:
+                      - text
+                      - select
+                      - number
+                      - date
+                      description: Custom field value data type.
+                    is_required:
+                      type: boolean
+                      description: If this custom field is required.
+                    options:
+                      type: array
+                      description: Array of custom field option (when field_type is select)
+                      example:
+                      - option1
+                      - option2
+                    config:
+                      type: object
+                      example:
+                        character_blacklist: true
+                        digit_length: 2
+                      description: When field_type is text or number, could set if need blacklist for text or decimal digit for number
+                  required:
+                  - entity_type
+                  - title
+                  - field_type
+      responses:
+        '200':
+          description: Update a custom field successfully
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+              description: A randomly generated request_id to uniquely identify each request sent.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  custom_field:
+                    type: object
+                    $ref: '#/components/schemas/show-2'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+  /entity_type/{entity_type}/entity_id/{entity_id}/custom_field_values:
+    put:
+      operationId: CreateOrUpdateCustomFieldValues
+      tags:
+      - Custom Field
+      summary: Create or update custom field value
+      description: Create or update custom field value
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: entity_type
+        in: path
+        required: true
+        schema:
+          type: string
+          enum:
+          - location
+          - department
+          - job_posting_template
+          - employee_record
+        description: Entity type of custom field value.
+      - name: entity_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        description: Entity id of custom field value
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_field_values:
+                  type: array
+                  description: Custom field values of entity
+                  items:
+                    type: object
+                    description: Custom field value
+                    properties:
+                      id:
+                        description: Custom field uuid
+                        type: string
+                        example: 509a251a-93af-41e3-8416-23b29dc293cc
+                      value:
+                        description: Custom field value of entity
+                        type: string
+      responses:
+        '200':
+          description: Returns new created custom field
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+              description: A randomly generated request_id to uniquely identify each request sent.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  entity_id:
+                    type: integer
+                    description: Entity id of custom field value
+                  entity_type:
+                    type: string
+                    description: Entity type of custom field value
+                  custom_field_values:
+                    type: array
+                    description: Custom field values of entity
+                    items:
+                      type: object
+                      description: Custom field value
+                      properties:
+                        id:
+                          description: Custom field uuid
+                          type: string
+                        value:
+                          description: Custom field value of entity
+                          type: string
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+components:
+  responses:
+    '422':
+      description: Unprocessable Entity - Invalid query params or request body.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13422
+              message:
+                type: string
+                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13403
+              message:
+                type: string
+                example: Forbidden - The user is not authorized to use this resource.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
+    '429':
+      description: Too many requests.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13429
+              message:
+                type: string
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+  schemas:
+    show-2:
+      type: object
+      title: Custom Field
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Custom Field ID
+          example: 1300622b-1bfa-41b2-b182-ca9425d140ca
+        entity_type:
+          type: string
+          description: Entity type this custom field apply for
+          enum:
+          - location
+          - department
+          - job_posting_template
+          - employee_record
+        title:
+          type: string
+          description: Custom Field title
+          example: Location Reference No.
+        description:
+          type: string
+          description: Brief description for this custom field usage
+          example: This is reference number on ADP side
+        is_required:
+          type: boolean
+          description: If custom field required when create or update entity
+        field_type:
+          type: string
+          description: Custom field value type
+          enum:
+          - select
+          - text
+          - number
+          - date
+        options:
+          type: string
+          description: When field_type is select, need pre-set options for custom field value
+          nullable: true
+        sequence:
+          type: integer
+          description: Sequence of custom field in entity
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://public-api.workstream.us/
+          scopes:
+            Applicants: Read Applicant records
+            Employees: Read Employee records
+            Company Users: Read Company User records
+            Company Roles: Read Company Role records
+            Positions: Read Position records
+            TeamMember: Read Team Member records
+            Locations: Read Location records
+            Departments: Read Department records
+            Imported Employee Infos: Read Imported Employee Info records
+            Custom Field: Read, update custom field and custom field values
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

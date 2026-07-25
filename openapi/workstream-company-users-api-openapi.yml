@@ -1,0 +1,495 @@
+openapi: 3.0.2
+info:
+  version: 1.0.0
+  title: Workstream Public Applicants Company Users API
+  termsOfService: https://workstream.us/terms/
+  contact:
+    email: help@workstream.is
+    url: https://help.workstream.us/en/
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-logo:
+    url: workstream-logo.svg
+    href: '#'
+  description: '# API Reference
+
+
+    The Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
+
+
+    **Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.
+
+    '
+servers:
+- url: https://{tenant}
+  variables:
+    tenant:
+      default: public-api.workstream.us
+      description: Public API URI
+tags:
+- name: Company Users
+  description: Company Users represent people who are system users within your company.
+paths:
+  /company_users:
+    get:
+      operationId: GetCompanyUsers
+      tags:
+      - Company Users
+      summary: List existing Company Users
+      description: Lists existing Company Users with the input parameters.
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: status
+        in: query
+        schema:
+          type: string
+          enum:
+          - active
+          - disabled
+          example: active
+        description: Returns Company users with the input `status`.
+      - name: name
+        in: query
+        schema:
+          type: string
+          example: Joey
+        description: Returns Company Users with the input `name`.
+      - name: uuid
+        in: query
+        schema:
+          type: string
+          format: uuid
+          example: 67161b3c-2584-11ee-be56-0242ac120002
+        description: Returns the Company User with the input `UUID`.
+      - name: created_at.gte
+        in: query
+        schema:
+          type: string
+          format: timestamp
+          example: '2020-09-30 00:00:00.000Z'
+        description: Returns Company Users at or after the input date.
+      - name: created_at.lte
+        in: query
+        schema:
+          type: string
+          format: timestamp
+          example: '2022-09-30 00:00:00.000Z'
+        description: Returns Company Users at or before the input date.
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+              description: A randomly generated request-id to uniquely identify each request sent.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/company_user'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+    post:
+      operationId: CreateCompanyStaff
+      summary: Create a new Company User with User info
+      description: Creates a new Company User with User info.
+      tags:
+      - Company Users
+      security:
+      - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/creation'
+      responses:
+        '201':
+          description: Returns the newly created Company User.
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+              description: A randomly generated request_id to uniquely identify each request sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/company_user'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+  /company_users/{uuid}:
+    put:
+      operationId: updateCompanyStaff
+      tags:
+      - Company Users
+      summary: Update an existing Company User's Company Role & permissions
+      description: Update an existing Company User's Company Role & permissions.
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+          example: 509a251a-93af-41e3-8416-23b29dc293cc
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                company_role_uuid:
+                  type: string
+                  format: uuid
+                  description: Company Role's unique identifier.
+                  example: 509a251a-93af-41e3-8416-23b29dc293cc
+                permission_config:
+                  $ref: '#/components/schemas/permission_config'
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+              description: A randomly generated request-id to uniquely identify each request sent.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/company_user'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+  /company_users/{uuid}/disable:
+    post:
+      operationId: disableCompanyStaff
+      tags:
+      - Company Users
+      summary: Disable an active Company User
+      description: Disable an active Company User.
+      security:
+      - bearerAuth: []
+      parameters:
+      - name: uuid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        '200':
+          description: OK
+          headers:
+            X-Request-ID:
+              schema:
+                type: string
+              description: A randomly generated request-id to uniquely identify each request sent.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  uuid:
+                    type: string
+                    format: uuid
+                    description: Company User's unique identifier.
+                    example: 509a251a-93af-41e3-8416-23b29dc293cc
+                  status:
+                    type: string
+                    enum:
+                    - active
+                    - disabled
+                    description: Company User's stauts.
+                    example: disabled
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '422':
+          $ref: '#/components/responses/422'
+        '429':
+          $ref: '#/components/responses/429'
+components:
+  responses:
+    '422':
+      description: Unprocessable Entity - Invalid query params or request body.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13422
+              message:
+                type: string
+                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13403
+              message:
+                type: string
+                example: Forbidden - The user is not authorized to use this resource.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
+    '429':
+      description: Too many requests.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13429
+              message:
+                type: string
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+    '404':
+      description: Not found - The requested resource is not found.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13404
+              message:
+                type: string
+                example: The requested resource is not found.
+  schemas:
+    company_user:
+      type: object
+      title: Company User
+      properties:
+        uuid:
+          description: Company User's unique identifier.
+          type: string
+          format: uuid
+          example: 509a251a-93af-41e3-8416-23b29dc293cc
+        name:
+          description: Company User's full name.
+          type: string
+          example: Joey White
+        status:
+          description: Company User's status.
+          type: string
+          enum:
+          - active
+          - disabled
+          example: active
+        region_number:
+          description: Country code of Company User's phone number.
+          type: string
+          example: '+1'
+        phone:
+          description: Company User's phone number
+          type: string
+          example: '4155693009'
+        created_at:
+          description: The date that the Company User was created.
+          type: string
+          format: date-time
+          example: '2022-09-30T00:00:00.000Z'
+        user:
+          type: object
+          properties:
+            email:
+              type: string
+              description: User's email.
+              format: email
+              example: test@test.com
+            uuid:
+              type: string
+              description: User's unique identifier.
+              format: uuid
+              example: 509a251a-93af-41e3-8416-23b29dc293cc
+            created_at:
+              description: The date that the User was created.
+              type: string
+              format: date-time
+              example: '2022-09-30T00:00:00.000Z'
+        company_role:
+          $ref: '#/components/schemas/company_role'
+        permission_config:
+          $ref: '#/components/schemas/permission_config'
+    creation:
+      type: object
+      title: Comapny Staff Creation Payload
+      required:
+      - user
+      - name
+      - company_role_uuid
+      properties:
+        user:
+          type: object
+          required:
+          - email
+          properties:
+            email:
+              type: string
+              description: User's email.
+              format: email
+              example: test@test.com
+            password:
+              type: string
+              format: password
+              description: User's password.
+              example: password
+        name:
+          type: string
+          description: Company User's full name.
+          example: Andy Lee
+        company_role_uuid:
+          type: string
+          description: Company Role's unique identifier.
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        region_number:
+          type: string
+          description: Contry code of Company User's phone number. Server will set it "1" as default if the request not set the parameter.
+          default: '1'
+          example: '1'
+        phone:
+          type: string
+          description: Company User's phone number.
+          example: '7789882873'
+    permission_config:
+      type: object
+      description: Location & Department Permission configuration.
+      properties:
+        all_locations:
+          type: boolean
+          description: Permission to access all locations. Set to `true` if the Company User should have access to all locations.
+          example: false
+        locations:
+          type: array
+          description: List of locations' unique identifiers that the Company User should have permission to. Use if `all_locations` is set to `false`.
+          items:
+            type: object
+            properties:
+              uuid:
+                type: string
+                format: uuid
+                example: 67161b3c-2584-11ee-be56-0242ac120002
+              all_departments:
+                type: boolean
+                example: false
+                description: Permission to access all departments in the location. Set to `true` if the Company User should have access to all departments in the location.
+              departments:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      type: string
+                      format: uuid
+                      example: 47161b3c-2584-11ee-be56-0242ac120002
+    company_role:
+      type: object
+      title: Company Role
+      properties:
+        uuid:
+          description: Company Role's unique identifier.
+          type: string
+          format: uuid
+          example: 509a251a-93af-41e3-8416-23b29dc293cc
+        name:
+          description: Company Role's name.
+          type: string
+          example: General Manager
+        editable:
+          description: Whether the Company Role is editable.
+          type: boolean
+          example: true
+        permissions_set:
+          description: Company Role's permissions set.
+          type: array
+          example:
+          - edit_user edit_location
+          - edit_department
+          - customize_notifications
+          - edit_position
+          - edit_custom_reports
+          - edit_custom_field
+          - edit_integration
+          - edit_company
+          items:
+            type: string
+        created_at:
+          description: The date that the Company Role was created.
+          type: string
+          format: date-time
+          example: '2022-09-30T00:00:00.000Z'
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        implicit:
+          authorizationUrl: https://public-api.workstream.us/
+          scopes:
+            Applicants: Read Applicant records
+            Employees: Read Employee records
+            Company Users: Read Company User records
+            Company Roles: Read Company Role records
+            Positions: Read Position records
+            TeamMember: Read Team Member records
+            Locations: Read Location records
+            Departments: Read Department records
+            Imported Employee Infos: Read Imported Employee Info records
+            Custom Field: Read, update custom field and custom field values
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
