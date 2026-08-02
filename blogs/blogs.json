@@ -1,0 +1,14 @@
+{
+  "repo": "workstream",
+  "feeds": [
+    {
+      "source": "https://help.workstream.us/en/",
+      "feed_url": "https://help.workstream.us/en/feed.xml",
+      "title": "",
+      "saved": 19,
+      "method": "discovered"
+    }
+  ],
+  "post_count": 19,
+  "fetched": "2026-08-01T15:49:00Z"
+}

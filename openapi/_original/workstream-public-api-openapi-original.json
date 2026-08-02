@@ -1,0 +1,5192 @@
+{
+ "openapi": "3.0.2",
+ "info": {
+  "version": "1.0.0",
+  "title": "Workstream Public API",
+  "termsOfService": "https://workstream.us/terms/",
+  "contact": {
+   "email": "help@workstream.is",
+   "url": "https://help.workstream.us/en/"
+  },
+  "license": {
+   "name": "Apache 2.0",
+   "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+  },
+  "x-logo": {
+   "url": "workstream-logo.svg",
+   "href": "#"
+  },
+  "description": "# API Reference\n\nThe Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.\n\n**Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.\n"
+ },
+ "tags": [
+  {
+   "name": "Authorization",
+   "description": "The Workstream API uses OAuth 2.0 Bearer access tokens to authenticate requests. You can view and manage your access tokens in the [Workstream Dashboard](https://hr.workstream.us/#/company?currentPanel=integrations&integrationItem=accesstoken).\n\nTo generate an access token, simply click on `Generate token`, give it a name, and select the permissions(i.e. Applicants, Employees, Positions) to attach to it. **The token expires in 7 days.**\n\nYou can also manage your tokens through API, as shown in the next section."
+  },
+  {
+   "name": "Positions",
+   "description": "Positions represent open job requisitions within your company that are looking to be filled."
+  },
+  {
+   "name": "Company Users",
+   "description": "Company Users represent people who are system users within your company."
+  },
+  {
+   "name": "Company Roles",
+   "description": "Company Roles represent roles within your company."
+  },
+  {
+   "name": "Applicants",
+   "description": "Applicants represent people who have applied for positions within your company."
+  },
+  {
+   "name": "Employees",
+   "description": "Employees represent applicants who have been accepted into a new position, or people who are already working for your company."
+  },
+  {
+   "name": "Locations",
+   "description": "Locations represent store locations within your company."
+  },
+  {
+   "name": "Departments",
+   "description": "Departments represent departments within your company."
+  },
+  {
+   "name": "Team Members",
+   "description": "Team Members represent team members that are managed within your company."
+  },
+  {
+   "name": "Employee Documents",
+   "description": "Employee Documents represent documents that are associated with employees within your company."
+  },
+  {
+   "name": "Imported Employee Infos",
+   "description": "Imported Employee Infos represent imported employee information that is associated with employees within your company."
+  },
+  {
+   "name": "Custom Field",
+   "description": "Custom field config for location, department, job posting and employee within your company."
+  }
+ ],
+ "servers": [
+  {
+   "url": "https://{tenant}",
+   "variables": {
+    "tenant": {
+     "default": "public-api.workstream.us",
+     "description": "Public API URI"
+    }
+   }
+  }
+ ],
+ "paths": {
+  "/tokens": {
+   "post": {
+    "operationId": "CreateAnAccessToken",
+    "tags": [
+     "Authorization"
+    ],
+    "summary": "Create a new access token",
+    "description": "Creates a new access token.",
+    "parameters": [
+     {
+      "name": "grant_type",
+      "description": "Grant type of access token, please use `client_credentials`.",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "example": "client_credentials"
+      }
+     },
+     {
+      "name": "client_id",
+      "description": "Client credentials provided as part of your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`.",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "client_secret",
+      "description": "The password used to authenticate your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`.",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "name",
+      "description": "Name of the access token displayed in the Dashboard.",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "scopes",
+      "description": "Permission scopes of access token.",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "array",
+       "items": {
+        "type": "string",
+        "enum": [
+         "positions",
+         "company_users",
+         "company_roles",
+         "position_applications",
+         "employees",
+         "locations",
+         "departments",
+         "team_members",
+         "imported_employee_infos"
+        ]
+       }
+      },
+      "style": "spaceDelimited",
+      "explode": false
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/access_token"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "error_code": {
+           "type": "integer",
+           "example": 13401
+          },
+          "message": {
+           "type": "string",
+           "example": "Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method."
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/tokens/refresh_token": {
+   "post": {
+    "operationId": "RefreshAnAccessToken",
+    "tags": [
+     "Authorization"
+    ],
+    "summary": "Refresh the access token",
+    "description": "Refresh the access token.",
+    "parameters": [
+     {
+      "name": "grant_type",
+      "description": "Grant type of access token, please use `client_credentials`.",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "example": "client_credentials"
+      }
+     },
+     {
+      "name": "client_id",
+      "description": "Client credentials provided as part of your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`.",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "client_secret",
+      "description": "The password used to authenticate your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`.",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "token",
+      "description": "The access token needs to be refreshed",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/access_token"
+        }
+       }
+      }
+     },
+     "401": {
+      "description": "Unauthorized",
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "error_code": {
+           "type": "integer",
+           "example": 13401
+          },
+          "message": {
+           "type": "string",
+           "example": "Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method."
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/revoke": {
+   "post": {
+    "operationId": "RevokeAnAccessToken",
+    "tags": [
+     "Authorization"
+    ],
+    "summary": "Revoke an existing access token",
+    "description": "Revokes an existing access token.",
+    "parameters": [
+     {
+      "name": "token",
+      "description": "The access token to revoke.",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "example": "AqrqBVwadstAdr_Ens0j5iHLug3gVKkOnTnDXvSDhmo"
+      }
+     },
+     {
+      "name": "client_id",
+      "description": "Client credentials provided as part of your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`.",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     },
+     {
+      "name": "client_secret",
+      "description": "The password used to authenticate your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`.",
+      "in": "query",
+      "required": true,
+      "schema": {
+       "type": "string"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "example": {}
+        }
+       }
+      }
+     },
+     "403": {
+      "description": "Unauthorized Client",
+      "content": {
+       "application/problem+json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "error": {
+           "type": "string",
+           "example": "unauthorized_client"
+          },
+          "error_description": {
+           "type": "string",
+           "example": "You are not authorized to revoke this token."
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "/positions/{uuid}": {
+   "get": {
+    "operationId": "GetPosition",
+    "tags": [
+     "Positions"
+    ],
+    "summary": "Retrieve an existing Position",
+    "description": "Retrieves an existing Position.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "uuid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "name": "embed",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "(location, custom_fields)"
+      },
+      "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/position"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/positions": {
+   "get": {
+    "operationId": "GetPositions",
+    "tags": [
+     "Positions"
+    ],
+    "summary": "List existing Positions",
+    "description": "Lists existing Positions with the input parameters.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "title",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Cook"
+      },
+      "description": "Returns positions with the input `title`."
+     },
+     {
+      "name": "status",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "pending",
+        "published",
+        "closed",
+        "deleted"
+       ],
+       "example": "published"
+      },
+      "description": "Returns positions with the input `status`."
+     },
+     {
+      "name": "access",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "link_only",
+        "public"
+       ],
+       "example": "link_only"
+      },
+      "description": "Returns positions with input `access`."
+     },
+     {
+      "name": "location[name]",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "SF%20Store"
+      },
+      "description": "Returns positions with the input location's name."
+     },
+     {
+      "name": "created_at.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "timestamp",
+       "example": "2022-09-30 00:00:00.000Z"
+      },
+      "description": "Returns positions created after or equals to the input date."
+     },
+     {
+      "name": "created_at.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "2022-09-30 00:00:00.000Z"
+      },
+      "description": "Returns positions created before or equals to the input date."
+     },
+     {
+      "name": "embed",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "(location, custom_fields)"
+      },
+      "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/position"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/position_applications/{uuid}": {
+   "get": {
+    "operationId": "GetApplicant",
+    "tags": [
+     "Applicants"
+    ],
+    "summary": "Retrieve an existing Applicant",
+    "description": "Retrieves an existing Applicant.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "uuid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "$ref": "#/components/parameters/applicant_embed"
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/applicant"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/position_applications/{uuid}/forms": {
+   "get": {
+    "operationId": "GetApplicantForm",
+    "tags": [
+     "Applicants"
+    ],
+    "summary": "List Applicant's custom forms",
+    "description": "Returns the questions and answers of forms filled in by an existing Applicant.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "uuid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/form"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/position_applications": {
+   "get": {
+    "operationId": "GetApplicants",
+    "tags": [
+     "Applicants"
+    ],
+    "summary": "List existing Applicants",
+    "description": "Lists existing Applicants with the input parameters.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "$ref": "#/components/parameters/applicant_embed"
+     },
+     {
+      "name": "status",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "in_progress",
+        "hired",
+        "rejected"
+       ],
+       "example": "in_progress"
+      },
+      "description": "Returns applicants with the input `status`."
+     },
+     {
+      "name": "first_name",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Andy"
+      },
+      "description": "Returns applicants with the input `first_name`."
+     },
+     {
+      "name": "last_name",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Lee"
+      },
+      "description": "Returns applicants with the input `last_name`."
+     },
+     {
+      "name": "name",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Andy%20Lee"
+      },
+      "description": "Returns applicants with the input `name`."
+     },
+     {
+      "name": "current_stage",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Onsite%20Interview"
+      },
+      "description": "Returns applicants with the input position stage."
+     },
+     {
+      "name": "position[uuid]",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "example": "67161b3c-2584-11ee-be56-0242ac120002"
+      },
+      "description": "Returns applicants with the input position's UUID."
+     },
+     {
+      "name": "location[name]",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "SF%20store"
+      },
+      "description": "Returns applicants with the input location's name."
+     },
+     {
+      "name": "tag[name]",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "cook"
+      },
+      "description": "Returns applicants with the input applicant tag's name."
+     },
+     {
+      "name": "note[content]",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "He is a good applicant"
+      },
+      "description": "Returns applicants with the input applicant note's content."
+     },
+     {
+      "name": "created_at.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "timestamp",
+       "example": "2020-09-30 00:00:00.000Z"
+      },
+      "description": "Returns applicants created after or equals to the input date."
+     },
+     {
+      "name": "created_at.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "timestamp",
+       "example": "2022-09-30 00:00:00.000Z"
+      },
+      "description": "Returns applicants created before or equals to the input date."
+     },
+     {
+      "name": "hired_at.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "timestamp",
+       "example": "2022-09-30 00:00:00.000Z"
+      },
+      "description": "Returns applicants hired after or equals to the input date."
+     },
+     {
+      "name": "hired_at.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "timestamp",
+       "example": "2022-09-30 00:00:00.000Z"
+      },
+      "description": "Returns applicants hired before or equals to the input date."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/applicant"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/company_users": {
+   "get": {
+    "operationId": "GetCompanyUsers",
+    "tags": [
+     "Company Users"
+    ],
+    "summary": "List existing Company Users",
+    "description": "Lists existing Company Users with the input parameters.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "status",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "active",
+        "disabled"
+       ],
+       "example": "active"
+      },
+      "description": "Returns Company users with the input `status`."
+     },
+     {
+      "name": "name",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Joey"
+      },
+      "description": "Returns Company Users with the input `name`."
+     },
+     {
+      "name": "uuid",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "example": "67161b3c-2584-11ee-be56-0242ac120002"
+      },
+      "description": "Returns the Company User with the input `UUID`."
+     },
+     {
+      "name": "created_at.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "timestamp",
+       "example": "2020-09-30 00:00:00.000Z"
+      },
+      "description": "Returns Company Users at or after the input date."
+     },
+     {
+      "name": "created_at.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "timestamp",
+       "example": "2022-09-30 00:00:00.000Z"
+      },
+      "description": "Returns Company Users at or before the input date."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/company_user"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   },
+   "post": {
+    "operationId": "CreateCompanyStaff",
+    "summary": "Create a new Company User with User info",
+    "description": "Creates a new Company User with User info.",
+    "tags": [
+     "Company Users"
+    ],
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "$ref": "#/components/schemas/creation"
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Returns the newly created Company User.",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request_id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/company_user"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/company_users/{uuid}": {
+   "put": {
+    "operationId": "updateCompanyStaff",
+    "tags": [
+     "Company Users"
+    ],
+    "summary": "Update an existing Company User's Company Role & permissions",
+    "description": "Update an existing Company User's Company Role & permissions.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "uuid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "example": "509a251a-93af-41e3-8416-23b29dc293cc"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "properties": {
+         "company_role_uuid": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Company Role's unique identifier.",
+          "example": "509a251a-93af-41e3-8416-23b29dc293cc"
+         },
+         "permission_config": {
+          "$ref": "#/components/schemas/permission_config"
+         }
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/company_user"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/company_users/{uuid}/disable": {
+   "post": {
+    "operationId": "disableCompanyStaff",
+    "tags": [
+     "Company Users"
+    ],
+    "summary": "Disable an active Company User",
+    "description": "Disable an active Company User.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "uuid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "uuid": {
+           "type": "string",
+           "format": "uuid",
+           "description": "Company User's unique identifier.",
+           "example": "509a251a-93af-41e3-8416-23b29dc293cc"
+          },
+          "status": {
+           "type": "string",
+           "enum": [
+            "active",
+            "disabled"
+           ],
+           "description": "Company User's stauts.",
+           "example": "disabled"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/company_roles": {
+   "get": {
+    "operationId": "GetCompanyRoles",
+    "tags": [
+     "Company Roles"
+    ],
+    "summary": "List existing Company Roles",
+    "description": "Lists existing Company Roles with the input parameters.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "uuid",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "example": "67161b3c-2584-11ee-be56-0242ac120002"
+      },
+      "description": "Returns the Company Role with the input `UUID`."
+     },
+     {
+      "name": "name",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Joey"
+      },
+      "description": "iReturns Company Roles with the input `name`."
+     },
+     {
+      "name": "created_at.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "timestamp",
+       "example": "2020-09-30 00:00:00.000Z"
+      },
+      "description": "Returns Company Roles created at or after the input date."
+     },
+     {
+      "name": "created_at.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "timestamp",
+       "example": "2022-09-30 00:00:00.000Z"
+      },
+      "description": "Returns Company Roles created at or after the input date."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/company_role"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/employees/{uuid}": {
+   "get": {
+    "operationId": "GetEmployee",
+    "tags": [
+     "Employees"
+    ],
+    "summary": "Retrieve an existing Employee",
+    "description": "Retrieves an existing Employee.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "uuid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "name": "embed",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, eligibility_details, custom_forms, position, location, department)"
+      },
+      "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/employee"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/employees": {
+   "get": {
+    "operationId": "GetEmployees",
+    "tags": [
+     "Employees"
+    ],
+    "summary": "List existing employees",
+    "description": "Lists existing employees with the input parameters.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "first_name",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Andy"
+      },
+      "description": "Returns employees with the input `first_name`."
+     },
+     {
+      "name": "last_name",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Lee"
+      },
+      "description": "Returns employees with the input `last_name`."
+     },
+     {
+      "name": "onboarding_status",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "not_started",
+        "in_progress",
+        "completed",
+        "suspended"
+       ],
+       "example": "completed"
+      },
+      "description": "Returns employees with the input `onboarding_status`."
+     },
+     {
+      "name": "start_date.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns employees with `start_date` after or equals to the input date."
+     },
+     {
+      "name": "start_date.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns employees with `start_date` before or equals to the input date."
+     },
+     {
+      "name": "hired_date.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns employees with `hired_date` after or equals to the input date."
+     },
+     {
+      "name": "hired_date.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns employees with `hired_date` before or equals to the input date."
+     },
+     {
+      "name": "applied_date.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns employees with `applied_date` after or equals to the input date."
+     },
+     {
+      "name": "applied_date.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns employees with `applied_date` before or equals to the input date."
+     },
+     {
+      "name": "onboard_date.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "timestamp",
+       "example": "2022-09-30T00:00:00.000Z"
+      },
+      "description": "Returns employees with `onboard_date` after or equals to the input date."
+     },
+     {
+      "name": "onboard_date.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "timestamp",
+       "example": "2022-09-30T00:00:00.000Z"
+      },
+      "description": "Returns employees with `onboard_date` before or equals to the input date."
+     },
+     {
+      "name": "embed",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, custom_forms, position, location, department)"
+      },
+      "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/employee"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/team_members/{uuid}": {
+   "get": {
+    "operationId": "GetTeamMember",
+    "tags": [
+     "Team Members"
+    ],
+    "summary": "Retrieve an existing Team Member",
+    "description": "Retrieves an existing Team Member.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "uuid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "name": "embed",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+      },
+      "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/team_member"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/team_members/{uuid}/status": {
+   "put": {
+    "operationId": "UpdateTeamMemberStatus",
+    "tags": [
+     "Team Members"
+    ],
+    "summary": "Update an existing Team Member's status",
+    "description": "Updates an existing Team Member's status.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "uuid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "properties": {
+         "status": {
+          "type": "string",
+          "enum": [
+           "hired",
+           "active",
+           "offboarded"
+          ]
+         },
+         "last_day_of_work": {
+          "type": "string",
+          "description": "The last day of work. **Required** when updating a team member's status to `offboarded`.",
+          "format": "date"
+         },
+         "note": {
+          "type": "string",
+          "description": "The offboard note. **Optional** when updating a team member's status to `offboarded`."
+         },
+         "rehireable": {
+          "type": "boolean",
+          "description": "Whether the team member can be rehired. **Optional** when setting a team member's status to `offboarded`."
+         }
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/base"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/team_members": {
+   "get": {
+    "operationId": "GetTeamMembers",
+    "summary": "List existing Team Members",
+    "description": "Lists existing Team Members with the input parameters.",
+    "tags": [
+     "Team Members"
+    ],
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "first_name",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Andy"
+      },
+      "description": "Returns team members with the input `first_name`."
+     },
+     {
+      "name": "last_name",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Lee"
+      },
+      "description": "Returns team members with the input `last_name`."
+     },
+     {
+      "name": "status",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "hired",
+        "active",
+        "offboarded"
+       ]
+      },
+      "description": "Returns team members with the input status."
+     },
+     {
+      "name": "location[uuid]",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "example": "c59c9852-2584-11ee-be56-0242ac120002"
+      },
+      "description": "Returns team members with the input location's UUID."
+     },
+     {
+      "name": "job_title[title]",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Bus Driver"
+      },
+      "description": "Returns team members with the input job_title's title."
+     },
+     {
+      "name": "start_date.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns team members with `start_date` after or equals to the input date."
+     },
+     {
+      "name": "start_date.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns team members with `start_date` before or equals to the input date."
+     },
+     {
+      "name": "embed",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+      },
+      "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request_id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/team_member"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   },
+   "post": {
+    "operationId": "CreateTeamMember",
+    "summary": "Create a new Team Member resource",
+    "description": "Creates a new Team Member resource.",
+    "tags": [
+     "Team Members"
+    ],
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "properties": {
+         "team_member": {
+          "$ref": "#/components/schemas/creation-2"
+         }
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "201": {
+      "description": "Returns the newly created Team Member.",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request_id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "uuid": {
+           "type": "string",
+           "format": "uuid"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/locations/{uuid}": {
+   "get": {
+    "operationId": "GetLocation",
+    "tags": [
+     "Locations"
+    ],
+    "summary": "Retrieve an existing Location",
+    "description": "Retrieves an existing Location.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "uuid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "name": "embed",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "(custom_fields)"
+      },
+      "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/location-4"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/locations": {
+   "get": {
+    "operationId": "GetLocations",
+    "tags": [
+     "Locations"
+    ],
+    "summary": "List existing Locations",
+    "description": "Lists existing Locations with the input parameters.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "name",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "San Francisco"
+      },
+      "description": "Returns locations with the input `name`."
+     },
+     {
+      "name": "embed",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "(custom_fields)"
+      },
+      "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/location-4"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/departments/{uuid}": {
+   "get": {
+    "operationId": "GetDepartment",
+    "tags": [
+     "Departments"
+    ],
+    "summary": "Retrieve an existing Department",
+    "description": "Retrieves an existing Department.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "uuid",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid"
+      }
+     },
+     {
+      "name": "embed",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "(custom_fields)"
+      },
+      "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "$ref": "#/components/schemas/department-4"
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/departments": {
+   "get": {
+    "operationId": "GetDepartments",
+    "tags": [
+     "Departments"
+    ],
+    "summary": "List existing Departments",
+    "description": "Lists existing Departments with the input parameters.",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "name",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Retail"
+      },
+      "description": "Returns departments with the input `name`."
+     },
+     {
+      "name": "embed",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "(custom_fields)"
+      },
+      "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request-id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/department-4"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/employee/docs/{document_id}": {
+   "get": {
+    "operationId": "GetEmployeeDocument",
+    "summary": "Download a employee document",
+    "description": "Download employee document with document id.\n**Note:** This endpoint requires the `document-public-api` feature flag. Please contact our [support team](https://help.workstream.us/en/) to request access.",
+    "tags": [
+     "Employee Documents"
+    ],
+    "servers": [
+     {
+      "url": "https://documents-api.workstream.us"
+     }
+    ],
+    "parameters": [
+     {
+      "name": "document_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "example": "123e4567-e89b-12d3-a456-426614174000"
+      },
+      "description": "The document id to download the file."
+     },
+     {
+      "name": "token",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "token123"
+      },
+      "description": "The authorization token to access the document."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "headers": {
+       "content-type": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "The document type."
+       }
+      },
+      "content": {
+       "application/pdf": {
+        "schema": {
+         "type": "string",
+         "description": "The document file content."
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/employee/docs": {
+   "get": {
+    "operationId": "GetEmployeeDocuments",
+    "summary": "List existing Employee Documents",
+    "description": "Lists existing employee documents with the input parameters.\n**Note:** This endpoint requires the `document-public-api` feature flag. Please contact our [support team](https://help.workstream.us/en/) to request access.",
+    "tags": [
+     "Employee Documents"
+    ],
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "servers": [
+     {
+      "url": "https://documents-api.workstream.us"
+     }
+    ],
+    "parameters": [
+     {
+      "name": "employee_uuid",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "123e4567-e89b-12d3-a456-426614174000"
+      },
+      "description": "Returns employee docs with the input `employee_uuid`."
+     },
+     {
+      "name": "first_name",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Andy"
+      },
+      "description": "Returns employee docs with the input `first_name`."
+     },
+     {
+      "name": "last_name",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "Lee"
+      },
+      "description": "Returns employee docs with the input `last_name`."
+     },
+     {
+      "name": "onboarding_status",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "not_started",
+        "in_progress",
+        "completed",
+        "suspended"
+       ],
+       "example": "completed"
+      },
+      "description": "Returns employee docs with the input `onboarding_status`."
+     },
+     {
+      "name": "start_date.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns employee docs with `start_date` after or equals to the input date."
+     },
+     {
+      "name": "start_date.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns employee docs with `start_date` before or equals to the input date."
+     },
+     {
+      "name": "hired_date.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns employee docs with `hired_date` after or equals to the input date."
+     },
+     {
+      "name": "hired_date.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns employee docs with `hired_date` before or equals to the input date."
+     },
+     {
+      "name": "applied_date.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns employee docs with `applied_date` after or equals to the input date."
+     },
+     {
+      "name": "applied_date.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "date",
+       "example": "2022-09-30"
+      },
+      "description": "Returns employee docs with `applied_date` before or equals to the input date."
+     },
+     {
+      "name": "onboard_date.gte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "timestamp",
+       "example": "2022-09-30T00:00:00.000Z"
+      },
+      "description": "Returns employee docs with `onboard_date` after or equals to the input date."
+     },
+     {
+      "name": "onboard_date.lte",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "format": "timestamp",
+       "example": "2022-09-30T00:00:00.000Z"
+      },
+      "description": "Returns employee docs with `onboard_date` before or equals to the input date."
+     },
+     {
+      "name": "embed",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "example": "(w4_doc, state_tax_docs, i9_docs, company_docs)"
+      },
+      "description": "Specifies the names of document types that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "OK",
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "data": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/document"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "404": {
+      "$ref": "#/components/responses/404"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/imported_employee_infos": {
+   "get": {
+    "operationId": "ListImportedEmployeeInfos",
+    "tags": [
+     "Imported Employee Infos"
+    ],
+    "summary": "List existing Imported Employee Infos",
+    "description": "List existing Imported Employee Infos",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "page",
+      "in": "query",
+      "schema": {
+       "type": "integer",
+       "example": 1
+      },
+      "description": "The page number to retrieve."
+     },
+     {
+      "name": "per_page",
+      "in": "query",
+      "schema": {
+       "type": "integer",
+       "example": 10
+      },
+      "description": "The number of items to retrieve per page, maximum is 100."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Returns the imported employee info list.",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request_id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "imported_employee_infos": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/show"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/custom_fields": {
+   "get": {
+    "operationId": "ListCustomFields",
+    "tags": [
+     "Custom Field"
+    ],
+    "summary": "List existing Custom Fields",
+    "description": "List existing Custom Fields",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "entity_type",
+      "in": "query",
+      "schema": {
+       "type": "string",
+       "enum": [
+        "location",
+        "department",
+        "job_posting_template",
+        "employee_record"
+       ]
+      },
+      "description": "Entity type of the custom field."
+     }
+    ],
+    "responses": {
+     "200": {
+      "description": "Returns all custom field values for an entity",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request_id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "custom_fields": {
+           "type": "array",
+           "items": {
+            "$ref": "#/components/schemas/show-2"
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   },
+   "post": {
+    "operationId": "CreateCustomField",
+    "tags": [
+     "Custom Field"
+    ],
+    "summary": "Create Custom Field",
+    "description": "Create Custom Field",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "properties": {
+         "custom_field": {
+          "type": "object",
+          "description": "Custom field create or update content",
+          "properties": {
+           "entity_type": {
+            "type": "string",
+            "enum": [
+             "location",
+             "department",
+             "job_posting_template",
+             "employee_record"
+            ],
+            "description": "Custom field value data type."
+           },
+           "title": {
+            "type": "string",
+            "description": "Custom field title."
+           },
+           "field_type": {
+            "type": "string",
+            "enum": [
+             "text",
+             "select",
+             "number",
+             "date"
+            ],
+            "description": "Custom field value data type."
+           },
+           "is_required": {
+            "type": "boolean",
+            "description": "If this custom field is required."
+           },
+           "options": {
+            "type": "array",
+            "description": "Array of custom field option (when field_type is select)",
+            "example": [
+             "option1",
+             "option2"
+            ]
+           },
+           "config": {
+            "type": "object",
+            "example": {
+             "character_blacklist": true,
+             "digit_length": 2
+            },
+            "description": "When field_type is text or number, could set if need blacklist for text or decimal digit for number"
+           }
+          },
+          "required": [
+           "entity_type",
+           "title",
+           "field_type"
+          ]
+         }
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Returns new created custom field",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request_id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "custom_field": {
+           "type": "object",
+           "$ref": "#/components/schemas/show-2"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/custom_fields/{id}": {
+   "put": {
+    "operationId": "UpdateCustomField",
+    "tags": [
+     "Custom Field"
+    ],
+    "summary": "Update an existing Custom Field",
+    "description": "Update an existing Custom Field",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "format": "uuid",
+       "example": "509a251a-93af-41e3-8416-23b29dc293cc"
+      }
+     }
+    ],
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "properties": {
+         "custom_field": {
+          "type": "object",
+          "description": "Custom field create or update content",
+          "properties": {
+           "entity_type": {
+            "type": "string",
+            "enum": [
+             "location",
+             "department",
+             "job_posting_template",
+             "employee_record"
+            ],
+            "description": "Custom field value data type."
+           },
+           "title": {
+            "type": "string",
+            "description": "Custom field title."
+           },
+           "field_type": {
+            "type": "string",
+            "enum": [
+             "text",
+             "select",
+             "number",
+             "date"
+            ],
+            "description": "Custom field value data type."
+           },
+           "is_required": {
+            "type": "boolean",
+            "description": "If this custom field is required."
+           },
+           "options": {
+            "type": "array",
+            "description": "Array of custom field option (when field_type is select)",
+            "example": [
+             "option1",
+             "option2"
+            ]
+           },
+           "config": {
+            "type": "object",
+            "example": {
+             "character_blacklist": true,
+             "digit_length": 2
+            },
+            "description": "When field_type is text or number, could set if need blacklist for text or decimal digit for number"
+           }
+          },
+          "required": [
+           "entity_type",
+           "title",
+           "field_type"
+          ]
+         }
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Update a custom field successfully",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request_id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "custom_field": {
+           "type": "object",
+           "$ref": "#/components/schemas/show-2"
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  },
+  "/entity_type/{entity_type}/entity_id/{entity_id}/custom_field_values": {
+   "put": {
+    "operationId": "CreateOrUpdateCustomFieldValues",
+    "tags": [
+     "Custom Field"
+    ],
+    "summary": "Create or update custom field value",
+    "description": "Create or update custom field value",
+    "security": [
+     {
+      "bearerAuth": []
+     }
+    ],
+    "parameters": [
+     {
+      "name": "entity_type",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "string",
+       "enum": [
+        "location",
+        "department",
+        "job_posting_template",
+        "employee_record"
+       ]
+      },
+      "description": "Entity type of custom field value."
+     },
+     {
+      "name": "entity_id",
+      "in": "path",
+      "required": true,
+      "schema": {
+       "type": "integer"
+      },
+      "description": "Entity id of custom field value"
+     }
+    ],
+    "requestBody": {
+     "required": true,
+     "content": {
+      "application/json": {
+       "schema": {
+        "type": "object",
+        "properties": {
+         "custom_field_values": {
+          "type": "array",
+          "description": "Custom field values of entity",
+          "items": {
+           "type": "object",
+           "description": "Custom field value",
+           "properties": {
+            "id": {
+             "description": "Custom field uuid",
+             "type": "string",
+             "example": "509a251a-93af-41e3-8416-23b29dc293cc"
+            },
+            "value": {
+             "description": "Custom field value of entity",
+             "type": "string"
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    },
+    "responses": {
+     "200": {
+      "description": "Returns new created custom field",
+      "headers": {
+       "X-Request-ID": {
+        "schema": {
+         "type": "string"
+        },
+        "description": "A randomly generated request_id to uniquely identify each request sent."
+       }
+      },
+      "content": {
+       "application/json": {
+        "schema": {
+         "type": "object",
+         "properties": {
+          "entity_id": {
+           "type": "integer",
+           "description": "Entity id of custom field value"
+          },
+          "entity_type": {
+           "type": "string",
+           "description": "Entity type of custom field value"
+          },
+          "custom_field_values": {
+           "type": "array",
+           "description": "Custom field values of entity",
+           "items": {
+            "type": "object",
+            "description": "Custom field value",
+            "properties": {
+             "id": {
+              "description": "Custom field uuid",
+              "type": "string"
+             },
+             "value": {
+              "description": "Custom field value of entity",
+              "type": "string"
+             }
+            }
+           }
+          }
+         }
+        }
+       }
+      }
+     },
+     "401": {
+      "$ref": "#/components/responses/401"
+     },
+     "403": {
+      "$ref": "#/components/responses/403"
+     },
+     "422": {
+      "$ref": "#/components/responses/422"
+     },
+     "429": {
+      "$ref": "#/components/responses/429"
+     }
+    }
+   }
+  }
+ },
+ "components": {
+  "securitySchemes": {
+   "oauth2": {
+    "type": "oauth2",
+    "flows": {
+     "implicit": {
+      "authorizationUrl": "https://public-api.workstream.us/",
+      "scopes": {
+       "Applicants": "Read Applicant records",
+       "Employees": "Read Employee records",
+       "Company Users": "Read Company User records",
+       "Company Roles": "Read Company Role records",
+       "Positions": "Read Position records",
+       "TeamMember": "Read Team Member records",
+       "Locations": "Read Location records",
+       "Departments": "Read Department records",
+       "Imported Employee Infos": "Read Imported Employee Info records",
+       "Custom Field": "Read, update custom field and custom field values"
+      }
+     }
+    }
+   },
+   "bearerAuth": {
+    "type": "http",
+    "scheme": "bearer",
+    "bearerFormat": "JWT"
+   }
+  },
+  "schemas": {
+   "access_token": {
+    "type": "object",
+    "title": "Access Token",
+    "properties": {
+     "name": {
+      "description": "Token name",
+      "type": "string",
+      "example": "token1"
+     },
+     "token": {
+      "description": "Token value",
+      "type": "string",
+      "example": "OtrQV4Gz7nwLouCm-ZLqiSxdwJEMEAFGx___GcNxES8"
+     },
+     "created_at": {
+      "description": "Token creation date",
+      "type": "string",
+      "format": "date-time"
+     },
+     "expires_in": {
+      "description": "Token expiry time",
+      "type": "integer",
+      "example": 604800
+     },
+     "scopes": {
+      "description": "Token data access permissions",
+      "type": "array",
+      "items": {
+       "type": "string"
+      },
+      "example": [
+       "positions",
+       "company_users",
+       "company_roles",
+       "position_applications",
+       "employees",
+       "locations",
+       "departments",
+       "team_members",
+       "imported_employee_infos"
+      ]
+     }
+    }
+   },
+   "location": {
+    "type": "object",
+    "title": "Position's location",
+    "description": "Need to embed **location** in request query params.",
+    "properties": {
+     "uuid": {
+      "description": "Location uuid",
+      "type": "string",
+      "example": "fc4487ce-67n0-436e-9aa7-a2eb496aff0e"
+     },
+     "name": {
+      "description": "location name",
+      "type": "string",
+      "example": "SF store"
+     },
+     "address": {
+      "description": "location's street address",
+      "type": "string"
+     },
+     "postal_code": {
+      "description": "location's postal code",
+      "type": "string"
+     },
+     "city": {
+      "description": "location's city",
+      "type": "string"
+     },
+     "state": {
+      "description": "location's state",
+      "type": "string"
+     },
+     "country": {
+      "description": "location's country",
+      "type": "string"
+     }
+    }
+   },
+   "custom_field": {
+    "type": "array",
+    "title": "custom field",
+    "description": "Need to embed **custom_fields** in request query params.",
+    "items": {
+     "type": "object",
+     "properties": {
+      "uuid": {
+       "description": "Custom field uuid",
+       "type": "string",
+       "example": "509a251a-93af-41e3-8416-23b29dc293cc"
+      },
+      "title": {
+       "description": "Custom field title",
+       "type": "string",
+       "example": "custom field title"
+      },
+      "value": {
+       "description": "Custom field value",
+       "type": "string",
+       "example": "custom field value"
+      }
+     }
+    }
+   },
+   "position": {
+    "type": "object",
+    "title": "Position",
+    "properties": {
+     "uuid": {
+      "description": "Position uuid",
+      "type": "string",
+      "format": "uuid",
+      "example": "c59c9852-2584-11ee-be56-0242ac120002"
+     },
+     "digest_key": {
+      "description": "Position digest_key",
+      "type": "string",
+      "example": "40ad0bd6836b9e5cfedbf28e7c907fe229a99a2a"
+     },
+     "title": {
+      "description": "Position title",
+      "type": "string",
+      "example": "Customer Success Associate"
+     },
+     "overview": {
+      "description": "Position title",
+      "type": "string",
+      "example": "We are looking for a full-time, dedicated, and passionate individual to join our growing team."
+     },
+     "status": {
+      "description": "Position title",
+      "type": "string",
+      "enum": [
+       "published",
+       "pending",
+       "closed",
+       "deleted"
+      ],
+      "example": "published"
+     },
+     "number": {
+      "description": "Position number",
+      "type": "string",
+      "example": "1845"
+     },
+     "access": {
+      "description": "Position access",
+      "type": "string",
+      "example": "public"
+     },
+     "pay_amount": {
+      "description": "Position pay_amount",
+      "type": "string",
+      "example": "15$"
+     },
+     "pay_frequency": {
+      "description": "Position pay_frequency",
+      "type": "string",
+      "example": "hourly"
+     },
+     "job_type": {
+      "description": "Position job_type",
+      "type": "string",
+      "example": "full_time"
+     },
+     "normalized_titles": {
+      "description": "Position normalized_titles",
+      "type": "string"
+     },
+     "remote_type": {
+      "description": "Position remote_type",
+      "type": "string",
+      "example": "on_site"
+     },
+     "job_url": {
+      "description": "Position job_url",
+      "type": "string",
+      "example": "https://got.work/ryan_burgers_ryans_radical_rapping_teddy_bears/ad4b4e75"
+     },
+     "location": {
+      "$ref": "#/components/schemas/location"
+     },
+     "custom_fields": {
+      "$ref": "#/components/schemas/custom_field"
+     }
+    }
+   },
+   "position-2": {
+    "type": "object",
+    "title": "Position",
+    "description": "Need to embed **position** in request query params",
+    "properties": {
+     "uuid": {
+      "description": "Position uuid",
+      "type": "string",
+      "format": "uuid",
+      "example": "c59c9852-2584-11ee-be56-0242ac120002"
+     },
+     "title": {
+      "description": "Position title",
+      "type": "string",
+      "example": "Cook"
+     }
+    }
+   },
+   "location-2": {
+    "type": "object",
+    "title": "Location",
+    "description": "Need to embed **location** in request query params",
+    "properties": {
+     "uuid": {
+      "description": "Location uuid",
+      "type": "string",
+      "format": "uuid",
+      "example": "c59c9852-2584-11ee-be56-0242ac120002"
+     },
+     "name": {
+      "description": "location name",
+      "type": "string",
+      "example": "SF store"
+     }
+    }
+   },
+   "department": {
+    "type": "object",
+    "title": "Department",
+    "description": "Need to embed **department** in request query params",
+    "properties": {
+     "name": {
+      "description": "Department name",
+      "type": "string",
+      "example": "Marketing"
+     },
+     "description": {
+      "description": "Department description",
+      "type": "string",
+      "example": "The marketing department"
+     }
+    }
+   },
+   "application_notes": {
+    "type": "array",
+    "title": "Applicant Notes",
+    "description": "Need to embed **notes** in request query params",
+    "items": {
+     "properties": {
+      "content": {
+       "description": "Content of note",
+       "type": "string",
+       "example": "He is a good applicant!"
+      }
+     }
+    }
+   },
+   "tags": {
+    "type": "array",
+    "title": "Applicant Tags",
+    "description": "Need to embed **tags** in request query params",
+    "items": {
+     "properties": {
+      "name": {
+       "description": "The name of the tag",
+       "type": "string",
+       "example": "cook"
+      }
+     }
+    }
+   },
+   "candidate_info": {
+    "type": "array",
+    "title": "Applicant Candidate Info",
+    "description": "Need to embed **candidate_info** in request query params",
+    "items": {
+     "properties": {
+      "question": {
+       "description": "Name of field",
+       "type": "string",
+       "example": "Street Address"
+      },
+      "answer": {
+       "description": "Value of field",
+       "type": "string",
+       "example": "110 W 5 st"
+      }
+     }
+    }
+   },
+   "pay_info": {
+    "type": "object",
+    "title": "Applicant Pay Info",
+    "description": "Need to embed **pay_info** in request query params",
+    "properties": {
+     "pay_amount": {
+      "description": "Pay amount",
+      "type": "number",
+      "example": 20
+     },
+     "pay_frequency": {
+      "description": "Pay frequency",
+      "type": "string",
+      "enum": [
+       "hour",
+       "day",
+       "week",
+       "month",
+       "year"
+      ],
+      "example": "hour"
+     }
+    }
+   },
+   "applicant": {
+    "type": "object",
+    "title": "Applicant",
+    "properties": {
+     "uuid": {
+      "description": "Applicant uuid",
+      "type": "string",
+      "format": "uuid",
+      "example": "509a251a-93af-41e3-8416-23b29dc293cc"
+     },
+     "digest_key": {
+      "description": "Applicant digest_key",
+      "type": "string",
+      "example": "108eeee1"
+     },
+     "referer_source": {
+      "description": "Applicant referer_source",
+      "type": "string",
+      "example": "Others"
+     },
+     "email": {
+      "description": "Applicant email",
+      "type": "string",
+      "example": "joblexxx@gmail.com"
+     },
+     "phone": {
+      "description": "Applicant phone",
+      "type": "string",
+      "example": "4321012345"
+     },
+     "first_name": {
+      "description": "Applicant first_name",
+      "type": "string",
+      "example": "Joey"
+     },
+     "last_name": {
+      "description": "Applicant last_name",
+      "type": "string",
+      "example": "White"
+     },
+     "name": {
+      "description": "Applicant name",
+      "type": "string",
+      "example": "Joey White"
+     },
+     "status": {
+      "description": "Applicant status",
+      "type": "string",
+      "enum": [
+       "in_progress",
+       "rejected",
+       "hired"
+      ],
+      "example": "in_progress"
+     },
+     "global_phone_number": {
+      "description": "Applicant global_phone_number",
+      "type": "string",
+      "example": "+15151515151"
+     },
+     "sms_notification": {
+      "description": "Applicant sms_notification",
+      "type": "boolean",
+      "example": true
+     },
+     "current_stage": {
+      "description": "Applicant current_stage",
+      "type": "string",
+      "example": "Application"
+     },
+     "hired_at": {
+      "description": "Applicant hired_at",
+      "type": "string",
+      "format": "datetime",
+      "example": "2022-12-01 08:00:00"
+     },
+     "application_date": {
+      "description": "Applicant application_date",
+      "type": "string",
+      "format": "date"
+     },
+     "latest_interview_date": {
+      "description": "Applicant latest_interview_date",
+      "type": "string",
+      "format": "date",
+      "example": "2022-12-01"
+     },
+     "position": {
+      "$ref": "#/components/schemas/position-2"
+     },
+     "location": {
+      "$ref": "#/components/schemas/location-2"
+     },
+     "department": {
+      "$ref": "#/components/schemas/department"
+     },
+     "notes": {
+      "$ref": "#/components/schemas/application_notes"
+     },
+     "tags": {
+      "$ref": "#/components/schemas/tags"
+     },
+     "candidate_info": {
+      "$ref": "#/components/schemas/candidate_info"
+     },
+     "pay_info": {
+      "$ref": "#/components/schemas/pay_info"
+     }
+    }
+   },
+   "form": {
+    "type": "object",
+    "title": "Form Submission",
+    "properties": {
+     "uuid": {
+      "description": "The uuid of the form submission.",
+      "type": "string",
+      "format": "uuid",
+      "example": "d404e957-af95-4776-af16-bae088e49165"
+     },
+     "name": {
+      "description": "The name of the form.",
+      "type": "string",
+      "example": "Additional Information"
+     },
+     "answers": {
+      "type": "array",
+      "description": "An array of form questions and answers.",
+      "items": {
+       "type": "object",
+       "title": "Form question and answer",
+       "properties": {
+        "question_uuid": {
+         "description": "The uuid of the question.",
+         "type": "string",
+         "format": "uuid",
+         "example": "d404e957-af95-4776-af16-bae088e49165"
+        },
+        "question_type": {
+         "description": "The type of the question.",
+         "type": "string",
+         "example": "multiple_choice"
+        },
+        "question": {
+         "description": "The text of the question.",
+         "type": "string",
+         "example": "Are you at least 18 years old with a valid Driver's license?"
+        },
+        "answer_uuid": {
+         "description": "The uuid of the answer.",
+         "type": "string",
+         "format": "uuid",
+         "example": "d404e957-af95-4776-af16-bae088e49165"
+        },
+        "answer": {
+         "description": "The answer to the question.",
+         "type": "string",
+         "example": "yes"
+        }
+       }
+      }
+     }
+    }
+   },
+   "company_role": {
+    "type": "object",
+    "title": "Company Role",
+    "properties": {
+     "uuid": {
+      "description": "Company Role's unique identifier.",
+      "type": "string",
+      "format": "uuid",
+      "example": "509a251a-93af-41e3-8416-23b29dc293cc"
+     },
+     "name": {
+      "description": "Company Role's name.",
+      "type": "string",
+      "example": "General Manager"
+     },
+     "editable": {
+      "description": "Whether the Company Role is editable.",
+      "type": "boolean",
+      "example": true
+     },
+     "permissions_set": {
+      "description": "Company Role's permissions set.",
+      "type": "array",
+      "example": [
+       "edit_user edit_location",
+       "edit_department",
+       "customize_notifications",
+       "edit_position",
+       "edit_custom_reports",
+       "edit_custom_field",
+       "edit_integration",
+       "edit_company"
+      ],
+      "items": {
+       "type": "string"
+      }
+     },
+     "created_at": {
+      "description": "The date that the Company Role was created.",
+      "type": "string",
+      "format": "date-time",
+      "example": "2022-09-30T00:00:00.000Z"
+     }
+    }
+   },
+   "permission_config": {
+    "type": "object",
+    "description": "Location & Department Permission configuration.",
+    "properties": {
+     "all_locations": {
+      "type": "boolean",
+      "description": "Permission to access all locations. Set to `true` if the Company User should have access to all locations.",
+      "example": false
+     },
+     "locations": {
+      "type": "array",
+      "description": "List of locations' unique identifiers that the Company User should have permission to. Use if `all_locations` is set to `false`.",
+      "items": {
+       "type": "object",
+       "properties": {
+        "uuid": {
+         "type": "string",
+         "format": "uuid",
+         "example": "67161b3c-2584-11ee-be56-0242ac120002"
+        },
+        "all_departments": {
+         "type": "boolean",
+         "example": false,
+         "description": "Permission to access all departments in the location. Set to `true` if the Company User should have access to all departments in the location."
+        },
+        "departments": {
+         "type": "array",
+         "items": {
+          "type": "object",
+          "properties": {
+           "uuid": {
+            "type": "string",
+            "format": "uuid",
+            "example": "47161b3c-2584-11ee-be56-0242ac120002"
+           }
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "company_user": {
+    "type": "object",
+    "title": "Company User",
+    "properties": {
+     "uuid": {
+      "description": "Company User's unique identifier.",
+      "type": "string",
+      "format": "uuid",
+      "example": "509a251a-93af-41e3-8416-23b29dc293cc"
+     },
+     "name": {
+      "description": "Company User's full name.",
+      "type": "string",
+      "example": "Joey White"
+     },
+     "status": {
+      "description": "Company User's status.",
+      "type": "string",
+      "enum": [
+       "active",
+       "disabled"
+      ],
+      "example": "active"
+     },
+     "region_number": {
+      "description": "Country code of Company User's phone number.",
+      "type": "string",
+      "example": "+1"
+     },
+     "phone": {
+      "description": "Company User's phone number",
+      "type": "string",
+      "example": "4155693009"
+     },
+     "created_at": {
+      "description": "The date that the Company User was created.",
+      "type": "string",
+      "format": "date-time",
+      "example": "2022-09-30T00:00:00.000Z"
+     },
+     "user": {
+      "type": "object",
+      "properties": {
+       "email": {
+        "type": "string",
+        "description": "User's email.",
+        "format": "email",
+        "example": "test@test.com"
+       },
+       "uuid": {
+        "type": "string",
+        "description": "User's unique identifier.",
+        "format": "uuid",
+        "example": "509a251a-93af-41e3-8416-23b29dc293cc"
+       },
+       "created_at": {
+        "description": "The date that the User was created.",
+        "type": "string",
+        "format": "date-time",
+        "example": "2022-09-30T00:00:00.000Z"
+       }
+      }
+     },
+     "company_role": {
+      "$ref": "#/components/schemas/company_role"
+     },
+     "permission_config": {
+      "$ref": "#/components/schemas/permission_config"
+     }
+    }
+   },
+   "creation": {
+    "type": "object",
+    "title": "Comapny Staff Creation Payload",
+    "required": [
+     "user",
+     "name",
+     "company_role_uuid"
+    ],
+    "properties": {
+     "user": {
+      "type": "object",
+      "required": [
+       "email"
+      ],
+      "properties": {
+       "email": {
+        "type": "string",
+        "description": "User's email.",
+        "format": "email",
+        "example": "test@test.com"
+       },
+       "password": {
+        "type": "string",
+        "format": "password",
+        "description": "User's password.",
+        "example": "password"
+       }
+      }
+     },
+     "name": {
+      "type": "string",
+      "description": "Company User's full name.",
+      "example": "Andy Lee"
+     },
+     "company_role_uuid": {
+      "type": "string",
+      "description": "Company Role's unique identifier.",
+      "example": "c59c9852-2584-11ee-be56-0242ac120002"
+     },
+     "region_number": {
+      "type": "string",
+      "description": "Contry code of Company User's phone number. Server will set it \"1\" as default if the request not set the parameter.",
+      "default": "1",
+      "example": "1"
+     },
+     "phone": {
+      "type": "string",
+      "description": "Company User's phone number.",
+      "example": "7789882873"
+     }
+    }
+   },
+   "information": {
+    "type": "object",
+    "title": "employee's information details",
+    "description": "Need to embed **information** in request query params.",
+    "properties": {
+     "phone": {
+      "description": "employee phone",
+      "type": "string",
+      "example": "+17789882873"
+     },
+     "email": {
+      "description": "employee email",
+      "type": "string",
+      "example": "wadam@example.fr"
+     },
+     "birthday": {
+      "description": "employee birthday",
+      "type": "string",
+      "format": "date"
+     },
+     "ethnicity": {
+      "description": "employee ethnicity",
+      "type": "string",
+      "example": "black_or_african_american"
+     },
+     "gender": {
+      "description": "employee gender",
+      "type": "string",
+      "example": "male"
+     },
+     "ssn": {
+      "description": "employee social security number",
+      "type": "string",
+      "example": "0015594"
+     },
+     "marital_status": {
+      "description": "employee marital status",
+      "type": "string",
+      "example": "never_married"
+     }
+    }
+   },
+   "address": {
+    "type": "object",
+    "title": "employee's address",
+    "description": "Need to embed **address** in request query params.",
+    "properties": {
+     "address": {
+      "description": "street address",
+      "type": "string",
+      "example": "6488 Gateway dr"
+     },
+     "city": {
+      "description": "city",
+      "type": "string",
+      "example": "Washington"
+     },
+     "state": {
+      "description": "state",
+      "type": "string",
+      "example": "United States"
+     },
+     "country": {
+      "description": "country",
+      "type": "string",
+      "example": "Virginia"
+     },
+     "zipcode": {
+      "description": "zipcode",
+      "type": "string",
+      "example": "23703"
+     }
+    }
+   },
+   "emergency_contact": {
+    "type": "object",
+    "title": "employee's emergency contact information",
+    "description": "Need to embed **emergency_contact** in request query params.",
+    "properties": {
+     "name": {
+      "description": "emergency contact name",
+      "type": "string",
+      "example": "Melinda Folk"
+     },
+     "email": {
+      "description": "emergency contact email",
+      "type": "string",
+      "example": "folk@example.fr"
+     },
+     "phone": {
+      "description": "emergency contact phone",
+      "type": "string",
+      "example": "+16084559135"
+     },
+     "relationship": {
+      "description": "emergency contact relationship",
+      "type": "string",
+      "example": "Father"
+     }
+    }
+   },
+   "employment_details": {
+    "type": "object",
+    "title": "employee's employment details",
+    "description": "Need to embed **employment_details** in request query params.",
+    "properties": {
+     "applied_date": {
+      "description": "employee applied date",
+      "type": "string",
+      "format": "date"
+     },
+     "department_name": {
+      "description": "employee department name",
+      "type": "string",
+      "example": "Staff"
+     },
+     "hired_date": {
+      "description": "employee hired date",
+      "type": "string",
+      "format": "date"
+     },
+     "job_title": {
+      "description": "employee job title",
+      "type": "string",
+      "example": "Barista"
+     },
+     "manager": {
+      "description": "employee manager",
+      "type": "string",
+      "example": "Test Manager"
+     },
+     "start_date": {
+      "description": "employee start date",
+      "type": "string",
+      "format": "date"
+     }
+    }
+   },
+   "work_location": {
+    "type": "object",
+    "title": "employee's work location",
+    "description": "Need to embed **work_location** in request query params.",
+    "properties": {
+     "name": {
+      "description": "work location name",
+      "type": "string",
+      "example": "Store"
+     },
+     "address": {
+      "description": "work location street address",
+      "type": "string",
+      "example": "800 Kings Way"
+     },
+     "city": {
+      "description": "work location city",
+      "type": "string",
+      "example": "Vancouver"
+     },
+     "state": {
+      "description": "work location state",
+      "type": "string",
+      "example": "VA"
+     },
+     "country": {
+      "description": "work location country",
+      "type": "string",
+      "example": "US"
+     },
+     "zipcode": {
+      "description": "work location zipcode",
+      "type": "string",
+      "example": "23321"
+     }
+    }
+   },
+   "compensation": {
+    "type": "object",
+    "title": "employee's compensation",
+    "description": "Need to embed **compensation** in request query params.",
+    "properties": {
+     "additional_remuneration": {
+      "description": "additional remuneration amount",
+      "type": "string",
+      "example": "2"
+     },
+     "additional_remuneration_currency_code": {
+      "description": "additional remuneration currency code",
+      "type": "string",
+      "example": "USD"
+     },
+     "employment_status": {
+      "description": "employment status",
+      "type": "string",
+      "enum": [
+       "full_time",
+       "part_time",
+       "contract",
+       "internship",
+       "temporary",
+       "commission"
+      ]
+     },
+     "status": {
+      "description": "compensation status",
+      "type": "string",
+      "example": "non_exempt"
+     },
+     "wage_amount": {
+      "description": "wage amount",
+      "type": "string",
+      "example": "12"
+     },
+     "wage_currency_code": {
+      "description": "wage currency code",
+      "type": "string",
+      "example": "USD"
+     },
+     "wage_pay_frequency": {
+      "description": "wage pay frequency",
+      "type": "string",
+      "enum": [
+       "hour",
+       "day",
+       "week",
+       "month",
+       "year"
+      ]
+     }
+    }
+   },
+   "direct_deposit": {
+    "type": "object",
+    "title": "employee's direct_deposit",
+    "properties": {
+     "account_number": {
+      "description": "bank account number",
+      "type": "string",
+      "example": "112223344"
+     },
+     "account_type": {
+      "description": "bank account type",
+      "type": "string",
+      "example": "saving"
+     },
+     "percentage": {
+      "description": "percentage of compensation credited into this account",
+      "type": "integer"
+     },
+     "routing_number": {
+      "description": "bank rounting number",
+      "type": "string",
+      "example": "00356"
+     },
+     "status": {
+      "description": "bank account status",
+      "type": "string",
+      "enum": [
+       "active",
+       "inactive"
+      ]
+     }
+    }
+   },
+   "federal_tax": {
+    "type": "object",
+    "title": "employee's federal tax info",
+    "description": "Need to embed **federal_tax** in request query params.",
+    "properties": {
+     "deductions": {
+      "description": "tax deductions amount",
+      "type": "integer"
+     },
+     "extra_withholding": {
+      "description": "extra withholding amount",
+      "type": "integer"
+     },
+     "filing_status": {
+      "description": "filing status",
+      "type": "string"
+     },
+     "other_income": {
+      "description": "other income amount",
+      "type": "integer"
+     },
+     "qualifying_children_num": {
+      "description": "qualifying children amount",
+      "type": "integer"
+     },
+     "qualifying_other_num": {
+      "description": "qualifying other amount",
+      "type": "integer"
+     },
+     "dependents": {
+      "description": "dependents amount",
+      "type": "integer"
+     },
+     "two_jobs": {
+      "description": "whether the employee has two jobs or not",
+      "type": "boolean"
+     },
+     "exempt_from_withholding": {
+      "description": "whether the employee is exempt from withholding or not",
+      "type": "string"
+     }
+    }
+   },
+   "state_tax": {
+    "type": "object",
+    "title": "employee's state tax info",
+    "description": "Need to embed **state_tax** in request query params.",
+    "properties": {
+     "allowances_exemptions": {
+      "description": "allowed exemptions amount",
+      "type": "integer"
+     },
+     "extra_withholding": {
+      "description": "extra withholding amount",
+      "type": "integer"
+     },
+     "filing_status": {
+      "description": "filing status",
+      "type": "string"
+     },
+     "tax_form": {
+      "description": "tax form name",
+      "type": "string"
+     },
+     "state": {
+      "description": "tax form state",
+      "type": "string"
+     },
+     "tax_form_details": {
+      "description": "tax form details",
+      "type": "object"
+     }
+    }
+   },
+   "eligibility": {
+    "type": "object",
+    "title": "employee's eligibility information",
+    "description": "Need to embed **eligibility** in request query params.",
+    "properties": {
+     "admission_number": {
+      "description": "I-94 admission number, if applicable",
+      "type": "string"
+     },
+     "alien_authorized_to_work_expiration_date": {
+      "description": "alien authorized to work expiration date, if applicable",
+      "type": "string",
+      "format": "date"
+     },
+     "alien_registration_or_uscis_number": {
+      "description": "alien registration or uscis number",
+      "type": "string"
+     },
+     "country_of_issuance": {
+      "description": "country of issuance of passport",
+      "type": "string"
+     },
+     "lawful_permanent_resident_alien_registration_or_uscis_number": {
+      "description": "lawful permanent resident alien registration or uscis number",
+      "type": "integer"
+     },
+     "passport_number": {
+      "description": "passport number",
+      "type": "string"
+     },
+     "resident_status_code": {
+      "description": "resident status code",
+      "type": "string"
+     },
+     "social_security_number": {
+      "description": "social security number, if applicable",
+      "type": "string"
+     }
+    }
+   },
+   "i9_section_one": {
+    "type": "object",
+    "title": "Form I-9 section 1 details",
+    "properties": {
+     "admission_number": {
+      "description": "I-94 admission number, if applicable",
+      "type": "string"
+     },
+     "alien_authorized_to_work_expiration_date": {
+      "description": "Alien authorized to work expiration date, if applicable",
+      "type": "string",
+      "format": "date"
+     },
+     "alien_registration_or_uscis_number": {
+      "description": "Alien registration or uscis number",
+      "type": "string"
+     },
+     "country_of_issuance": {
+      "description": "Country of issuance of passport",
+      "type": "string"
+     },
+     "lawful_permanent_resident_alien_registration_or_uscis_number": {
+      "description": "Lawful permanent resident alien registration or uscis number",
+      "type": "integer"
+     },
+     "passport_number": {
+      "description": "Passport number",
+      "type": "string"
+     },
+     "resident_status_code": {
+      "description": "Resident status code",
+      "type": "string"
+     },
+     "social_security_number": {
+      "description": "Social security number, if applicable",
+      "type": "string"
+     },
+     "employee_signed_date": {
+      "description": "Date at which employee signed section 1",
+      "type": "string",
+      "format": "date"
+     }
+    }
+   },
+   "list_a": {
+    "type": "object",
+    "title": "List A - Documents that establish both identity and employment authorization",
+    "properties": {
+     "list_a_document_title_1": {
+      "description": "Title of the first List A document provided by the employee",
+      "type": "string"
+     },
+     "list_a_document_number_1": {
+      "description": "Number associated with the first List A document provided by the employee",
+      "type": "string"
+     },
+     "list_a_expiration_date_1": {
+      "description": "Expiration date of the first List A document",
+      "type": "string",
+      "format": "date"
+     },
+     "list_a_no_expiration_date_1": {
+      "description": "Indicates if the first List A document has no expiration date",
+      "type": "boolean"
+     },
+     "list_a_issuing_authority_1": {
+      "description": "Authority that issued the first List A document",
+      "type": "string"
+     },
+     "list_a_document_title_2": {
+      "description": "Title of the second List A document provided by the employee",
+      "type": "string"
+     },
+     "list_a_document_number_2": {
+      "description": "Number associated with the second List A document provided by the employee",
+      "type": "string"
+     },
+     "list_a_expiration_date_2": {
+      "description": "Expiration date of the second List A document",
+      "type": "string",
+      "format": "date"
+     },
+     "list_a_no_expiration_date_2": {
+      "description": "Indicates if the second List A document has no expiration date",
+      "type": "boolean"
+     },
+     "list_a_issuing_authority_2": {
+      "description": "Authority that issued the second List A document",
+      "type": "string"
+     },
+     "list_a_document_title_3": {
+      "description": "Title of the third List A document provided by the employee",
+      "type": "string"
+     },
+     "list_a_document_number_3": {
+      "description": "Number associated with the third List A document provided by the employee",
+      "type": "string"
+     },
+     "list_a_expiration_date_3": {
+      "description": "Expiration date of the third List A document",
+      "type": "string",
+      "format": "date"
+     },
+     "list_a_no_expiration_date_3": {
+      "description": "Indicates if the third List A document has no expiration date",
+      "type": "boolean"
+     },
+     "list_a_issuing_authority_3": {
+      "description": "Authority that issued the third List A document",
+      "type": "string"
+     }
+    }
+   },
+   "list_b": {
+    "type": "object",
+    "title": "List B - Documents that establish identity and employment authorization",
+    "properties": {
+     "list_b_document_title_1": {
+      "description": "Title of the first List B document provided by the employee",
+      "type": "string"
+     },
+     "list_b_document_code": {
+      "description": "Code associated with List B documents",
+      "type": "string"
+     },
+     "list_b_document_number_1": {
+      "description": "Number associated with the List B document provided by the employee",
+      "type": "string"
+     },
+     "list_b_issuing_authority_1": {
+      "description": "Authority that issued the first List B document",
+      "type": "string"
+     },
+     "list_b_us_state_code_1": {
+      "description": "Two-letter code representing the U.S. state for List B documents",
+      "type": "string",
+      "example": "CA"
+     },
+     "list_b_expiration_date_1": {
+      "description": "Expiration date of the first List B document",
+      "type": "string",
+      "format": "date"
+     },
+     "list_b_no_expiration_date": {
+      "description": "Indicates if List B documents have no expiration date",
+      "type": "boolean"
+     }
+    }
+   },
+   "list_c": {
+    "type": "object",
+    "title": "List C - Documents that establish employment authorization only",
+    "properties": {
+     "list_c_document_title_1": {
+      "description": "Title of the first List C document provided by the employee",
+      "type": "string"
+     },
+     "list_c_document_code": {
+      "description": "Code associated with List C documents",
+      "type": "string"
+     },
+     "list_c_issuing_authority_1": {
+      "description": "Authority that issued the first List C document",
+      "type": "string"
+     },
+     "list_c_document_number_1": {
+      "description": "Number associated with the first List C document provided by the employee",
+      "type": "string"
+     },
+     "list_c_expiration_date_1": {
+      "description": "Expiration date of the first List C document",
+      "type": "string",
+      "format": "date"
+     },
+     "list_c_no_expiration_date": {
+      "description": "Indicates if the first List C document has no expiration date",
+      "type": "boolean"
+     }
+    }
+   },
+   "i9_section_two": {
+    "type": "object",
+    "title": "Form I-9 section 2 details",
+    "properties": {
+     "employer_fname": {
+      "description": "Employer's first name",
+      "type": "string"
+     },
+     "employer_lname": {
+      "description": "Employer's last name",
+      "type": "string"
+     },
+     "employer_job_title": {
+      "description": "Employer's job title",
+      "type": "string"
+     },
+     "employee_start_date": {
+      "description": "Employee's first day of employment",
+      "type": "string"
+     },
+     "employer_signed_date": {
+      "description": "Date at which employer signed section 2",
+      "format": "date",
+      "type": "string"
+     },
+     "list_a": {
+      "$ref": "#/components/schemas/list_a"
+     },
+     "list_b": {
+      "$ref": "#/components/schemas/list_b"
+     },
+     "list_c": {
+      "$ref": "#/components/schemas/list_c"
+     }
+    }
+   },
+   "eligibility_details": {
+    "type": "object",
+    "title": "Employee's detailed eligibility information",
+    "description": "Need to embed **eligibility_details** in request query params.",
+    "properties": {
+     "i9_section_one": {
+      "$ref": "#/components/schemas/i9_section_one"
+     },
+     "i9_section_two": {
+      "$ref": "#/components/schemas/i9_section_two"
+     }
+    }
+   },
+   "custom_forms": {
+    "type": "array",
+    "title": "employee's custom forms",
+    "description": "Need to embed **custom_forms** in request query params.",
+    "items": {
+     "type": "object",
+     "properties": {
+      "name": {
+       "description": "Custom form name",
+       "type": "string",
+       "example": "Custom form"
+      },
+      "content": {
+       "type": "array",
+       "items": {
+        "type": "object",
+        "properties": {
+         "question": {
+          "description": "Question",
+          "type": "object",
+          "properties": {
+           "title": {
+            "description": "Question title",
+            "type": "string",
+            "example": "How old are you?"
+           },
+           "content": {
+            "description": "Question content",
+            "type": "string",
+            "example": "Please enter your age."
+           }
+          }
+         },
+         "answer": {
+          "description": "Answer content",
+          "type": "array",
+          "items": {
+           "type": "object"
+          }
+         }
+        }
+       }
+      }
+     }
+    }
+   },
+   "department-2": {
+    "type": "object",
+    "title": "Department",
+    "description": "Need to embed **department** in request query params",
+    "properties": {
+     "uuid": {
+      "description": "Department uuid",
+      "type": "string",
+      "format": "uuid",
+      "example": "c59c9852-2584-11ee-be56-0242ac120002"
+     },
+     "name": {
+      "description": "Department name",
+      "type": "string",
+      "example": "Marketing"
+     }
+    }
+   },
+   "employee": {
+    "type": "object",
+    "title": "Employee",
+    "properties": {
+     "uuid": {
+      "description": "Employee uuid",
+      "type": "string",
+      "format": "uuid",
+      "example": "d404e957-af95-4776-af16-bae088e49165"
+     },
+     "first_name": {
+      "description": "Employee first_name",
+      "type": "string",
+      "example": "Ryan"
+     },
+     "middle_initial": {
+      "description": "Employee middle_initial",
+      "type": "string",
+      "example": "J"
+     },
+     "last_name": {
+      "description": "Employee last_name",
+      "type": "string",
+      "example": "Folk"
+     },
+     "preferred_name": {
+      "description": "Employee preferred name. Returned as `null` for employees who have not set one.",
+      "type": "string",
+      "nullable": true,
+      "example": "Johnny"
+     },
+     "start_date": {
+      "description": "Employee start_date",
+      "type": "string",
+      "format": "date"
+     },
+     "applied_date": {
+      "description": "Employee applied_date",
+      "type": "string",
+      "format": "date"
+     },
+     "hired_date": {
+      "description": "Employee hired_date",
+      "type": "string",
+      "format": "date"
+     },
+     "onboard_date": {
+      "description": "Employee onboard_date",
+      "type": "string",
+      "format": "date-time"
+     },
+     "status": {
+      "description": "Employee onboarding status",
+      "type": "string",
+      "enum": [
+       "not_started",
+       "in_progress",
+       "completed",
+       "suspended"
+      ],
+      "example": "completed"
+     },
+     "information": {
+      "$ref": "#/components/schemas/information"
+     },
+     "address": {
+      "$ref": "#/components/schemas/address"
+     },
+     "emergency_contact": {
+      "$ref": "#/components/schemas/emergency_contact"
+     },
+     "employment_details": {
+      "$ref": "#/components/schemas/employment_details"
+     },
+     "work_location": {
+      "$ref": "#/components/schemas/work_location"
+     },
+     "compensation": {
+      "$ref": "#/components/schemas/compensation"
+     },
+     "direct_deposits": {
+      "type": "array",
+      "description": "Need to embed **direct_deposits** in request query params.",
+      "items": {
+       "$ref": "#/components/schemas/direct_deposit"
+      }
+     },
+     "federal_tax": {
+      "$ref": "#/components/schemas/federal_tax"
+     },
+     "state_tax": {
+      "$ref": "#/components/schemas/state_tax"
+     },
+     "eligibility": {
+      "$ref": "#/components/schemas/eligibility"
+     },
+     "eligibility_details": {
+      "$ref": "#/components/schemas/eligibility_details"
+     },
+     "custom_forms": {
+      "$ref": "#/components/schemas/custom_forms"
+     },
+     "position": {
+      "$ref": "#/components/schemas/position-2"
+     },
+     "location": {
+      "$ref": "#/components/schemas/location-2"
+     },
+     "department": {
+      "$ref": "#/components/schemas/department-2"
+     }
+    }
+   },
+   "base": {
+    "type": "object",
+    "title": "Team Member",
+    "properties": {
+     "uuid": {
+      "type": "string",
+      "format": "uuid"
+     },
+     "first_name": {
+      "description": "Team member's first name.",
+      "type": "string",
+      "example": "Ryan"
+     },
+     "middle_initial": {
+      "description": "Team member's middle initial.",
+      "type": "string",
+      "example": "J"
+     },
+     "last_name": {
+      "description": "Team member's last name.",
+      "type": "string",
+      "example": "Folk"
+     },
+     "preferred_name": {
+      "description": "Team member's preferred name. Returned as `null` for team members who have not set one.",
+      "type": "string",
+      "nullable": true,
+      "example": "Johnny"
+     },
+     "termination_note": {
+      "description": "Team member's termination note.",
+      "type": "string",
+      "format": "nullable"
+     },
+     "start_date": {
+      "description": "Team member's start date.",
+      "type": "string",
+      "format": "date"
+     },
+     "status": {
+      "description": "Status of the team member.",
+      "type": "string",
+      "enum": [
+       "hired",
+       "active",
+       "offboarded"
+      ]
+     }
+    }
+   },
+   "job_title": {
+    "type": "object",
+    "title": "Job Title",
+    "description": "Need to embed **job_title** in request query params",
+    "properties": {
+     "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "example": "c59c9852-2584-11ee-be56-0242ac120002"
+     },
+     "title": {
+      "type": "string",
+      "example": "Bus Driver"
+     }
+    }
+   },
+   "location-3": {
+    "type": "object",
+    "title": "Location",
+    "description": "Need to embed **location** in request query params",
+    "properties": {
+     "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "example": "c59c9852-2584-11ee-be56-0242ac120002"
+     },
+     "name": {
+      "type": "string",
+      "example": "SF store"
+     }
+    }
+   },
+   "department-3": {
+    "type": "object",
+    "title": "Department",
+    "description": "Need to embed **department** in request query params",
+    "properties": {
+     "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "example": "c59c9852-2584-11ee-be56-0242ac120002"
+     },
+     "name": {
+      "type": "string",
+      "example": "Marketing"
+     }
+    }
+   },
+   "information-2": {
+    "type": "object",
+    "title": "Information",
+    "description": "Need to embed **information** in request query params.",
+    "properties": {
+     "phone": {
+      "description": "Team member's phone number.",
+      "type": "string",
+      "example": "+17789882873"
+     },
+     "email": {
+      "description": "Team member's email address.",
+      "type": "string",
+      "example": "wadam@example.fr"
+     },
+     "dob": {
+      "description": "Team member's date of birth.",
+      "type": "string",
+      "format": "date",
+      "example": "2020-04-01"
+     },
+     "ethnicity": {
+      "description": "Team member's ethnicity.",
+      "type": "string",
+      "enum": [
+       "white",
+       "black_or_african_american",
+       "hispanic_or_latino",
+       "american_indian_or_alaskan_native",
+       "asian",
+       "native_hawaiian_or_other_pacific_islander",
+       "two_or_more_races",
+       "not_specified"
+      ],
+      "example": "black_or_african_american"
+     },
+     "gender": {
+      "description": "Team member's gender.",
+      "type": "string",
+      "enum": [
+       "female",
+       "male",
+       "non_binary"
+      ],
+      "example": "male"
+     },
+     "ssn": {
+      "description": "Team member's social security number.",
+      "type": "string",
+      "example": "222521248"
+     },
+     "marital_status": {
+      "description": "Team member's marital status.",
+      "type": "string",
+      "enum": [
+       "never_married",
+       "married",
+       "separated",
+       "divorced",
+       "widowed"
+      ],
+      "example": "never_married"
+     }
+    }
+   },
+   "federal_tax-2": {
+    "type": "object",
+    "title": "Federal Tax",
+    "description": "Need to embed **federal_tax** in request query params.",
+    "properties": {
+     "deductions": {
+      "description": "tax deductions amount",
+      "type": "integer"
+     },
+     "extra_withholding": {
+      "description": "extra withholding amount",
+      "type": "integer"
+     },
+     "filing_status": {
+      "description": "filing status",
+      "type": "string"
+     },
+     "other_income": {
+      "description": "other income amount",
+      "type": "integer"
+     },
+     "qualifying_children_num": {
+      "description": "qualifying children amount",
+      "type": "integer"
+     },
+     "qualifying_other_num": {
+      "description": "qualifying other amount",
+      "type": "integer"
+     },
+     "two_jobs": {
+      "description": "whether the employee has two jobs or not",
+      "type": "boolean"
+     }
+    }
+   },
+   "state_tax-2": {
+    "type": "object",
+    "title": "State Tax",
+    "description": "Need to embed **state_tax** in request query params.",
+    "properties": {
+     "allowances_exemptions": {
+      "description": "allowed exemptions amount",
+      "type": "integer"
+     },
+     "extra_withholding": {
+      "description": "extra withholding amount",
+      "type": "integer"
+     },
+     "filing_status": {
+      "description": "filing status",
+      "type": "string"
+     },
+     "tax_form": {
+      "description": "tax form name",
+      "type": "string"
+     }
+    }
+   },
+   "team_member": {
+    "allOf": [
+     {
+      "$ref": "#/components/schemas/base"
+     },
+     {
+      "type": "object",
+      "properties": {
+       "job_title": {
+        "$ref": "#/components/schemas/job_title"
+       },
+       "location": {
+        "$ref": "#/components/schemas/location-3"
+       },
+       "department": {
+        "$ref": "#/components/schemas/department-3"
+       },
+       "information": {
+        "$ref": "#/components/schemas/information-2"
+       },
+       "direct_deposits": {
+        "type": "array",
+        "description": "Need to embed **direct_deposits** in request query params.",
+        "items": {
+         "$ref": "#/components/schemas/direct_deposit"
+        }
+       },
+       "state_tax": {
+        "$ref": "#/components/schemas/state_tax"
+       },
+       "federal_tax": {
+        "$ref": "#/components/schemas/federal_tax-2"
+       },
+       "eligibility": {
+        "$ref": "#/components/schemas/state_tax-2"
+       },
+       "custom_fields": {
+        "$ref": "#/components/schemas/custom_field"
+       }
+      }
+     }
+    ]
+   },
+   "creation-2": {
+    "required": [
+     "first_name",
+     "last_name",
+     "dob",
+     "phone",
+     "status",
+     "start_date",
+     "location",
+     "job_title",
+     "department",
+     "government_ids"
+    ],
+    "type": "object",
+    "title": "Team Member Creation Payload",
+    "properties": {
+     "first_name": {
+      "type": "string",
+      "description": "Team member's first name.",
+      "example": "Ryan"
+     },
+     "middle_initial": {
+      "type": "string",
+      "description": "Team member's middle initial.",
+      "example": "J"
+     },
+     "last_name": {
+      "type": "string",
+      "description": "Team member's last name.",
+      "example": "Folk"
+     },
+     "preferred_name": {
+      "type": "string",
+      "description": "Team member's preferred name (optional).",
+      "example": "Johnny"
+     },
+     "dob": {
+      "type": "string",
+      "description": "Team member's date of birth.",
+      "format": "date",
+      "example": "2020-04-01"
+     },
+     "phone": {
+      "type": "string",
+      "description": "Team member's phone number.",
+      "example": "+17789882873"
+     },
+     "email": {
+      "type": "string",
+      "description": "Team member's email address.",
+      "example": "wadam@example.fr"
+     },
+     "gender": {
+      "type": "string",
+      "description": "Team member's gender.",
+      "enum": [
+       "female",
+       "male",
+       "non_binary"
+      ],
+      "example": "male"
+     },
+     "status": {
+      "type": "string",
+      "description": "Status of the team member.",
+      "enum": [
+       "hired",
+       "active",
+       "offboarded"
+      ]
+     },
+     "start_date": {
+      "type": "string",
+      "description": "Team member's employment start date.",
+      "format": "date",
+      "example": "2023-05-01"
+     },
+     "location": {
+      "type": "object",
+      "description": "Team member's work location.",
+      "properties": {
+       "uuid": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Team member's work location ID."
+       }
+      }
+     },
+     "job_title": {
+      "type": "object",
+      "description": "Team member's job title.",
+      "properties": {
+       "uuid": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Team member's job title ID."
+       }
+      }
+     },
+     "department": {
+      "type": "object",
+      "description": "Team member's department.",
+      "properties": {
+       "uuid": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Team member's department ID."
+       }
+      }
+     },
+     "government_ids": {
+      "type": "array",
+      "description": "Array of team member's government IDs. Only Social Security Number is accepted at the moment.",
+      "items": {
+       "type": "object",
+       "description": "government ID",
+       "properties": {
+        "type": {
+         "type": "string",
+         "enum": [
+          "SSN"
+         ]
+        },
+        "value": {
+         "type": "string",
+         "example": "222521248"
+        }
+       }
+      }
+     },
+     "metadata": {
+      "type": "object",
+      "description": "Customer-defined key-value pairs. Use this parameter to store additional information on your candidate."
+     }
+    }
+   },
+   "location-4": {
+    "type": "object",
+    "title": "Location",
+    "properties": {
+     "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "example": "8b9ad790-2584-11ee-be56-0242ac120002"
+     },
+     "name": {
+      "type": "string",
+      "example": "San Francisco store"
+     },
+     "custom_fields": {
+      "$ref": "#/components/schemas/custom_field"
+     }
+    }
+   },
+   "department-4": {
+    "type": "object",
+    "title": "Department",
+    "properties": {
+     "uuid": {
+      "type": "string",
+      "format": "uuid",
+      "example": "77cac653-7150-4929-9fda-3ea0e33e108f"
+     },
+     "name": {
+      "type": "string",
+      "example": "Retail"
+     },
+     "custom_fields": {
+      "$ref": "#/components/schemas/custom_field"
+     }
+    }
+   },
+   "document": {
+    "type": "object",
+    "title": "Document",
+    "properties": {
+     "employee_uuid": {
+      "description": "Employee uuid",
+      "type": "string",
+      "format": "uuid",
+      "example": "d404e957-af95-4776-af16-bae088e49165"
+     },
+     "documents": {
+      "type": "array",
+      "items": {
+       "type": "object",
+       "title": "Document_info",
+       "properties": {
+        "url": {
+         "description": "Document url",
+         "type": "string",
+         "example": "https://example.com/employee/docs/123"
+        },
+        "type": {
+         "description": "Document type",
+         "type": "string",
+         "enum": [
+          "w4",
+          "state_tax",
+          "i9",
+          "i9_supplement_b",
+          "company_docs",
+          "adhoc_docs"
+         ],
+         "example": "w4"
+        },
+        "created_at": {
+         "description": "Document created_at",
+         "type": "string",
+         "format": "date-time",
+         "example": "2022-09-30T00:00:00.000Z"
+        }
+       }
+      }
+     }
+    }
+   },
+   "show": {
+    "type": "object",
+    "title": "Imported Employee Info",
+    "properties": {
+     "first_name": {
+      "type": "string",
+      "description": "Imported employee's first name.",
+      "example": "Tom"
+     },
+     "last_name": {
+      "type": "string",
+      "description": "Imported employee's last name"
+     },
+     "phone": {
+      "type": "string",
+      "description": "Imported employee's phone number",
+      "example": "+17789882873"
+     },
+     "email": {
+      "type": "string",
+      "description": "Imported employee's email address"
+     },
+     "rehire_eligiblity": {
+      "type": "string",
+      "description": "Imported employee's rehire eligibility",
+      "enum": [
+       "eligible",
+       "not_eligible"
+      ],
+      "nullable": true
+     },
+     "termination_reason": {
+      "type": "string",
+      "description": "Imported employee's termination reason"
+     }
+    }
+   },
+   "show-2": {
+    "type": "object",
+    "title": "Custom Field",
+    "properties": {
+     "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Custom Field ID",
+      "example": "1300622b-1bfa-41b2-b182-ca9425d140ca"
+     },
+     "entity_type": {
+      "type": "string",
+      "description": "Entity type this custom field apply for",
+      "enum": [
+       "location",
+       "department",
+       "job_posting_template",
+       "employee_record"
+      ]
+     },
+     "title": {
+      "type": "string",
+      "description": "Custom Field title",
+      "example": "Location Reference No."
+     },
+     "description": {
+      "type": "string",
+      "description": "Brief description for this custom field usage",
+      "example": "This is reference number on ADP side"
+     },
+     "is_required": {
+      "type": "boolean",
+      "description": "If custom field required when create or update entity"
+     },
+     "field_type": {
+      "type": "string",
+      "description": "Custom field value type",
+      "enum": [
+       "select",
+       "text",
+       "number",
+       "date"
+      ]
+     },
+     "options": {
+      "type": "string",
+      "description": "When field_type is select, need pre-set options for custom field value",
+      "nullable": true
+     },
+     "sequence": {
+      "type": "integer",
+      "description": "Sequence of custom field in entity"
+     }
+    }
+   }
+  },
+  "responses": {
+   "401": {
+    "description": "Unauthorized - Credentials are not valid for the target resource.",
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "type": "object",
+       "properties": {
+        "error_code": {
+         "type": "integer",
+         "example": 13401
+        },
+        "message": {
+         "type": "string",
+         "example": "Unauthorized"
+        }
+       }
+      }
+     }
+    }
+   },
+   "403": {
+    "description": "Forbidden - The user is not authorized to use this resource.",
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "type": "object",
+       "properties": {
+        "error_code": {
+         "type": "integer",
+         "example": 13403
+        },
+        "message": {
+         "type": "string",
+         "example": "Forbidden - The user is not authorized to use this resource."
+        }
+       }
+      }
+     }
+    }
+   },
+   "404": {
+    "description": "Not found - The requested resource is not found.",
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "type": "object",
+       "properties": {
+        "error_code": {
+         "type": "integer",
+         "example": 13404
+        },
+        "message": {
+         "type": "string",
+         "example": "The requested resource is not found."
+        }
+       }
+      }
+     }
+    }
+   },
+   "422": {
+    "description": "Unprocessable Entity - Invalid query params or request body.",
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "type": "object",
+       "properties": {
+        "error_code": {
+         "type": "integer",
+         "example": 13422
+        },
+        "message": {
+         "type": "string",
+         "example": "(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources)."
+        }
+       }
+      }
+     }
+    }
+   },
+   "429": {
+    "description": "Too many requests.",
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "type": "object",
+       "properties": {
+        "error_code": {
+         "type": "integer",
+         "example": 13429
+        },
+        "message": {
+         "type": "string",
+         "example": "Throttle limit reached. Limit to 100 requests in 60 seconds."
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  "parameters": {
+   "applicant_embed": {
+    "name": "embed",
+    "in": "query",
+    "schema": {
+     "type": "string",
+     "example": "(position, location, department, notes, tags, candidate_info, pay_info)"
+    },
+    "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated"
+   }
+  }
+ }
+}

@@ -1,0 +1,36 @@
+{
+  "provider": "workstream",
+  "sources": [
+    "workstream-applicants-api-openapi.yml",
+    "workstream-authorization-api-openapi.yml",
+    "workstream-company-roles-api-openapi.yml",
+    "workstream-company-users-api-openapi.yml",
+    "workstream-custom-field-api-openapi.yml",
+    "workstream-departments-api-openapi.yml",
+    "workstream-employee-documents-api-openapi.yml",
+    "workstream-employees-api-openapi.yml",
+    "workstream-imported-employee-infos-api-openapi.yml",
+    "workstream-locations-api-openapi.yml",
+    "workstream-positions-api-openapi.yml",
+    "workstream-team-members-api-openapi.yml"
+  ],
+  "outputs": [
+    "workstream-applicants-api-openapi.yml",
+    "workstream-authorization-api-openapi.yml",
+    "workstream-company-roles-api-openapi.yml",
+    "workstream-company-users-api-openapi.yml",
+    "workstream-custom-field-api-openapi.yml",
+    "workstream-departments-api-openapi.yml",
+    "workstream-employee-documents-api-openapi.yml",
+    "workstream-employees-api-openapi.yml",
+    "workstream-imported-employee-infos-api-openapi.yml",
+    "workstream-locations-api-openapi.yml",
+    "workstream-positions-api-openapi.yml",
+    "workstream-team-members-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

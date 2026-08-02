@@ -1,0 +1,13 @@
+# Workstream Help Center
+
+> How can we help?
+
+## Guides
+
+- [Get started as a Super Admin in Workstream](https://help.workstream.us/en/articles/12452638-get-started-as-a-super-admin-in-workstream.md)
+- [Get started as a Manager in Workstream](https://help.workstream.us/en/articles/12455064-get-started-as-a-manager-in-workstream.md)
+- [Explore your Team View homepage in Workstream](https://help.workstream.us/en/articles/12499993-explore-your-team-view-homepage-in-workstream.md)
+
+## Workstream App
+
+- [Use the Workstream Job Seeker App](https://help.workstream.us/en/articles/15255699-use-the-workstream-job-seeker-app.md): Learn how to sign up, search for jobs, apply, and track your applications using the Workstream Job Seeker App.

@@ -1,0 +1,70 @@
+generated: '2026-07-21'
+method: derived
+source: openapi/workstream-public-api-openapi-original.json
+schemes:
+- name: oauth2
+  source: openapi/workstream-public-api-openapi-original.json
+  flows:
+  - flow: implicit
+    authorizationUrl: https://public-api.workstream.us/
+scopes:
+- scope: Applicants
+  description: Read Applicant records
+  flows:
+  - implicit
+  sources:
+  - openapi/workstream-public-api-openapi-original.json
+- scope: Company Roles
+  description: Read Company Role records
+  flows:
+  - implicit
+  sources:
+  - openapi/workstream-public-api-openapi-original.json
+- scope: Company Users
+  description: Read Company User records
+  flows:
+  - implicit
+  sources:
+  - openapi/workstream-public-api-openapi-original.json
+- scope: Custom Field
+  description: Read, update custom field and custom field values
+  flows:
+  - implicit
+  sources:
+  - openapi/workstream-public-api-openapi-original.json
+- scope: Departments
+  description: Read Department records
+  flows:
+  - implicit
+  sources:
+  - openapi/workstream-public-api-openapi-original.json
+- scope: Employees
+  description: Read Employee records
+  flows:
+  - implicit
+  sources:
+  - openapi/workstream-public-api-openapi-original.json
+- scope: Imported Employee Infos
+  description: Read Imported Employee Info records
+  flows:
+  - implicit
+  sources:
+  - openapi/workstream-public-api-openapi-original.json
+- scope: Locations
+  description: Read Location records
+  flows:
+  - implicit
+  sources:
+  - openapi/workstream-public-api-openapi-original.json
+- scope: Positions
+  description: Read Position records
+  flows:
+  - implicit
+  sources:
+  - openapi/workstream-public-api-openapi-original.json
+- scope: TeamMember
+  description: Read Team Member records
+  flows:
+  - implicit
+  sources:
+  - openapi/workstream-public-api-openapi-original.json

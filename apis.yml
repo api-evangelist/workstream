@@ -1,28 +1,267 @@
 aid: workstream
 name: Workstream
-description: 'Workstream is a company surfaced as a portfolio company of bond-capital, crv and added to
-  the API Evangelist network as a stub for enrichment. Sector: hr-tech. This profile is a lead awaiting
-  the enrichment pipeline.'
+description: 'Workstream is an all-in-one HR, hiring, and payroll platform built for
+  hourly businesses, particularly multi-location restaurants, serving 46 of the top
+  50 restaurant brands including Taco Bell, Jimmy John''s, and Culver''s. The platform
+  covers applicant tracking and sourcing, Voice AI screening, onboarding, team management,
+  time and scheduling, compliance, and full-service payroll. Workstream publishes
+  a public REST API (OAuth 2.0 access tokens scoped to positions, applicants, employees,
+  locations, departments, and custom fields) documented at docs.workstream.us.'
 url: https://raw.githubusercontent.com/api-evangelist/workstream/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - bond-capital
 - crv
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: enriched
+x-tier-reason: public-api
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-21'
 tags:
 - Company
 - Hr Tech
-apis: []
+- Hiring
+- Payroll
+- Onboarding
+- Applicant Tracking
+- Hourly Workforce
+- Restaurants
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/workstream.png
+apis:
+- aid: workstream:workstream-applicants-api
+  name: Workstream Applicants API
+  description: Applicants represent people who have applied for positions within your company.
+  humanURL: https://docs.workstream.us/
+  baseURL: https://public-api.workstream.us
+  tags:
+  - Applicants
+  properties:
+  - type: OpenAPI
+    url: openapi/workstream-applicants-api-openapi.yml
+  - type: Documentation
+    url: https://docs.workstream.us/
+  - type: APIReference
+    url: https://docs.workstream.us/
+- aid: workstream:workstream-authorization-api
+  name: Workstream Authorization API
+  description: >-
+    The Workstream API uses OAuth 2.0 Bearer access tokens to authenticate requests. You can view and
+    manage your access tokens in the [Workstream Dashboard](https://hr.workstream.us/#/company?currentPanel=integrations&integrationItem=accesstoken).
+
+
+    To generate an access token, simply click on `Generate token`, give it a name, and select the permissions(i.e.
+    Applicants, Employees, Positions) to attach to it. **The token expires in 7 days.**
+
+
+    You can also manage your tokens through API, as shown in the next section.
+  humanURL: https://docs.workstream.us/
+  baseURL: https://public-api.workstream.us
+  tags:
+  - Authorization
+  properties:
+  - type: OpenAPI
+    url: openapi/workstream-authorization-api-openapi.yml
+  - type: Documentation
+    url: https://docs.workstream.us/
+  - type: APIReference
+    url: https://docs.workstream.us/
+- aid: workstream:workstream-company-roles-api
+  name: Workstream Company Roles API
+  description: Company Roles represent roles within your company.
+  humanURL: https://docs.workstream.us/
+  baseURL: https://public-api.workstream.us
+  tags:
+  - Company Roles
+  properties:
+  - type: OpenAPI
+    url: openapi/workstream-company-roles-api-openapi.yml
+  - type: Documentation
+    url: https://docs.workstream.us/
+  - type: APIReference
+    url: https://docs.workstream.us/
+- aid: workstream:workstream-company-users-api
+  name: Workstream Company Users API
+  description: Company Users represent people who are system users within your company.
+  humanURL: https://docs.workstream.us/
+  baseURL: https://public-api.workstream.us
+  tags:
+  - Company Users
+  properties:
+  - type: OpenAPI
+    url: openapi/workstream-company-users-api-openapi.yml
+  - type: Documentation
+    url: https://docs.workstream.us/
+  - type: APIReference
+    url: https://docs.workstream.us/
+- aid: workstream:workstream-custom-field-api
+  name: Workstream Custom Field API
+  description: >-
+    Custom field config for location, department, job posting and employee within your company.
+  humanURL: https://docs.workstream.us/
+  baseURL: https://public-api.workstream.us
+  tags:
+  - Custom Field
+  properties:
+  - type: OpenAPI
+    url: openapi/workstream-custom-field-api-openapi.yml
+  - type: Documentation
+    url: https://docs.workstream.us/
+  - type: APIReference
+    url: https://docs.workstream.us/
+- aid: workstream:workstream-departments-api
+  name: Workstream Departments API
+  description: Departments represent departments within your company.
+  humanURL: https://docs.workstream.us/
+  baseURL: https://public-api.workstream.us
+  tags:
+  - Departments
+  properties:
+  - type: OpenAPI
+    url: openapi/workstream-departments-api-openapi.yml
+  - type: Documentation
+    url: https://docs.workstream.us/
+  - type: APIReference
+    url: https://docs.workstream.us/
+- aid: workstream:workstream-employee-documents-api
+  name: Workstream Employee Documents API
+  description: >-
+    Employee Documents represent documents that are associated with employees within your company.
+  humanURL: https://docs.workstream.us/
+  baseURL: https://public-api.workstream.us
+  tags:
+  - Employee Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/workstream-employee-documents-api-openapi.yml
+  - type: Documentation
+    url: https://docs.workstream.us/
+  - type: APIReference
+    url: https://docs.workstream.us/
+- aid: workstream:workstream-employees-api
+  name: Workstream Employees API
+  description: >-
+    Employees represent applicants who have been accepted into a new position, or people who are already
+    working for your company.
+  humanURL: https://docs.workstream.us/
+  baseURL: https://public-api.workstream.us
+  tags:
+  - Employees
+  properties:
+  - type: OpenAPI
+    url: openapi/workstream-employees-api-openapi.yml
+  - type: Documentation
+    url: https://docs.workstream.us/
+  - type: APIReference
+    url: https://docs.workstream.us/
+- aid: workstream:workstream-imported-employee-infos-api
+  name: Workstream Imported Employee Infos API
+  description: >-
+    Imported Employee Infos represent imported employee information that is associated with employees
+    within your company.
+  humanURL: https://docs.workstream.us/
+  baseURL: https://public-api.workstream.us
+  tags:
+  - Imported Employee Infos
+  properties:
+  - type: OpenAPI
+    url: openapi/workstream-imported-employee-infos-api-openapi.yml
+  - type: Documentation
+    url: https://docs.workstream.us/
+  - type: APIReference
+    url: https://docs.workstream.us/
+- aid: workstream:workstream-locations-api
+  name: Workstream Locations API
+  description: Locations represent store locations within your company.
+  humanURL: https://docs.workstream.us/
+  baseURL: https://public-api.workstream.us
+  tags:
+  - Locations
+  properties:
+  - type: OpenAPI
+    url: openapi/workstream-locations-api-openapi.yml
+  - type: Documentation
+    url: https://docs.workstream.us/
+  - type: APIReference
+    url: https://docs.workstream.us/
+- aid: workstream:workstream-positions-api
+  name: Workstream Positions API
+  description: >-
+    Positions represent open job requisitions within your company that are looking to be filled.
+  humanURL: https://docs.workstream.us/
+  baseURL: https://public-api.workstream.us
+  tags:
+  - Positions
+  properties:
+  - type: OpenAPI
+    url: openapi/workstream-positions-api-openapi.yml
+  - type: Documentation
+    url: https://docs.workstream.us/
+  - type: APIReference
+    url: https://docs.workstream.us/
+- aid: workstream:workstream-team-members-api
+  name: Workstream Team Members API
+  description: Team Members represent team members that are managed within your company.
+  humanURL: https://docs.workstream.us/
+  baseURL: https://public-api.workstream.us
+  tags:
+  - Team Members
+  properties:
+  - type: OpenAPI
+    url: openapi/workstream-team-members-api-openapi.yml
+  - type: Documentation
+    url: https://docs.workstream.us/
+  - type: APIReference
+    url: https://docs.workstream.us/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/workstream-domain-security.yml
+- type: Authentication
+  url: authentication/workstream-authentication.yml
+- type: OAuthScopes
+  url: scopes/workstream-scopes.yml
 - type: Website
   url: https://workstream.us
+- type: Documentation
+  url: https://docs.workstream.us/
+- type: APIReference
+  url: https://docs.workstream.us/
+- type: DeveloperPortal
+  url: https://docs.workstream.us/
+- type: GettingStarted
+  url: https://help.workstream.us/en/articles/12278786-set-up-workstream-apis
+- type: Support
+  url: https://help.workstream.us/en/
+- type: HelpCenter
+  url: https://help.workstream.us/en/
+- type: Blog
+  url: https://www.workstream.us/blog
+- type: Pricing
+  url: https://www.workstream.us/pricing
+- type: Login
+  url: https://hr.workstream.us/
+- type: TermsOfService
+  url: https://workstream.us/terms/
+- type: PrivacyPolicy
+  url: https://www.workstream.us/privacy
+- type: StatusPage
+  url: https://workstream-status.statuspage.io/
+- type: Integrations
+  url: https://www.workstream.us/product/integrations
