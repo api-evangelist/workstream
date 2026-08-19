@@ -1,0 +1,156 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workstream Public Applicants Team Members API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Team Members",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve an existing Team Member",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/team_members/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves an existing Team Member."
+        },
+        {
+          "info": {
+            "name": "Update an existing Team Member's status",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}/team_members/:uuid/status",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Updates an existing Team Member's status."
+        },
+        {
+          "info": {
+            "name": "List existing Team Members",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/team_members",
+            "params": [
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query",
+                "description": "Returns team members with the input `first_name`."
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query",
+                "description": "Returns team members with the input `last_name`."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Returns team members with the input status."
+              },
+              {
+                "name": "location[uuid]",
+                "value": "",
+                "type": "query",
+                "description": "Returns team members with the input location's UUID."
+              },
+              {
+                "name": "job_title[title]",
+                "value": "",
+                "type": "query",
+                "description": "Returns team members with the input job_title's title."
+              },
+              {
+                "name": "start_date.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns team members with `start_date` after or equals to the input date."
+              },
+              {
+                "name": "start_date.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns team members with `start_date` before or equals to the input date."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists existing Team Members with the input parameters."
+        },
+        {
+          "info": {
+            "name": "Create a new Team Member resource",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}/team_members",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new Team Member resource."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

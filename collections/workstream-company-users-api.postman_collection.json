@@ -1,0 +1,1863 @@
+{
+  "item": [
+    {
+      "id": "cae3c93a-706a-43f0-b541-7bb882470532",
+      "name": "Company Users",
+      "description": {
+        "content": "Company Users represent people who are system users within your company.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "5cd4d21d-123a-48cf-a3d2-0474200f5f9c",
+          "name": "List existing Company Users",
+          "request": {
+            "name": "List existing Company Users",
+            "description": {
+              "content": "Lists existing Company Users with the input parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company_users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Returns Company users with the input `status`."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "Returns Company Users with the input `name`."
+                },
+                {
+                  "disabled": false,
+                  "key": "uuid",
+                  "value": "<uuid>",
+                  "description": "Returns the Company User with the input `UUID`."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.gte",
+                  "value": "<timestamp>",
+                  "description": "Returns Company Users at or after the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.lte",
+                  "value": "<timestamp>",
+                  "description": "Returns Company Users at or before the input date."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4dbabef4-f6e6-4fa1-8a93-af57a7db26c6",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Joey"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "67161b3c-2584-11ee-be56-0242ac120002"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2020-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request-id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"name\": \"Joey White\",\n      \"status\": \"active\",\n      \"region_number\": \"+1\",\n      \"phone\": \"4155693009\",\n      \"created_at\": \"2022-09-30T00:00:00.000Z\",\n      \"user\": {\n        \"email\": \"test@test.com\",\n        \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n        \"created_at\": \"2022-09-30T00:00:00.000Z\"\n      },\n      \"company_role\": {\n        \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n        \"name\": \"General Manager\",\n        \"editable\": true,\n        \"permissions_set\": [\n          \"edit_user edit_location\",\n          \"edit_department\",\n          \"customize_notifications\",\n          \"edit_position\",\n          \"edit_custom_reports\",\n          \"edit_custom_field\",\n          \"edit_integration\",\n          \"edit_company\"\n        ],\n        \"created_at\": \"2022-09-30T00:00:00.000Z\"\n      },\n      \"permission_config\": {\n        \"all_locations\": false,\n        \"locations\": [\n          {\n            \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n            \"all_departments\": false,\n            \"departments\": [\n              {\n                \"uuid\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"uuid\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          {\n            \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n            \"all_departments\": false,\n            \"departments\": [\n              {\n                \"uuid\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"uuid\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          }\n        ]\n      }\n    },\n    {\n      \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"name\": \"Joey White\",\n      \"status\": \"active\",\n      \"region_number\": \"+1\",\n      \"phone\": \"4155693009\",\n      \"created_at\": \"2022-09-30T00:00:00.000Z\",\n      \"user\": {\n        \"email\": \"test@test.com\",\n        \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n        \"created_at\": \"2022-09-30T00:00:00.000Z\"\n      },\n      \"company_role\": {\n        \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n        \"name\": \"General Manager\",\n        \"editable\": true,\n        \"permissions_set\": [\n          \"edit_user edit_location\",\n          \"edit_department\",\n          \"customize_notifications\",\n          \"edit_position\",\n          \"edit_custom_reports\",\n          \"edit_custom_field\",\n          \"edit_integration\",\n          \"edit_company\"\n        ],\n        \"created_at\": \"2022-09-30T00:00:00.000Z\"\n      },\n      \"permission_config\": {\n        \"all_locations\": false,\n        \"locations\": [\n          {\n            \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n            \"all_departments\": false,\n            \"departments\": [\n              {\n                \"uuid\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"uuid\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          },\n          {\n            \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n            \"all_departments\": false,\n            \"departments\": [\n              {\n                \"uuid\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              {\n                \"uuid\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              }\n            ]\n          }\n        ]\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9e0f43ed-b160-44e9-95e9-aaaf1de0ac9b",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Joey"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "67161b3c-2584-11ee-be56-0242ac120002"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2020-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "39f1f37a-5d1e-47a8-8180-94b247ecb95e",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Joey"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "67161b3c-2584-11ee-be56-0242ac120002"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2020-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "784f232d-772f-4fc6-aaeb-14b1fe289403",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Joey"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "67161b3c-2584-11ee-be56-0242ac120002"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2020-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4d7d42a6-de7e-491b-ba1a-1c1c64db9b58",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Joey"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "67161b3c-2584-11ee-be56-0242ac120002"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2020-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb7d10f0-120d-4f0c-a28a-12683921ce59",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "name",
+                      "value": "Joey"
+                    },
+                    {
+                      "key": "uuid",
+                      "value": "67161b3c-2584-11ee-be56-0242ac120002"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2020-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "aeaeb5be-131c-4317-828a-a83829de84a8",
+          "name": "Create a new Company User with User info",
+          "request": {
+            "name": "Create a new Company User with User info",
+            "description": {
+              "content": "Creates a new Company User with User info.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company_users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"user\": {\n    \"email\": \"<email>\",\n    \"password\": \"<password>\"\n  },\n  \"name\": \"<string>\",\n  \"company_role_uuid\": \"<string>\",\n  \"region_number\": \"1\",\n  \"phone\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "912bafb7-2424-43ed-9daa-607b70e4c1c6",
+              "name": "Returns the newly created Company User.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"password\": \"password\"\n  },\n  \"name\": \"Andy Lee\",\n  \"company_role_uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n  \"region_number\": \"1\",\n  \"phone\": \"7789882873\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request_id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n  \"name\": \"Joey White\",\n  \"status\": \"active\",\n  \"region_number\": \"+1\",\n  \"phone\": \"4155693009\",\n  \"created_at\": \"2022-09-30T00:00:00.000Z\",\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n    \"created_at\": \"2022-09-30T00:00:00.000Z\"\n  },\n  \"company_role\": {\n    \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n    \"name\": \"General Manager\",\n    \"editable\": true,\n    \"permissions_set\": [\n      \"edit_user edit_location\",\n      \"edit_department\",\n      \"customize_notifications\",\n      \"edit_position\",\n      \"edit_custom_reports\",\n      \"edit_custom_field\",\n      \"edit_integration\",\n      \"edit_company\"\n    ],\n    \"created_at\": \"2022-09-30T00:00:00.000Z\"\n  },\n  \"permission_config\": {\n    \"all_locations\": false,\n    \"locations\": [\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      },\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f7ce6775-2d47-421a-bde1-846075fa4c70",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"password\": \"password\"\n  },\n  \"name\": \"Andy Lee\",\n  \"company_role_uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n  \"region_number\": \"1\",\n  \"phone\": \"7789882873\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "bdaf24a7-1e17-4b35-9937-d203c681bb52",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"password\": \"password\"\n  },\n  \"name\": \"Andy Lee\",\n  \"company_role_uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n  \"region_number\": \"1\",\n  \"phone\": \"7789882873\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "807b55a6-c1bf-4d3b-b581-9b2c36e52063",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"password\": \"password\"\n  },\n  \"name\": \"Andy Lee\",\n  \"company_role_uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n  \"region_number\": \"1\",\n  \"phone\": \"7789882873\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c6e7ae05-6e92-414e-89b1-3a4743cfc7a8",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"password\": \"password\"\n  },\n  \"name\": \"Andy Lee\",\n  \"company_role_uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n  \"region_number\": \"1\",\n  \"phone\": \"7789882873\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93c6de96-5884-4ac7-89c2-d29adb448620",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"password\": \"password\"\n  },\n  \"name\": \"Andy Lee\",\n  \"company_role_uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n  \"region_number\": \"1\",\n  \"phone\": \"7789882873\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5f81d02e-dc34-4f04-92ec-97afd8dd7b19",
+          "name": "Update an existing Company User's Company Role & permissions",
+          "request": {
+            "name": "Update an existing Company User's Company Role & permissions",
+            "description": {
+              "content": "Update an existing Company User's Company Role & permissions.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company_users",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"company_role_uuid\": \"<uuid>\",\n  \"permission_config\": {\n    \"all_locations\": \"<boolean>\",\n    \"locations\": [\n      {\n        \"uuid\": \"<uuid>\",\n        \"all_departments\": \"<boolean>\",\n        \"departments\": [\n          {\n            \"uuid\": \"<uuid>\"\n          },\n          {\n            \"uuid\": \"<uuid>\"\n          }\n        ]\n      },\n      {\n        \"uuid\": \"<uuid>\",\n        \"all_departments\": \"<boolean>\",\n        \"departments\": [\n          {\n            \"uuid\": \"<uuid>\"\n          },\n          {\n            \"uuid\": \"<uuid>\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "56735788-aa84-4f31-ab65-36508f0ebb42",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_role_uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n  \"permission_config\": {\n    \"all_locations\": false,\n    \"locations\": [\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      },\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request-id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n  \"name\": \"Joey White\",\n  \"status\": \"active\",\n  \"region_number\": \"+1\",\n  \"phone\": \"4155693009\",\n  \"created_at\": \"2022-09-30T00:00:00.000Z\",\n  \"user\": {\n    \"email\": \"test@test.com\",\n    \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n    \"created_at\": \"2022-09-30T00:00:00.000Z\"\n  },\n  \"company_role\": {\n    \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n    \"name\": \"General Manager\",\n    \"editable\": true,\n    \"permissions_set\": [\n      \"edit_user edit_location\",\n      \"edit_department\",\n      \"customize_notifications\",\n      \"edit_position\",\n      \"edit_custom_reports\",\n      \"edit_custom_field\",\n      \"edit_integration\",\n      \"edit_company\"\n    ],\n    \"created_at\": \"2022-09-30T00:00:00.000Z\"\n  },\n  \"permission_config\": {\n    \"all_locations\": false,\n    \"locations\": [\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      },\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3db48e83-81d3-4661-959f-1c3385c021c9",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_role_uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n  \"permission_config\": {\n    \"all_locations\": false,\n    \"locations\": [\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      },\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e9e06918-797a-4fee-ade9-bf07f7697013",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_role_uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n  \"permission_config\": {\n    \"all_locations\": false,\n    \"locations\": [\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      },\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "728fb2b5-096e-4a23-9540-4e75f2f1791b",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_role_uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n  \"permission_config\": {\n    \"all_locations\": false,\n    \"locations\": [\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      },\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5c0f4c9-a112-4a66-864d-4d5aeadb0a75",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_role_uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n  \"permission_config\": {\n    \"all_locations\": false,\n    \"locations\": [\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      },\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b40bd27b-b118-462b-9c83-3b970887daf4",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"company_role_uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n  \"permission_config\": {\n    \"all_locations\": false,\n    \"locations\": [\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      },\n      {\n        \"uuid\": \"67161b3c-2584-11ee-be56-0242ac120002\",\n        \"all_departments\": false,\n        \"departments\": [\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          },\n          {\n            \"uuid\": \"47161b3c-2584-11ee-be56-0242ac120002\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "473311f4-2335-4f18-a8d9-372f92d61d7a",
+          "name": "Disable an active Company User",
+          "request": {
+            "name": "Disable an active Company User",
+            "description": {
+              "content": "Disable an active Company User.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "company_users",
+                ":uuid",
+                "disable"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "4040fbb7-9636-4dcf-8287-6c6926847174",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users",
+                    ":uuid",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request-id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n  \"status\": \"disabled\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb457d68-e32d-4ad1-ab0b-36c8df4b7e65",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users",
+                    ":uuid",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7c09f285-513f-4037-aeb8-754cabb36c5b",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users",
+                    ":uuid",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fd4fcf77-9c6e-4e5e-86d2-c7108b58a9e8",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users",
+                    ":uuid",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acf6501c-af09-4bb0-80cd-f3a78b174357",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users",
+                    ":uuid",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bd9254d-b41e-409b-acdf-20b68949cfac",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "company_users",
+                    ":uuid",
+                    "disable"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Public API URI",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "public-api.workstream.us",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a0fdd6a4-824a-4e29-a68c-1c611bf3733c",
+    "name": "Workstream Public Applicants Company Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# API Reference\n\nThe Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.\n\n**Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.\n\n\nContact Support:\n Email: help@workstream.is",
+      "type": "text/plain"
+    }
+  }
+}

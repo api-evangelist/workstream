@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workstream Public Applicants Imported Employee Infos API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Imported Employee Infos",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List existing Imported Employee Infos",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/imported_employee_infos",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number to retrieve."
+              },
+              {
+                "name": "per_page",
+                "value": "",
+                "type": "query",
+                "description": "The number of items to retrieve per page, maximum is 100."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List existing Imported Employee Infos"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

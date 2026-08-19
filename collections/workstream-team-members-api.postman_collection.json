@@ -1,0 +1,1990 @@
+{
+  "item": [
+    {
+      "id": "3e8d3578-f283-4d87-b1dc-9995c1c4aa1e",
+      "name": "Team Members",
+      "description": {
+        "content": "Team Members represent team members that are managed within your company.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "28598098-2fd8-403e-85ea-cd5254b5f28e",
+          "name": "Retrieve an existing Team Member",
+          "request": {
+            "name": "Retrieve an existing Team Member",
+            "description": {
+              "content": "Retrieves an existing Team Member.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team_members",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "embed",
+                  "value": "<string>",
+                  "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "e4d9dc19-ae08-4c4f-943a-09433e79459f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request-id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"de7b4faa-4da1-afcb-784b-6c3eb5f412c8\",\n  \"first_name\": \"Ryan\",\n  \"middle_initial\": \"J\",\n  \"last_name\": \"Folk\",\n  \"preferred_name\": \"Johnny\",\n  \"termination_note\": \"string\",\n  \"start_date\": \"1976-05-30\",\n  \"status\": \"offboarded\",\n  \"job_title\": {\n    \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n    \"title\": \"Bus Driver\"\n  },\n  \"location\": {\n    \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n    \"name\": \"SF store\"\n  },\n  \"department\": {\n    \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n    \"name\": \"Marketing\"\n  },\n  \"information\": {\n    \"phone\": \"+17789882873\",\n    \"email\": \"wadam@example.fr\",\n    \"dob\": \"2020-04-01\",\n    \"ethnicity\": \"black_or_african_american\",\n    \"gender\": \"male\",\n    \"ssn\": \"222521248\",\n    \"marital_status\": \"never_married\"\n  },\n  \"direct_deposits\": [\n    {\n      \"account_number\": \"112223344\",\n      \"account_type\": \"saving\",\n      \"percentage\": 2743,\n      \"routing_number\": \"00356\",\n      \"status\": \"inactive\"\n    },\n    {\n      \"account_number\": \"112223344\",\n      \"account_type\": \"saving\",\n      \"percentage\": 4128,\n      \"routing_number\": \"00356\",\n      \"status\": \"inactive\"\n    }\n  ],\n  \"state_tax\": {\n    \"allowances_exemptions\": 2814,\n    \"extra_withholding\": 2405,\n    \"filing_status\": \"string\",\n    \"tax_form\": \"string\",\n    \"state\": \"string\",\n    \"tax_form_details\": {}\n  },\n  \"federal_tax\": {\n    \"deductions\": 2125,\n    \"extra_withholding\": 3764,\n    \"filing_status\": \"string\",\n    \"other_income\": 2652,\n    \"qualifying_children_num\": 2887,\n    \"qualifying_other_num\": 2286,\n    \"two_jobs\": false\n  },\n  \"eligibility\": {\n    \"allowances_exemptions\": 8939,\n    \"extra_withholding\": 9983,\n    \"filing_status\": \"string\",\n    \"tax_form\": \"string\"\n  },\n  \"custom_fields\": [\n    {\n      \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"title\": \"custom field title\",\n      \"value\": \"custom field value\"\n    },\n    {\n      \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"title\": \"custom field title\",\n      \"value\": \"custom field value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50639d90-af02-43c2-bdd0-41849e4ecb1f",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fe1b9080-0377-45c4-beb6-2d76972df2d2",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e5cf72be-5fd3-407f-8cbd-6c30afdf5921",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a4f935d4-ab0d-4cd7-ba96-173ded51c62a",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e23f8bcb-4ba9-42ae-be43-37384b86b71e",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ff0e566e-53d1-4b73-a3b7-410a308c38b7",
+          "name": "Update an existing Team Member's status",
+          "request": {
+            "name": "Update an existing Team Member's status",
+            "description": {
+              "content": "Updates an existing Team Member's status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team_members",
+                ":uuid",
+                "status"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"last_day_of_work\": \"<date>\",\n  \"note\": \"<string>\",\n  \"rehireable\": \"<boolean>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "2c21a94b-f100-4730-b8ac-77ca4b09c02a",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members",
+                    ":uuid",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"last_day_of_work\": \"<date>\",\n  \"note\": \"<string>\",\n  \"rehireable\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request-id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"c1d4af06-6e68-7264-07ea-98f7e36d512d\",\n  \"first_name\": \"Ryan\",\n  \"middle_initial\": \"J\",\n  \"last_name\": \"Folk\",\n  \"preferred_name\": \"Johnny\",\n  \"termination_note\": \"string\",\n  \"start_date\": \"1975-03-13\",\n  \"status\": \"active\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a9851e56-e390-4201-9933-f8bea690fe16",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members",
+                    ":uuid",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"last_day_of_work\": \"<date>\",\n  \"note\": \"<string>\",\n  \"rehireable\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4970ece1-796b-4991-8756-f8afec197876",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members",
+                    ":uuid",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"last_day_of_work\": \"<date>\",\n  \"note\": \"<string>\",\n  \"rehireable\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3740684e-df18-40e1-813a-1b81b09ed77f",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members",
+                    ":uuid",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"last_day_of_work\": \"<date>\",\n  \"note\": \"<string>\",\n  \"rehireable\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f36f5a3e-1e4b-4c1e-b00e-b19e54dab40b",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members",
+                    ":uuid",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"last_day_of_work\": \"<date>\",\n  \"note\": \"<string>\",\n  \"rehireable\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c13daf60-d10d-4342-a783-e58593eaa70e",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members",
+                    ":uuid",
+                    "status"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"<string>\",\n  \"last_day_of_work\": \"<date>\",\n  \"note\": \"<string>\",\n  \"rehireable\": \"<boolean>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bbed1e56-0d29-4247-a083-6fbf2ef9b26a",
+          "name": "List existing Team Members",
+          "request": {
+            "name": "List existing Team Members",
+            "description": {
+              "content": "Lists existing Team Members with the input parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team_members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>",
+                  "description": "Returns team members with the input `first_name`."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>",
+                  "description": "Returns team members with the input `last_name`."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Returns team members with the input status."
+                },
+                {
+                  "disabled": false,
+                  "key": "location[uuid]",
+                  "value": "<uuid>",
+                  "description": "Returns team members with the input location's UUID."
+                },
+                {
+                  "disabled": false,
+                  "key": "job_title[title]",
+                  "value": "<string>",
+                  "description": "Returns team members with the input job_title's title."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date.gte",
+                  "value": "<date>",
+                  "description": "Returns team members with `start_date` after or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date.lte",
+                  "value": "<date>",
+                  "description": "Returns team members with `start_date` before or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "embed",
+                  "value": "<string>",
+                  "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a0c8ec3f-9957-4173-a198-75e3de8bc3ce",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location[uuid]",
+                      "value": "c59c9852-2584-11ee-be56-0242ac120002"
+                    },
+                    {
+                      "key": "job_title[title]",
+                      "value": "Bus Driver"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request_id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"uuid\": \"2fe65e16-f8b9-2540-d00e-c528cd4495c6\",\n      \"first_name\": \"Ryan\",\n      \"middle_initial\": \"J\",\n      \"last_name\": \"Folk\",\n      \"preferred_name\": \"Johnny\",\n      \"termination_note\": \"string\",\n      \"start_date\": \"2001-12-04\",\n      \"status\": \"active\",\n      \"job_title\": {\n        \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n        \"title\": \"Bus Driver\"\n      },\n      \"location\": {\n        \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n        \"name\": \"SF store\"\n      },\n      \"department\": {\n        \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n        \"name\": \"Marketing\"\n      },\n      \"information\": {\n        \"phone\": \"+17789882873\",\n        \"email\": \"wadam@example.fr\",\n        \"dob\": \"2020-04-01\",\n        \"ethnicity\": \"black_or_african_american\",\n        \"gender\": \"male\",\n        \"ssn\": \"222521248\",\n        \"marital_status\": \"never_married\"\n      },\n      \"direct_deposits\": [\n        {\n          \"account_number\": \"112223344\",\n          \"account_type\": \"saving\",\n          \"percentage\": 6698,\n          \"routing_number\": \"00356\",\n          \"status\": \"inactive\"\n        },\n        {\n          \"account_number\": \"112223344\",\n          \"account_type\": \"saving\",\n          \"percentage\": 9305,\n          \"routing_number\": \"00356\",\n          \"status\": \"inactive\"\n        }\n      ],\n      \"state_tax\": {\n        \"allowances_exemptions\": 8611,\n        \"extra_withholding\": 4238,\n        \"filing_status\": \"string\",\n        \"tax_form\": \"string\",\n        \"state\": \"string\",\n        \"tax_form_details\": {}\n      },\n      \"federal_tax\": {\n        \"deductions\": 7823,\n        \"extra_withholding\": 1618,\n        \"filing_status\": \"string\",\n        \"other_income\": 8810,\n        \"qualifying_children_num\": 2016,\n        \"qualifying_other_num\": 2611,\n        \"two_jobs\": true\n      },\n      \"eligibility\": {\n        \"allowances_exemptions\": 6278,\n        \"extra_withholding\": 1280,\n        \"filing_status\": \"string\",\n        \"tax_form\": \"string\"\n      },\n      \"custom_fields\": [\n        {\n          \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n          \"title\": \"custom field title\",\n          \"value\": \"custom field value\"\n        },\n        {\n          \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n          \"title\": \"custom field title\",\n          \"value\": \"custom field value\"\n        }\n      ]\n    },\n    {\n      \"uuid\": \"8a3acaa4-9599-67b2-a684-60434abe641b\",\n      \"first_name\": \"Ryan\",\n      \"middle_initial\": \"J\",\n      \"last_name\": \"Folk\",\n      \"preferred_name\": \"Johnny\",\n      \"termination_note\": \"string\",\n      \"start_date\": \"1959-03-14\",\n      \"status\": \"offboarded\",\n      \"job_title\": {\n        \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n        \"title\": \"Bus Driver\"\n      },\n      \"location\": {\n        \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n        \"name\": \"SF store\"\n      },\n      \"department\": {\n        \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n        \"name\": \"Marketing\"\n      },\n      \"information\": {\n        \"phone\": \"+17789882873\",\n        \"email\": \"wadam@example.fr\",\n        \"dob\": \"2020-04-01\",\n        \"ethnicity\": \"black_or_african_american\",\n        \"gender\": \"male\",\n        \"ssn\": \"222521248\",\n        \"marital_status\": \"never_married\"\n      },\n      \"direct_deposits\": [\n        {\n          \"account_number\": \"112223344\",\n          \"account_type\": \"saving\",\n          \"percentage\": 5861,\n          \"routing_number\": \"00356\",\n          \"status\": \"active\"\n        },\n        {\n          \"account_number\": \"112223344\",\n          \"account_type\": \"saving\",\n          \"percentage\": 1111,\n          \"routing_number\": \"00356\",\n          \"status\": \"active\"\n        }\n      ],\n      \"state_tax\": {\n        \"allowances_exemptions\": 5158,\n        \"extra_withholding\": 1817,\n        \"filing_status\": \"string\",\n        \"tax_form\": \"string\",\n        \"state\": \"string\",\n        \"tax_form_details\": {}\n      },\n      \"federal_tax\": {\n        \"deductions\": 4662,\n        \"extra_withholding\": 3746,\n        \"filing_status\": \"string\",\n        \"other_income\": 9687,\n        \"qualifying_children_num\": 3106,\n        \"qualifying_other_num\": 572,\n        \"two_jobs\": false\n      },\n      \"eligibility\": {\n        \"allowances_exemptions\": 1568,\n        \"extra_withholding\": 3319,\n        \"filing_status\": \"string\",\n        \"tax_form\": \"string\"\n      },\n      \"custom_fields\": [\n        {\n          \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n          \"title\": \"custom field title\",\n          \"value\": \"custom field value\"\n        },\n        {\n          \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n          \"title\": \"custom field title\",\n          \"value\": \"custom field value\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1fd55cbe-ded7-40ad-8baf-9af3165c9f87",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location[uuid]",
+                      "value": "c59c9852-2584-11ee-be56-0242ac120002"
+                    },
+                    {
+                      "key": "job_title[title]",
+                      "value": "Bus Driver"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfae4f3b-f735-4346-b691-88f3f0b30b28",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location[uuid]",
+                      "value": "c59c9852-2584-11ee-be56-0242ac120002"
+                    },
+                    {
+                      "key": "job_title[title]",
+                      "value": "Bus Driver"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2286b932-d4d5-4559-ba24-a424dd28efa5",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location[uuid]",
+                      "value": "c59c9852-2584-11ee-be56-0242ac120002"
+                    },
+                    {
+                      "key": "job_title[title]",
+                      "value": "Bus Driver"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "162c7d6a-eb1e-40ed-bb5a-6256af766139",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location[uuid]",
+                      "value": "c59c9852-2584-11ee-be56-0242ac120002"
+                    },
+                    {
+                      "key": "job_title[title]",
+                      "value": "Bus Driver"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1942e04d-44b2-428c-9a49-4c995d9d2e50",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "location[uuid]",
+                      "value": "c59c9852-2584-11ee-be56-0242ac120002"
+                    },
+                    {
+                      "key": "job_title[title]",
+                      "value": "Bus Driver"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(location, job_title, department, information, state_tax, federal_tax, eligibility, direct_deposits)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b2da76e4-f682-4ce8-b604-3d30aa43095e",
+          "name": "Create a new Team Member resource",
+          "request": {
+            "name": "Create a new Team Member resource",
+            "description": {
+              "content": "Creates a new Team Member resource.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "team_members"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"team_member\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"dob\": \"<date>\",\n    \"phone\": \"<string>\",\n    \"status\": \"<string>\",\n    \"start_date\": \"<date>\",\n    \"location\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"job_title\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"department\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"government_ids\": [\n      {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"value\": \"<string>\"\n      }\n    ],\n    \"middle_initial\": \"<string>\",\n    \"preferred_name\": \"<string>\",\n    \"email\": \"<string>\",\n    \"gender\": \"<string>\",\n    \"metadata\": \"<object>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f3f440c8-9649-4a2c-9f23-462be01a58f6",
+              "name": "Returns the newly created Team Member.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"team_member\": {\n    \"first_name\": \"Ryan\",\n    \"last_name\": \"Folk\",\n    \"dob\": \"2020-04-01\",\n    \"phone\": \"+17789882873\",\n    \"status\": \"<string>\",\n    \"start_date\": \"2023-05-01\",\n    \"location\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"job_title\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"department\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"government_ids\": [\n      {\n        \"type\": \"<string>\",\n        \"value\": \"222521248\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"value\": \"222521248\"\n      }\n    ],\n    \"middle_initial\": \"J\",\n    \"preferred_name\": \"Johnny\",\n    \"email\": \"wadam@example.fr\",\n    \"gender\": \"male\",\n    \"metadata\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request_id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"bc236c85-4a2f-35c0-1211-225dbc826e07\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1634a43a-d283-4f9c-97b4-84a9337e2c76",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"team_member\": {\n    \"first_name\": \"Ryan\",\n    \"last_name\": \"Folk\",\n    \"dob\": \"2020-04-01\",\n    \"phone\": \"+17789882873\",\n    \"status\": \"<string>\",\n    \"start_date\": \"2023-05-01\",\n    \"location\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"job_title\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"department\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"government_ids\": [\n      {\n        \"type\": \"<string>\",\n        \"value\": \"222521248\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"value\": \"222521248\"\n      }\n    ],\n    \"middle_initial\": \"J\",\n    \"preferred_name\": \"Johnny\",\n    \"email\": \"wadam@example.fr\",\n    \"gender\": \"male\",\n    \"metadata\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6b1b19b3-a4f1-421a-828f-997014b0c8ff",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"team_member\": {\n    \"first_name\": \"Ryan\",\n    \"last_name\": \"Folk\",\n    \"dob\": \"2020-04-01\",\n    \"phone\": \"+17789882873\",\n    \"status\": \"<string>\",\n    \"start_date\": \"2023-05-01\",\n    \"location\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"job_title\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"department\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"government_ids\": [\n      {\n        \"type\": \"<string>\",\n        \"value\": \"222521248\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"value\": \"222521248\"\n      }\n    ],\n    \"middle_initial\": \"J\",\n    \"preferred_name\": \"Johnny\",\n    \"email\": \"wadam@example.fr\",\n    \"gender\": \"male\",\n    \"metadata\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "acb1db0e-1c2c-4eec-b845-3d3cb5bed5f8",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"team_member\": {\n    \"first_name\": \"Ryan\",\n    \"last_name\": \"Folk\",\n    \"dob\": \"2020-04-01\",\n    \"phone\": \"+17789882873\",\n    \"status\": \"<string>\",\n    \"start_date\": \"2023-05-01\",\n    \"location\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"job_title\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"department\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"government_ids\": [\n      {\n        \"type\": \"<string>\",\n        \"value\": \"222521248\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"value\": \"222521248\"\n      }\n    ],\n    \"middle_initial\": \"J\",\n    \"preferred_name\": \"Johnny\",\n    \"email\": \"wadam@example.fr\",\n    \"gender\": \"male\",\n    \"metadata\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "42b9d6bb-e558-4927-b6ec-4664ca30104e",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"team_member\": {\n    \"first_name\": \"Ryan\",\n    \"last_name\": \"Folk\",\n    \"dob\": \"2020-04-01\",\n    \"phone\": \"+17789882873\",\n    \"status\": \"<string>\",\n    \"start_date\": \"2023-05-01\",\n    \"location\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"job_title\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"department\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"government_ids\": [\n      {\n        \"type\": \"<string>\",\n        \"value\": \"222521248\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"value\": \"222521248\"\n      }\n    ],\n    \"middle_initial\": \"J\",\n    \"preferred_name\": \"Johnny\",\n    \"email\": \"wadam@example.fr\",\n    \"gender\": \"male\",\n    \"metadata\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2695b24a-9c8d-4f71-b13b-f0139076cc94",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "team_members"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"team_member\": {\n    \"first_name\": \"Ryan\",\n    \"last_name\": \"Folk\",\n    \"dob\": \"2020-04-01\",\n    \"phone\": \"+17789882873\",\n    \"status\": \"<string>\",\n    \"start_date\": \"2023-05-01\",\n    \"location\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"job_title\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"department\": {\n      \"uuid\": \"<uuid>\"\n    },\n    \"government_ids\": [\n      {\n        \"type\": \"<string>\",\n        \"value\": \"222521248\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"value\": \"222521248\"\n      }\n    ],\n    \"middle_initial\": \"J\",\n    \"preferred_name\": \"Johnny\",\n    \"email\": \"wadam@example.fr\",\n    \"gender\": \"male\",\n    \"metadata\": \"<object>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Public API URI",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "public-api.workstream.us",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "d659b295-97f1-4335-9220-adf7907d1305",
+    "name": "Workstream Public Applicants Team Members API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# API Reference\n\nThe Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.\n\n**Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.\n\n\nContact Support:\n Email: help@workstream.is",
+      "type": "text/plain"
+    }
+  }
+}

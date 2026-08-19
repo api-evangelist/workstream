@@ -1,0 +1,129 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workstream Public Applicants Authorization API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Authorization",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}/tokens",
+            "params": [
+              {
+                "name": "grant_type",
+                "value": "",
+                "type": "query",
+                "description": "Grant type of access token, please use `client_credentials`."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Client credentials provided as part of your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`."
+              },
+              {
+                "name": "client_secret",
+                "value": "",
+                "type": "query",
+                "description": "The password used to authenticate your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Name of the access token displayed in the Dashboard."
+              },
+              {
+                "name": "scopes",
+                "value": "",
+                "type": "query",
+                "description": "Permission scopes of access token."
+              }
+            ]
+          },
+          "docs": "Creates a new access token."
+        },
+        {
+          "info": {
+            "name": "Refresh the access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}/tokens/refresh_token",
+            "params": [
+              {
+                "name": "grant_type",
+                "value": "",
+                "type": "query",
+                "description": "Grant type of access token, please use `client_credentials`."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Client credentials provided as part of your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`."
+              },
+              {
+                "name": "client_secret",
+                "value": "",
+                "type": "query",
+                "description": "The password used to authenticate your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`."
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "The access token needs to be refreshed"
+              }
+            ]
+          },
+          "docs": "Refresh the access token."
+        },
+        {
+          "info": {
+            "name": "Revoke an existing access token",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}/revoke",
+            "params": [
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "The access token to revoke."
+              },
+              {
+                "name": "client_id",
+                "value": "",
+                "type": "query",
+                "description": "Client credentials provided as part of your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`."
+              },
+              {
+                "name": "client_secret",
+                "value": "",
+                "type": "query",
+                "description": "The password used to authenticate your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`."
+              }
+            ]
+          },
+          "docs": "Revokes an existing access token."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

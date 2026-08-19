@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workstream Public Applicants Locations API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Locations",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve an existing Location",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/locations/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves an existing Location."
+        },
+        {
+          "info": {
+            "name": "List existing Locations",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/locations",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Returns locations with the input `name`."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists existing Locations with the input parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

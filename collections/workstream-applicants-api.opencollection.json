@@ -1,0 +1,169 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workstream Public Applicants API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Applicants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve an existing Applicant",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/position_applications/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves an existing Applicant."
+        },
+        {
+          "info": {
+            "name": "List Applicant's custom forms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/position_applications/:uuid/forms",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns the questions and answers of forms filled in by an existing Applicant."
+        },
+        {
+          "info": {
+            "name": "List existing Applicants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/position_applications",
+            "params": [
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Returns applicants with the input `status`."
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query",
+                "description": "Returns applicants with the input `first_name`."
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query",
+                "description": "Returns applicants with the input `last_name`."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Returns applicants with the input `name`."
+              },
+              {
+                "name": "current_stage",
+                "value": "",
+                "type": "query",
+                "description": "Returns applicants with the input position stage."
+              },
+              {
+                "name": "position[uuid]",
+                "value": "",
+                "type": "query",
+                "description": "Returns applicants with the input position's UUID."
+              },
+              {
+                "name": "location[name]",
+                "value": "",
+                "type": "query",
+                "description": "Returns applicants with the input location's name."
+              },
+              {
+                "name": "tag[name]",
+                "value": "",
+                "type": "query",
+                "description": "Returns applicants with the input applicant tag's name."
+              },
+              {
+                "name": "note[content]",
+                "value": "",
+                "type": "query",
+                "description": "Returns applicants with the input applicant note's content."
+              },
+              {
+                "name": "created_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns applicants created after or equals to the input date."
+              },
+              {
+                "name": "created_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns applicants created before or equals to the input date."
+              },
+              {
+                "name": "hired_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns applicants hired after or equals to the input date."
+              },
+              {
+                "name": "hired_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns applicants hired before or equals to the input date."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists existing Applicants with the input parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

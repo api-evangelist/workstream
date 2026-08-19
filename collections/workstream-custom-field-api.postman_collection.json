@@ -1,0 +1,1612 @@
+{
+  "item": [
+    {
+      "id": "db5f42f5-8e27-464b-94e6-525fbbeb0aa6",
+      "name": "Custom Field",
+      "description": {
+        "content": "Custom field config for location, department, job posting and employee within your company.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "6ff1bffe-7eb0-455f-a1ad-822ef59b9f5b",
+          "name": "List existing Custom Fields",
+          "request": {
+            "name": "List existing Custom Fields",
+            "description": {
+              "content": "List existing Custom Fields",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "entity_type",
+                  "value": "<string>",
+                  "description": "Entity type of the custom field."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "ed48074c-041e-44b9-a3ea-320d00c1165a",
+              "name": "Returns all custom field values for an entity",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entity_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request_id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"custom_fields\": [\n    {\n      \"id\": \"1300622b-1bfa-41b2-b182-ca9425d140ca\",\n      \"entity_type\": \"job_posting_template\",\n      \"title\": \"Location Reference No.\",\n      \"description\": \"This is reference number on ADP side\",\n      \"is_required\": false,\n      \"field_type\": \"date\",\n      \"options\": \"string\",\n      \"sequence\": 3776\n    },\n    {\n      \"id\": \"1300622b-1bfa-41b2-b182-ca9425d140ca\",\n      \"entity_type\": \"department\",\n      \"title\": \"Location Reference No.\",\n      \"description\": \"This is reference number on ADP side\",\n      \"is_required\": true,\n      \"field_type\": \"select\",\n      \"options\": \"string\",\n      \"sequence\": 2532\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5c99a433-06f4-4053-9130-73b5ef39fa12",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entity_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "4c55bdcb-4bfc-499b-8a13-44439158a152",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entity_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "2cf0c5c7-5c5c-4cb4-815c-f107245b7ebd",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entity_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b9035044-3af5-45da-9470-e8ce98668f0e",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "entity_type",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3bb4ea34-2e28-403a-8ad5-36caa5639041",
+          "name": "Create Custom Field",
+          "request": {
+            "name": "Create Custom Field",
+            "description": {
+              "content": "Create Custom Field",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_fields"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"custom_field\": {\n    \"entity_type\": \"<string>\",\n    \"title\": \"<string>\",\n    \"field_type\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"options\": \"<array>\",\n    \"config\": \"<object>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "83e33cc1-1770-4801-a290-5158b9b8ced2",
+              "name": "Returns new created custom field",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field\": {\n    \"entity_type\": \"<string>\",\n    \"title\": \"<string>\",\n    \"field_type\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"options\": [\n      \"option1\",\n      \"option2\"\n    ],\n    \"config\": {\n      \"character_blacklist\": true,\n      \"digit_length\": 2\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request_id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"custom_field\": {\n    \"id\": \"1300622b-1bfa-41b2-b182-ca9425d140ca\",\n    \"entity_type\": \"department\",\n    \"title\": \"Location Reference No.\",\n    \"description\": \"This is reference number on ADP side\",\n    \"is_required\": true,\n    \"field_type\": \"text\",\n    \"options\": \"string\",\n    \"sequence\": 8369\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a8b608ec-c6b5-4c8f-b40f-b0aa16d1e0d0",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field\": {\n    \"entity_type\": \"<string>\",\n    \"title\": \"<string>\",\n    \"field_type\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"options\": [\n      \"option1\",\n      \"option2\"\n    ],\n    \"config\": {\n      \"character_blacklist\": true,\n      \"digit_length\": 2\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5ebec65-7043-470a-ba0d-69b22f400637",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field\": {\n    \"entity_type\": \"<string>\",\n    \"title\": \"<string>\",\n    \"field_type\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"options\": [\n      \"option1\",\n      \"option2\"\n    ],\n    \"config\": {\n      \"character_blacklist\": true,\n      \"digit_length\": 2\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a924b9f2-c4e1-4852-80b5-ffc2370037b5",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field\": {\n    \"entity_type\": \"<string>\",\n    \"title\": \"<string>\",\n    \"field_type\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"options\": [\n      \"option1\",\n      \"option2\"\n    ],\n    \"config\": {\n      \"character_blacklist\": true,\n      \"digit_length\": 2\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ef5501c4-d323-44c8-97f4-1a84aa029c6d",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field\": {\n    \"entity_type\": \"<string>\",\n    \"title\": \"<string>\",\n    \"field_type\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"options\": [\n      \"option1\",\n      \"option2\"\n    ],\n    \"config\": {\n      \"character_blacklist\": true,\n      \"digit_length\": 2\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "019567a7-90d8-40a2-b758-6771bae0198f",
+          "name": "Update an existing Custom Field",
+          "request": {
+            "name": "Update an existing Custom Field",
+            "description": {
+              "content": "Update an existing Custom Field",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom_fields",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "id",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"custom_field\": {\n    \"entity_type\": \"<string>\",\n    \"title\": \"<string>\",\n    \"field_type\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"options\": \"<array>\",\n    \"config\": \"<object>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "c9e2ad67-e663-4694-bde6-125f15592caf",
+              "name": "Update a custom field successfully",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field\": {\n    \"entity_type\": \"<string>\",\n    \"title\": \"<string>\",\n    \"field_type\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"options\": [\n      \"option1\",\n      \"option2\"\n    ],\n    \"config\": {\n      \"character_blacklist\": true,\n      \"digit_length\": 2\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request_id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"custom_field\": {\n    \"id\": \"1300622b-1bfa-41b2-b182-ca9425d140ca\",\n    \"entity_type\": \"department\",\n    \"title\": \"Location Reference No.\",\n    \"description\": \"This is reference number on ADP side\",\n    \"is_required\": true,\n    \"field_type\": \"text\",\n    \"options\": \"string\",\n    \"sequence\": 8369\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0b93c7ed-2458-460d-9df6-d6cc6fb336c0",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field\": {\n    \"entity_type\": \"<string>\",\n    \"title\": \"<string>\",\n    \"field_type\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"options\": [\n      \"option1\",\n      \"option2\"\n    ],\n    \"config\": {\n      \"character_blacklist\": true,\n      \"digit_length\": 2\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8ffa3aff-fba9-43c8-90b1-c98c21be466a",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field\": {\n    \"entity_type\": \"<string>\",\n    \"title\": \"<string>\",\n    \"field_type\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"options\": [\n      \"option1\",\n      \"option2\"\n    ],\n    \"config\": {\n      \"character_blacklist\": true,\n      \"digit_length\": 2\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "0d91e89b-bd70-4372-bb8b-f8a42325d375",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field\": {\n    \"entity_type\": \"<string>\",\n    \"title\": \"<string>\",\n    \"field_type\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"options\": [\n      \"option1\",\n      \"option2\"\n    ],\n    \"config\": {\n      \"character_blacklist\": true,\n      \"digit_length\": 2\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "01169280-8749-4066-a19c-4e664f32fcc4",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom_fields",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "id",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field\": {\n    \"entity_type\": \"<string>\",\n    \"title\": \"<string>\",\n    \"field_type\": \"<string>\",\n    \"is_required\": \"<boolean>\",\n    \"options\": [\n      \"option1\",\n      \"option2\"\n    ],\n    \"config\": {\n      \"character_blacklist\": true,\n      \"digit_length\": 2\n    }\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ddb502a6-b19f-4e59-99bf-d5eb8f3a7dc8",
+          "name": "Create or update custom field value",
+          "request": {
+            "name": "Create or update custom field value",
+            "description": {
+              "content": "Create or update custom field value",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entity_type",
+                ":entity_type",
+                "entity_id",
+                ":entity_id",
+                "custom_field_values"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entity_type",
+                  "description": "(Required) Entity type of custom field value."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "entity_id",
+                  "description": "(Required) Entity id of custom field value"
+                },
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"custom_field_values\": [\n    {\n      \"id\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "1dd4d727-eab2-420a-a25c-068e2975b591",
+              "name": "Returns new created custom field",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_type",
+                    ":entity_type",
+                    "entity_id",
+                    ":entity_id",
+                    "custom_field_values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_type",
+                      "description": "(Required) Entity type of custom field value."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "entity_id",
+                      "description": "(Required) Entity id of custom field value"
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field_values\": [\n    {\n      \"id\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"id\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request_id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entity_id\": 7935,\n  \"entity_type\": \"string\",\n  \"custom_field_values\": [\n    {\n      \"id\": \"string\",\n      \"value\": \"string\"\n    },\n    {\n      \"id\": \"string\",\n      \"value\": \"string\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b0058be6-ab32-4b9b-98eb-f44b23302578",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_type",
+                    ":entity_type",
+                    "entity_id",
+                    ":entity_id",
+                    "custom_field_values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_type",
+                      "description": "(Required) Entity type of custom field value."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "entity_id",
+                      "description": "(Required) Entity id of custom field value"
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field_values\": [\n    {\n      \"id\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"id\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "6bbb7b41-1f2d-45d1-a12c-1a90d7d52d63",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_type",
+                    ":entity_type",
+                    "entity_id",
+                    ":entity_id",
+                    "custom_field_values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_type",
+                      "description": "(Required) Entity type of custom field value."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "entity_id",
+                      "description": "(Required) Entity id of custom field value"
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field_values\": [\n    {\n      \"id\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"id\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cb8f0eb6-e729-4276-8cdc-88f93bb1ecc8",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_type",
+                    ":entity_type",
+                    "entity_id",
+                    ":entity_id",
+                    "custom_field_values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_type",
+                      "description": "(Required) Entity type of custom field value."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "entity_id",
+                      "description": "(Required) Entity id of custom field value"
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field_values\": [\n    {\n      \"id\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"id\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "379aecd6-ba7a-4f87-baab-7daab0ebcf0d",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entity_type",
+                    ":entity_type",
+                    "entity_id",
+                    ":entity_id",
+                    "custom_field_values"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entity_type",
+                      "description": "(Required) Entity type of custom field value."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "entity_id",
+                      "description": "(Required) Entity id of custom field value"
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"custom_field_values\": [\n    {\n      \"id\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"id\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Public API URI",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "public-api.workstream.us",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "829bb3d8-3495-453c-a47f-896bdd931f62",
+    "name": "Workstream Public Applicants Custom Field API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# API Reference\n\nThe Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.\n\n**Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.\n\n\nContact Support:\n Email: help@workstream.is",
+      "type": "text/plain"
+    }
+  }
+}

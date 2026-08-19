@@ -1,0 +1,59 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workstream Public Applicants Company Roles API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company Roles",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List existing Company Roles",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/company_roles",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "Returns the Company Role with the input `UUID`."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "iReturns Company Roles with the input `name`."
+              },
+              {
+                "name": "created_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns Company Roles created at or after the input date."
+              },
+              {
+                "name": "created_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns Company Roles created at or after the input date."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists existing Company Roles with the input parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

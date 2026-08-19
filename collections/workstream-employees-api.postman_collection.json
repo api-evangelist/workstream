@@ -1,0 +1,1213 @@
+{
+  "item": [
+    {
+      "id": "aef7d7a5-a2ac-42b5-ac7c-37da14c961e9",
+      "name": "Employees",
+      "description": {
+        "content": "Employees represent applicants who have been accepted into a new position, or people who are already working for your company.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f541f600-bbd5-477e-aff1-ed0dd72e3dd6",
+          "name": "Retrieve an existing Employee",
+          "request": {
+            "name": "Retrieve an existing Employee",
+            "description": {
+              "content": "Retrieves an existing Employee.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "embed",
+                  "value": "<string>",
+                  "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "adba14ea-4629-4e1d-b6fd-f133cc7556f0",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, eligibility_details, custom_forms, position, location, department)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request-id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"d404e957-af95-4776-af16-bae088e49165\",\n  \"first_name\": \"Ryan\",\n  \"middle_initial\": \"J\",\n  \"last_name\": \"Folk\",\n  \"preferred_name\": \"Johnny\",\n  \"start_date\": \"1968-01-14\",\n  \"applied_date\": \"2018-07-26\",\n  \"hired_date\": \"1977-08-16\",\n  \"onboard_date\": \"2012-11-25T20:44:02.947Z\",\n  \"status\": \"completed\",\n  \"information\": {\n    \"phone\": \"+17789882873\",\n    \"email\": \"wadam@example.fr\",\n    \"birthday\": \"1971-05-13\",\n    \"ethnicity\": \"black_or_african_american\",\n    \"gender\": \"male\",\n    \"ssn\": \"string\",\n    \"marital_status\": \"never_married\"\n  },\n  \"address\": {\n    \"address\": \"6488 Gateway dr\",\n    \"city\": \"Washington\",\n    \"state\": \"United States\",\n    \"country\": \"Virginia\",\n    \"zipcode\": \"23703\"\n  },\n  \"emergency_contact\": {\n    \"name\": \"Melinda Folk\",\n    \"email\": \"folk@example.fr\",\n    \"phone\": \"+16084559135\",\n    \"relationship\": \"Father\"\n  },\n  \"employment_details\": {\n    \"applied_date\": \"1985-08-06\",\n    \"department_name\": \"Staff\",\n    \"hired_date\": \"1987-08-12\",\n    \"job_title\": \"Barista\",\n    \"manager\": \"Test Manager\",\n    \"start_date\": \"1993-09-20\"\n  },\n  \"work_location\": {\n    \"name\": \"Store\",\n    \"address\": \"800 Kings Way\",\n    \"city\": \"Vancouver\",\n    \"state\": \"VA\",\n    \"country\": \"US\",\n    \"zipcode\": \"23321\"\n  },\n  \"compensation\": {\n    \"additional_remuneration\": \"2\",\n    \"additional_remuneration_currency_code\": \"USD\",\n    \"employment_status\": \"internship\",\n    \"status\": \"non_exempt\",\n    \"wage_amount\": \"12\",\n    \"wage_currency_code\": \"USD\",\n    \"wage_pay_frequency\": \"year\"\n  },\n  \"direct_deposits\": [\n    {\n      \"account_number\": \"112223344\",\n      \"account_type\": \"saving\",\n      \"percentage\": 7995,\n      \"routing_number\": \"00356\",\n      \"status\": \"active\"\n    },\n    {\n      \"account_number\": \"112223344\",\n      \"account_type\": \"saving\",\n      \"percentage\": 8803,\n      \"routing_number\": \"00356\",\n      \"status\": \"active\"\n    }\n  ],\n  \"federal_tax\": {\n    \"deductions\": 8958,\n    \"extra_withholding\": 9934,\n    \"filing_status\": \"string\",\n    \"other_income\": 4126,\n    \"qualifying_children_num\": 8933,\n    \"qualifying_other_num\": 490,\n    \"dependents\": 7426,\n    \"two_jobs\": false,\n    \"exempt_from_withholding\": \"string\"\n  },\n  \"state_tax\": {\n    \"allowances_exemptions\": 9404,\n    \"extra_withholding\": 4542,\n    \"filing_status\": \"string\",\n    \"tax_form\": \"string\",\n    \"state\": \"string\",\n    \"tax_form_details\": {}\n  },\n  \"eligibility\": {\n    \"admission_number\": \"string\",\n    \"alien_authorized_to_work_expiration_date\": \"2002-01-11\",\n    \"alien_registration_or_uscis_number\": \"string\",\n    \"country_of_issuance\": \"string\",\n    \"lawful_permanent_resident_alien_registration_or_uscis_number\": 2610,\n    \"passport_number\": \"string\",\n    \"resident_status_code\": \"string\",\n    \"social_security_number\": \"string\"\n  },\n  \"eligibility_details\": {\n    \"i9_section_one\": {\n      \"admission_number\": \"string\",\n      \"alien_authorized_to_work_expiration_date\": \"1948-10-28\",\n      \"alien_registration_or_uscis_number\": \"string\",\n      \"country_of_issuance\": \"string\",\n      \"lawful_permanent_resident_alien_registration_or_uscis_number\": 8346,\n      \"passport_number\": \"string\",\n      \"resident_status_code\": \"string\",\n      \"social_security_number\": \"string\",\n      \"employee_signed_date\": \"1994-12-25\"\n    },\n    \"i9_section_two\": {\n      \"employer_fname\": \"string\",\n      \"employer_lname\": \"string\",\n      \"employer_job_title\": \"string\",\n      \"employee_start_date\": \"string\",\n      \"employer_signed_date\": \"2023-04-28\",\n      \"list_a\": {\n        \"list_a_document_title_1\": \"string\",\n        \"list_a_document_number_1\": \"string\",\n        \"list_a_expiration_date_1\": \"1970-06-26\",\n        \"list_a_no_expiration_date_1\": true,\n        \"list_a_issuing_authority_1\": \"string\",\n        \"list_a_document_title_2\": \"string\",\n        \"list_a_document_number_2\": \"string\",\n        \"list_a_expiration_date_2\": \"1978-09-26\",\n        \"list_a_no_expiration_date_2\": true,\n        \"list_a_issuing_authority_2\": \"string\",\n        \"list_a_document_title_3\": \"string\",\n        \"list_a_document_number_3\": \"string\",\n        \"list_a_expiration_date_3\": \"1956-07-15\",\n        \"list_a_no_expiration_date_3\": false,\n        \"list_a_issuing_authority_3\": \"string\"\n      },\n      \"list_b\": {\n        \"list_b_document_title_1\": \"string\",\n        \"list_b_document_code\": \"string\",\n        \"list_b_document_number_1\": \"string\",\n        \"list_b_issuing_authority_1\": \"string\",\n        \"list_b_us_state_code_1\": \"CA\",\n        \"list_b_expiration_date_1\": \"1986-02-21\",\n        \"list_b_no_expiration_date\": false\n      },\n      \"list_c\": {\n        \"list_c_document_title_1\": \"string\",\n        \"list_c_document_code\": \"string\",\n        \"list_c_issuing_authority_1\": \"string\",\n        \"list_c_document_number_1\": \"string\",\n        \"list_c_expiration_date_1\": \"2010-01-31\",\n        \"list_c_no_expiration_date\": true\n      }\n    }\n  },\n  \"custom_forms\": [\n    {\n      \"name\": \"Custom form\",\n      \"content\": [\n        {\n          \"question\": {\n            \"title\": \"How old are you?\",\n            \"content\": \"Please enter your age.\"\n          }\n        },\n        {\n          \"question\": {\n            \"title\": \"How old are you?\",\n            \"content\": \"Please enter your age.\"\n          }\n        }\n      ]\n    },\n    {\n      \"name\": \"Custom form\",\n      \"content\": [\n        {\n          \"question\": {\n            \"title\": \"How old are you?\",\n            \"content\": \"Please enter your age.\"\n          }\n        },\n        {\n          \"question\": {\n            \"title\": \"How old are you?\",\n            \"content\": \"Please enter your age.\"\n          }\n        }\n      ]\n    }\n  ],\n  \"position\": {\n    \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n    \"title\": \"Cook\"\n  },\n  \"location\": {\n    \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n    \"name\": \"SF store\"\n  },\n  \"department\": {\n    \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n    \"name\": \"Marketing\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e068dc0f-07e1-4a12-9fef-d9618f34bf13",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, eligibility_details, custom_forms, position, location, department)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "21729cda-e4be-466e-bd36-83e04dcb92b2",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, eligibility_details, custom_forms, position, location, department)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f5456e11-54dc-4ba0-8cba-29b625809473",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, eligibility_details, custom_forms, position, location, department)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73c6ca52-d084-48d3-8db1-aa399662f911",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, eligibility_details, custom_forms, position, location, department)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1bcae078-23f0-43e2-afd7-25b02b70d6ed",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, eligibility_details, custom_forms, position, location, department)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "551da494-fc59-44bd-8a75-584f71bf8aff",
+          "name": "List existing employees",
+          "request": {
+            "name": "List existing employees",
+            "description": {
+              "content": "Lists existing employees with the input parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "employees"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>",
+                  "description": "Returns employees with the input `first_name`."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>",
+                  "description": "Returns employees with the input `last_name`."
+                },
+                {
+                  "disabled": false,
+                  "key": "onboarding_status",
+                  "value": "<string>",
+                  "description": "Returns employees with the input `onboarding_status`."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date.gte",
+                  "value": "<date>",
+                  "description": "Returns employees with `start_date` after or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date.lte",
+                  "value": "<date>",
+                  "description": "Returns employees with `start_date` before or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "hired_date.gte",
+                  "value": "<date>",
+                  "description": "Returns employees with `hired_date` after or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "hired_date.lte",
+                  "value": "<date>",
+                  "description": "Returns employees with `hired_date` before or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "applied_date.gte",
+                  "value": "<date>",
+                  "description": "Returns employees with `applied_date` after or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "applied_date.lte",
+                  "value": "<date>",
+                  "description": "Returns employees with `applied_date` before or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "onboard_date.gte",
+                  "value": "<timestamp>",
+                  "description": "Returns employees with `onboard_date` after or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "onboard_date.lte",
+                  "value": "<timestamp>",
+                  "description": "Returns employees with `onboard_date` before or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "embed",
+                  "value": "<string>",
+                  "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "a712c98f-6297-4c45-b35a-51f4b3e8cd1f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "onboarding_status",
+                      "value": "completed"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "onboard_date.gte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "onboard_date.lte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, custom_forms, position, location, department)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request-id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"uuid\": \"d404e957-af95-4776-af16-bae088e49165\",\n      \"first_name\": \"Ryan\",\n      \"middle_initial\": \"J\",\n      \"last_name\": \"Folk\",\n      \"preferred_name\": \"Johnny\",\n      \"start_date\": \"1984-09-06\",\n      \"applied_date\": \"1990-07-24\",\n      \"hired_date\": \"2018-04-14\",\n      \"onboard_date\": \"1971-04-07T02:59:49.040Z\",\n      \"status\": \"completed\",\n      \"information\": {\n        \"phone\": \"+17789882873\",\n        \"email\": \"wadam@example.fr\",\n        \"birthday\": \"1982-08-05\",\n        \"ethnicity\": \"black_or_african_american\",\n        \"gender\": \"male\",\n        \"ssn\": \"string\",\n        \"marital_status\": \"never_married\"\n      },\n      \"address\": {\n        \"address\": \"6488 Gateway dr\",\n        \"city\": \"Washington\",\n        \"state\": \"United States\",\n        \"country\": \"Virginia\",\n        \"zipcode\": \"23703\"\n      },\n      \"emergency_contact\": {\n        \"name\": \"Melinda Folk\",\n        \"email\": \"folk@example.fr\",\n        \"phone\": \"+16084559135\",\n        \"relationship\": \"Father\"\n      },\n      \"employment_details\": {\n        \"applied_date\": \"2015-12-15\",\n        \"department_name\": \"Staff\",\n        \"hired_date\": \"1962-06-16\",\n        \"job_title\": \"Barista\",\n        \"manager\": \"Test Manager\",\n        \"start_date\": \"1967-04-16\"\n      },\n      \"work_location\": {\n        \"name\": \"Store\",\n        \"address\": \"800 Kings Way\",\n        \"city\": \"Vancouver\",\n        \"state\": \"VA\",\n        \"country\": \"US\",\n        \"zipcode\": \"23321\"\n      },\n      \"compensation\": {\n        \"additional_remuneration\": \"2\",\n        \"additional_remuneration_currency_code\": \"USD\",\n        \"employment_status\": \"contract\",\n        \"status\": \"non_exempt\",\n        \"wage_amount\": \"12\",\n        \"wage_currency_code\": \"USD\",\n        \"wage_pay_frequency\": \"day\"\n      },\n      \"direct_deposits\": [\n        {\n          \"account_number\": \"112223344\",\n          \"account_type\": \"saving\",\n          \"percentage\": 1726,\n          \"routing_number\": \"00356\",\n          \"status\": \"inactive\"\n        },\n        {\n          \"account_number\": \"112223344\",\n          \"account_type\": \"saving\",\n          \"percentage\": 31,\n          \"routing_number\": \"00356\",\n          \"status\": \"active\"\n        }\n      ],\n      \"federal_tax\": {\n        \"deductions\": 1819,\n        \"extra_withholding\": 6443,\n        \"filing_status\": \"string\",\n        \"other_income\": 7579,\n        \"qualifying_children_num\": 2013,\n        \"qualifying_other_num\": 1417,\n        \"dependents\": 112,\n        \"two_jobs\": false,\n        \"exempt_from_withholding\": \"string\"\n      },\n      \"state_tax\": {\n        \"allowances_exemptions\": 3790,\n        \"extra_withholding\": 6259,\n        \"filing_status\": \"string\",\n        \"tax_form\": \"string\",\n        \"state\": \"string\",\n        \"tax_form_details\": {}\n      },\n      \"eligibility\": {\n        \"admission_number\": \"string\",\n        \"alien_authorized_to_work_expiration_date\": \"2020-02-21\",\n        \"alien_registration_or_uscis_number\": \"string\",\n        \"country_of_issuance\": \"string\",\n        \"lawful_permanent_resident_alien_registration_or_uscis_number\": 9387,\n        \"passport_number\": \"string\",\n        \"resident_status_code\": \"string\",\n        \"social_security_number\": \"string\"\n      },\n      \"eligibility_details\": {\n        \"i9_section_one\": {\n          \"admission_number\": \"string\",\n          \"alien_authorized_to_work_expiration_date\": \"2024-09-10\",\n          \"alien_registration_or_uscis_number\": \"string\",\n          \"country_of_issuance\": \"string\",\n          \"lawful_permanent_resident_alien_registration_or_uscis_number\": 6124,\n          \"passport_number\": \"string\",\n          \"resident_status_code\": \"string\",\n          \"social_security_number\": \"string\",\n          \"employee_signed_date\": \"1966-04-04\"\n        },\n        \"i9_section_two\": {\n          \"employer_fname\": \"string\",\n          \"employer_lname\": \"string\",\n          \"employer_job_title\": \"string\",\n          \"employee_start_date\": \"string\",\n          \"employer_signed_date\": \"1947-12-12\",\n          \"list_a\": {\n            \"list_a_document_title_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_document_number_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_expiration_date_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_no_expiration_date_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_issuing_authority_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_document_title_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_document_number_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_expiration_date_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_no_expiration_date_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_issuing_authority_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_document_title_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_document_number_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_expiration_date_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_no_expiration_date_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_issuing_authority_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"list_b\": {\n            \"list_b_document_title_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_b_document_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_b_document_number_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_b_issuing_authority_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_b_us_state_code_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_b_expiration_date_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_b_no_expiration_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"list_c\": {\n            \"list_c_document_title_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_c_document_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_c_issuing_authority_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_c_document_number_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_c_expiration_date_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_c_no_expiration_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"custom_forms\": [\n        {\n          \"name\": \"Custom form\",\n          \"content\": [\n            {\n              \"question\": {\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"content\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              \"answer\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"question\": {\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"content\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              \"answer\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        },\n        {\n          \"name\": \"Custom form\",\n          \"content\": [\n            {\n              \"question\": {\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"content\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              \"answer\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"question\": {\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"content\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              \"answer\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        }\n      ],\n      \"position\": {\n        \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n        \"title\": \"Cook\"\n      },\n      \"location\": {\n        \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n        \"name\": \"SF store\"\n      },\n      \"department\": {\n        \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n        \"name\": \"Marketing\"\n      }\n    },\n    {\n      \"uuid\": \"d404e957-af95-4776-af16-bae088e49165\",\n      \"first_name\": \"Ryan\",\n      \"middle_initial\": \"J\",\n      \"last_name\": \"Folk\",\n      \"preferred_name\": \"Johnny\",\n      \"start_date\": \"2014-03-20\",\n      \"applied_date\": \"1951-02-19\",\n      \"hired_date\": \"1955-03-09\",\n      \"onboard_date\": \"2000-06-03T23:36:16.363Z\",\n      \"status\": \"completed\",\n      \"information\": {\n        \"phone\": \"+17789882873\",\n        \"email\": \"wadam@example.fr\",\n        \"birthday\": \"2020-09-23\",\n        \"ethnicity\": \"black_or_african_american\",\n        \"gender\": \"male\",\n        \"ssn\": \"string\",\n        \"marital_status\": \"never_married\"\n      },\n      \"address\": {\n        \"address\": \"6488 Gateway dr\",\n        \"city\": \"Washington\",\n        \"state\": \"United States\",\n        \"country\": \"Virginia\",\n        \"zipcode\": \"23703\"\n      },\n      \"emergency_contact\": {\n        \"name\": \"Melinda Folk\",\n        \"email\": \"folk@example.fr\",\n        \"phone\": \"+16084559135\",\n        \"relationship\": \"Father\"\n      },\n      \"employment_details\": {\n        \"applied_date\": \"1992-06-09\",\n        \"department_name\": \"Staff\",\n        \"hired_date\": \"2002-11-20\",\n        \"job_title\": \"Barista\",\n        \"manager\": \"Test Manager\",\n        \"start_date\": \"2014-10-14\"\n      },\n      \"work_location\": {\n        \"name\": \"Store\",\n        \"address\": \"800 Kings Way\",\n        \"city\": \"Vancouver\",\n        \"state\": \"VA\",\n        \"country\": \"US\",\n        \"zipcode\": \"23321\"\n      },\n      \"compensation\": {\n        \"additional_remuneration\": \"2\",\n        \"additional_remuneration_currency_code\": \"USD\",\n        \"employment_status\": \"full_time\",\n        \"status\": \"non_exempt\",\n        \"wage_amount\": \"12\",\n        \"wage_currency_code\": \"USD\",\n        \"wage_pay_frequency\": \"month\"\n      },\n      \"direct_deposits\": [\n        {\n          \"account_number\": \"112223344\",\n          \"account_type\": \"saving\",\n          \"percentage\": 8191,\n          \"routing_number\": \"00356\",\n          \"status\": \"active\"\n        },\n        {\n          \"account_number\": \"112223344\",\n          \"account_type\": \"saving\",\n          \"percentage\": 2706,\n          \"routing_number\": \"00356\",\n          \"status\": \"inactive\"\n        }\n      ],\n      \"federal_tax\": {\n        \"deductions\": 1852,\n        \"extra_withholding\": 5760,\n        \"filing_status\": \"string\",\n        \"other_income\": 567,\n        \"qualifying_children_num\": 1660,\n        \"qualifying_other_num\": 4493,\n        \"dependents\": 9478,\n        \"two_jobs\": false,\n        \"exempt_from_withholding\": \"string\"\n      },\n      \"state_tax\": {\n        \"allowances_exemptions\": 4341,\n        \"extra_withholding\": 9427,\n        \"filing_status\": \"string\",\n        \"tax_form\": \"string\",\n        \"state\": \"string\",\n        \"tax_form_details\": {}\n      },\n      \"eligibility\": {\n        \"admission_number\": \"string\",\n        \"alien_authorized_to_work_expiration_date\": \"1973-08-18\",\n        \"alien_registration_or_uscis_number\": \"string\",\n        \"country_of_issuance\": \"string\",\n        \"lawful_permanent_resident_alien_registration_or_uscis_number\": 9368,\n        \"passport_number\": \"string\",\n        \"resident_status_code\": \"string\",\n        \"social_security_number\": \"string\"\n      },\n      \"eligibility_details\": {\n        \"i9_section_one\": {\n          \"admission_number\": \"string\",\n          \"alien_authorized_to_work_expiration_date\": \"1952-12-11\",\n          \"alien_registration_or_uscis_number\": \"string\",\n          \"country_of_issuance\": \"string\",\n          \"lawful_permanent_resident_alien_registration_or_uscis_number\": 3979,\n          \"passport_number\": \"string\",\n          \"resident_status_code\": \"string\",\n          \"social_security_number\": \"string\",\n          \"employee_signed_date\": \"2023-04-28\"\n        },\n        \"i9_section_two\": {\n          \"employer_fname\": \"string\",\n          \"employer_lname\": \"string\",\n          \"employer_job_title\": \"string\",\n          \"employee_start_date\": \"string\",\n          \"employer_signed_date\": \"2020-02-14\",\n          \"list_a\": {\n            \"list_a_document_title_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_document_number_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_expiration_date_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_no_expiration_date_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_issuing_authority_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_document_title_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_document_number_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_expiration_date_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_no_expiration_date_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_issuing_authority_2\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_document_title_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_document_number_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_expiration_date_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_no_expiration_date_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_a_issuing_authority_3\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"list_b\": {\n            \"list_b_document_title_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_b_document_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_b_document_number_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_b_issuing_authority_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_b_us_state_code_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_b_expiration_date_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_b_no_expiration_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          },\n          \"list_c\": {\n            \"list_c_document_title_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_c_document_code\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_c_issuing_authority_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_c_document_number_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_c_expiration_date_1\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            },\n            \"list_c_no_expiration_date\": {\n              \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n            }\n          }\n        }\n      },\n      \"custom_forms\": [\n        {\n          \"name\": \"Custom form\",\n          \"content\": [\n            {\n              \"question\": {\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"content\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              \"answer\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"question\": {\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"content\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              \"answer\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        },\n        {\n          \"name\": \"Custom form\",\n          \"content\": [\n            {\n              \"question\": {\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"content\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              \"answer\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            },\n            {\n              \"question\": {\n                \"title\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                \"content\": {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              },\n              \"answer\": [\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                },\n                {\n                  \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n                }\n              ]\n            }\n          ]\n        }\n      ],\n      \"position\": {\n        \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n        \"title\": \"Cook\"\n      },\n      \"location\": {\n        \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n        \"name\": \"SF store\"\n      },\n      \"department\": {\n        \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n        \"name\": \"Marketing\"\n      }\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d29478b4-78b0-45af-aa98-d472777add5e",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "onboarding_status",
+                      "value": "completed"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "onboard_date.gte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "onboard_date.lte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, custom_forms, position, location, department)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "22d889b0-8571-4963-b664-9d01ca46abff",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "onboarding_status",
+                      "value": "completed"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "onboard_date.gte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "onboard_date.lte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, custom_forms, position, location, department)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3b4263d6-a42f-42b6-8f0c-6b8401ab9226",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "onboarding_status",
+                      "value": "completed"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "onboard_date.gte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "onboard_date.lte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, custom_forms, position, location, department)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "beaabce7-1b10-4402-a79c-098d0d6ca655",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "onboarding_status",
+                      "value": "completed"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "onboard_date.gte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "onboard_date.lte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, custom_forms, position, location, department)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74679d2d-7267-41cd-b04d-5a3ecf105004",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "employees"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "onboarding_status",
+                      "value": "completed"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "onboard_date.gte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "onboard_date.lte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(information, address, emergency_contact, employment_details, work_location, compensation, direct_deposits, federal_tax, state_tax, eligibility, custom_forms, position, location, department)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Public API URI",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "public-api.workstream.us",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "f047a539-b14d-43c8-a6fb-a253ec857714",
+    "name": "Workstream Public Applicants Employees API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# API Reference\n\nThe Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.\n\n**Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.\n\n\nContact Support:\n Email: help@workstream.is",
+      "type": "text/plain"
+    }
+  }
+}

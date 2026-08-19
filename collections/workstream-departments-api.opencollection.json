@@ -1,0 +1,75 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workstream Public Applicants Departments API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Departments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve an existing Department",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/departments/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves an existing Department."
+        },
+        {
+          "info": {
+            "name": "List existing Departments",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/departments",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Returns departments with the input `name`."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists existing Departments with the input parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

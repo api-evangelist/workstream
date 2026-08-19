@@ -1,0 +1,1140 @@
+{
+  "item": [
+    {
+      "id": "edd61123-d293-456e-8baf-9a73681503c6",
+      "name": "Employee Documents",
+      "description": {
+        "content": "Employee Documents represent documents that are associated with employees within your company.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "c4565209-2064-4fec-b001-52e6bd9da7f7",
+          "name": "Download a employee document",
+          "request": {
+            "name": "Download a employee document",
+            "description": {
+              "content": "Download employee document with document id.\n**Note:** This endpoint requires the `document-public-api` feature flag. Please contact our [support team](https://help.workstream.us/en/) to request access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "employee",
+                "docs",
+                ":document_id"
+              ],
+              "host": [
+                "documents-api",
+                "workstream",
+                "us"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "The authorization token to access the document."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "document_id",
+                  "description": "(Required) The document id to download the file."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/pdf"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "5e567caa-1036-4b81-9d41-e2e653499c0f",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "employee",
+                    "docs",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "documents-api",
+                    "workstream",
+                    "us"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "token123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) The document id to download the file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/pdf"
+                }
+              ],
+              "body": "string",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "786eba3a-ecda-4355-b65b-58d2f9fefc1d",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "employee",
+                    "docs",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "documents-api",
+                    "workstream",
+                    "us"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "token123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) The document id to download the file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "3e2bbac0-2a42-4731-ad57-0be5d3f07ff3",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "employee",
+                    "docs",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "documents-api",
+                    "workstream",
+                    "us"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "token123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) The document id to download the file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9604e086-ea24-401b-8104-39658529903b",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "employee",
+                    "docs",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "documents-api",
+                    "workstream",
+                    "us"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "token123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) The document id to download the file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "15671ad8-ffd8-4052-b639-21083c0c5e03",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "employee",
+                    "docs",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "documents-api",
+                    "workstream",
+                    "us"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "token123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) The document id to download the file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fed23980-c60f-4e39-ae66-5e30cc0f768c",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "employee",
+                    "docs",
+                    ":document_id"
+                  ],
+                  "host": [
+                    "documents-api",
+                    "workstream",
+                    "us"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "token123"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "document_id",
+                      "description": "(Required) The document id to download the file."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "c858585b-5fb1-4c57-9927-2805cff7a5f7",
+          "name": "List existing Employee Documents",
+          "request": {
+            "name": "List existing Employee Documents",
+            "description": {
+              "content": "Lists existing employee documents with the input parameters.\n**Note:** This endpoint requires the `document-public-api` feature flag. Please contact our [support team](https://help.workstream.us/en/) to request access.",
+              "type": "text/plain"
+            },
+            "url": {
+              "protocol": "https",
+              "path": [
+                "employee",
+                "docs"
+              ],
+              "host": [
+                "documents-api",
+                "workstream",
+                "us"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "employee_uuid",
+                  "value": "<string>",
+                  "description": "Returns employee docs with the input `employee_uuid`."
+                },
+                {
+                  "disabled": false,
+                  "key": "first_name",
+                  "value": "<string>",
+                  "description": "Returns employee docs with the input `first_name`."
+                },
+                {
+                  "disabled": false,
+                  "key": "last_name",
+                  "value": "<string>",
+                  "description": "Returns employee docs with the input `last_name`."
+                },
+                {
+                  "disabled": false,
+                  "key": "onboarding_status",
+                  "value": "<string>",
+                  "description": "Returns employee docs with the input `onboarding_status`."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date.gte",
+                  "value": "<date>",
+                  "description": "Returns employee docs with `start_date` after or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "start_date.lte",
+                  "value": "<date>",
+                  "description": "Returns employee docs with `start_date` before or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "hired_date.gte",
+                  "value": "<date>",
+                  "description": "Returns employee docs with `hired_date` after or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "hired_date.lte",
+                  "value": "<date>",
+                  "description": "Returns employee docs with `hired_date` before or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "applied_date.gte",
+                  "value": "<date>",
+                  "description": "Returns employee docs with `applied_date` after or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "applied_date.lte",
+                  "value": "<date>",
+                  "description": "Returns employee docs with `applied_date` before or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "onboard_date.gte",
+                  "value": "<timestamp>",
+                  "description": "Returns employee docs with `onboard_date` after or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "onboard_date.lte",
+                  "value": "<timestamp>",
+                  "description": "Returns employee docs with `onboard_date` before or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "embed",
+                  "value": "<string>",
+                  "description": "Specifies the names of document types that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "081579a5-a299-46ea-ae73-c2c7745a4188",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "employee",
+                    "docs"
+                  ],
+                  "host": [
+                    "documents-api",
+                    "workstream",
+                    "us"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_uuid",
+                      "value": "123e4567-e89b-12d3-a456-426614174000"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "onboarding_status",
+                      "value": "completed"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "onboard_date.gte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "onboard_date.lte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(w4_doc, state_tax_docs, i9_docs, company_docs)"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"employee_uuid\": \"d404e957-af95-4776-af16-bae088e49165\",\n      \"documents\": [\n        {\n          \"url\": \"https://example.com/employee/docs/123\",\n          \"type\": \"w4\",\n          \"created_at\": \"2022-09-30T00:00:00.000Z\"\n        },\n        {\n          \"url\": \"https://example.com/employee/docs/123\",\n          \"type\": \"w4\",\n          \"created_at\": \"2022-09-30T00:00:00.000Z\"\n        }\n      ]\n    },\n    {\n      \"employee_uuid\": \"d404e957-af95-4776-af16-bae088e49165\",\n      \"documents\": [\n        {\n          \"url\": \"https://example.com/employee/docs/123\",\n          \"type\": \"w4\",\n          \"created_at\": \"2022-09-30T00:00:00.000Z\"\n        },\n        {\n          \"url\": \"https://example.com/employee/docs/123\",\n          \"type\": \"w4\",\n          \"created_at\": \"2022-09-30T00:00:00.000Z\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "9d7dd84a-d426-4ebb-aa6d-bd0b2cdc0ff6",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "employee",
+                    "docs"
+                  ],
+                  "host": [
+                    "documents-api",
+                    "workstream",
+                    "us"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_uuid",
+                      "value": "123e4567-e89b-12d3-a456-426614174000"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "onboarding_status",
+                      "value": "completed"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "onboard_date.gte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "onboard_date.lte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(w4_doc, state_tax_docs, i9_docs, company_docs)"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ebaac572-74aa-48ab-9e0e-47a80974865f",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "employee",
+                    "docs"
+                  ],
+                  "host": [
+                    "documents-api",
+                    "workstream",
+                    "us"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_uuid",
+                      "value": "123e4567-e89b-12d3-a456-426614174000"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "onboarding_status",
+                      "value": "completed"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "onboard_date.gte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "onboard_date.lte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(w4_doc, state_tax_docs, i9_docs, company_docs)"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b38636ab-7bac-4b24-9995-77f29d9ebf22",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "employee",
+                    "docs"
+                  ],
+                  "host": [
+                    "documents-api",
+                    "workstream",
+                    "us"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_uuid",
+                      "value": "123e4567-e89b-12d3-a456-426614174000"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "onboarding_status",
+                      "value": "completed"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "onboard_date.gte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "onboard_date.lte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(w4_doc, state_tax_docs, i9_docs, company_docs)"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1340d67-0808-4918-bb08-66885efe0ebd",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "employee",
+                    "docs"
+                  ],
+                  "host": [
+                    "documents-api",
+                    "workstream",
+                    "us"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_uuid",
+                      "value": "123e4567-e89b-12d3-a456-426614174000"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "onboarding_status",
+                      "value": "completed"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "onboard_date.gte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "onboard_date.lte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(w4_doc, state_tax_docs, i9_docs, company_docs)"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dc38e945-1372-4704-9e86-f4707ccf4d6f",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "protocol": "https",
+                  "path": [
+                    "employee",
+                    "docs"
+                  ],
+                  "host": [
+                    "documents-api",
+                    "workstream",
+                    "us"
+                  ],
+                  "query": [
+                    {
+                      "key": "employee_uuid",
+                      "value": "123e4567-e89b-12d3-a456-426614174000"
+                    },
+                    {
+                      "key": "first_name",
+                      "value": "Andy"
+                    },
+                    {
+                      "key": "last_name",
+                      "value": "Lee"
+                    },
+                    {
+                      "key": "onboarding_status",
+                      "value": "completed"
+                    },
+                    {
+                      "key": "start_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "start_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "hired_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.gte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "applied_date.lte",
+                      "value": "2022-09-30"
+                    },
+                    {
+                      "key": "onboard_date.gte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "onboard_date.lte",
+                      "value": "2022-09-30T00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(w4_doc, state_tax_docs, i9_docs, company_docs)"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Public API URI",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "public-api.workstream.us",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0b6f2f35-ef81-4c9e-a40c-f0ecb94e9494",
+    "name": "Workstream Public Applicants Employee Documents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# API Reference\n\nThe Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.\n\n**Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.\n\n\nContact Support:\n Email: help@workstream.is",
+      "type": "text/plain"
+    }
+  }
+}

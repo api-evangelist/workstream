@@ -1,0 +1,119 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workstream Public Applicants Custom Field API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Field",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List existing Custom Fields",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/custom_fields",
+            "params": [
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "query",
+                "description": "Entity type of the custom field."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "List existing Custom Fields"
+        },
+        {
+          "info": {
+            "name": "Create Custom Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}/custom_fields",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create Custom Field"
+        },
+        {
+          "info": {
+            "name": "Update an existing Custom Field",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}/custom_fields/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing Custom Field"
+        },
+        {
+          "info": {
+            "name": "Create or update custom field value",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}/entity_type/:entity_type/entity_id/:entity_id/custom_field_values",
+            "params": [
+              {
+                "name": "entity_type",
+                "value": "",
+                "type": "path",
+                "description": "Entity type of custom field value."
+              },
+              {
+                "name": "entity_id",
+                "value": "",
+                "type": "path",
+                "description": "Entity id of custom field value"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Create or update custom field value"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

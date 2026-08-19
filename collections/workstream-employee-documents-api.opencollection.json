@@ -1,0 +1,138 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workstream Public Applicants Employee Documents API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employee Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Download a employee document",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/employee/docs/:document_id",
+            "params": [
+              {
+                "name": "document_id",
+                "value": "",
+                "type": "path",
+                "description": "The document id to download the file."
+              },
+              {
+                "name": "token",
+                "value": "",
+                "type": "query",
+                "description": "The authorization token to access the document."
+              }
+            ]
+          },
+          "docs": "Download employee document with document id.\n**Note:** This endpoint requires the `document-public-api` feature flag. Please contact our [support team](https://help.workstream.us/en/) to request access."
+        },
+        {
+          "info": {
+            "name": "List existing Employee Documents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/employee/docs",
+            "params": [
+              {
+                "name": "employee_uuid",
+                "value": "",
+                "type": "query",
+                "description": "Returns employee docs with the input `employee_uuid`."
+              },
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query",
+                "description": "Returns employee docs with the input `first_name`."
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query",
+                "description": "Returns employee docs with the input `last_name`."
+              },
+              {
+                "name": "onboarding_status",
+                "value": "",
+                "type": "query",
+                "description": "Returns employee docs with the input `onboarding_status`."
+              },
+              {
+                "name": "start_date.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employee docs with `start_date` after or equals to the input date."
+              },
+              {
+                "name": "start_date.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employee docs with `start_date` before or equals to the input date."
+              },
+              {
+                "name": "hired_date.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employee docs with `hired_date` after or equals to the input date."
+              },
+              {
+                "name": "hired_date.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employee docs with `hired_date` before or equals to the input date."
+              },
+              {
+                "name": "applied_date.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employee docs with `applied_date` after or equals to the input date."
+              },
+              {
+                "name": "applied_date.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employee docs with `applied_date` before or equals to the input date."
+              },
+              {
+                "name": "onboard_date.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employee docs with `onboard_date` after or equals to the input date."
+              },
+              {
+                "name": "onboard_date.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employee docs with `onboard_date` before or equals to the input date."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the names of document types that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists existing employee documents with the input parameters.\n**Note:** This endpoint requires the `document-public-api` feature flag. Please contact our [support team](https://help.workstream.us/en/) to request access."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workstream Public Applicants Company Users API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Company Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List existing Company Users",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/company_users",
+            "params": [
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Returns Company users with the input `status`."
+              },
+              {
+                "name": "name",
+                "value": "",
+                "type": "query",
+                "description": "Returns Company Users with the input `name`."
+              },
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "query",
+                "description": "Returns the Company User with the input `UUID`."
+              },
+              {
+                "name": "created_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns Company Users at or after the input date."
+              },
+              {
+                "name": "created_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns Company Users at or before the input date."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists existing Company Users with the input parameters."
+        },
+        {
+          "info": {
+            "name": "Create a new Company User with User info",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}/company_users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Creates a new Company User with User info."
+        },
+        {
+          "info": {
+            "name": "Update an existing Company User's Company Role & permissions",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{tenant}/company_users/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Update an existing Company User's Company Role & permissions."
+        },
+        {
+          "info": {
+            "name": "Disable an active Company User",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant}/company_users/:uuid/disable",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Disable an active Company User."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

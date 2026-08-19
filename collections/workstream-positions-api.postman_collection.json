@@ -1,0 +1,1063 @@
+{
+  "item": [
+    {
+      "id": "ddd9c5e0-c860-442f-98f6-584a6c5fb207",
+      "name": "Positions",
+      "description": {
+        "content": "Positions represent open job requisitions within your company that are looking to be filled.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f20bc35e-76fb-4985-97bf-3444b9bb0ef4",
+          "name": "Retrieve an existing Position",
+          "request": {
+            "name": "Retrieve an existing Position",
+            "description": {
+              "content": "Retrieves an existing Position.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "positions",
+                ":uuid"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "embed",
+                  "value": "<string>",
+                  "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<uuid>",
+                  "key": "uuid",
+                  "description": "(Required) "
+                },
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "efc3662d-7632-4ebf-924d-d330f8d40a66",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(location, custom_fields)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request-id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n  \"digest_key\": \"40ad0bd6836b9e5cfedbf28e7c907fe229a99a2a\",\n  \"title\": \"Customer Success Associate\",\n  \"overview\": \"We are looking for a full-time, dedicated, and passionate individual to join our growing team.\",\n  \"status\": \"published\",\n  \"number\": \"1845\",\n  \"access\": \"public\",\n  \"pay_amount\": \"15$\",\n  \"pay_frequency\": \"hourly\",\n  \"job_type\": \"full_time\",\n  \"normalized_titles\": \"string\",\n  \"remote_type\": \"on_site\",\n  \"job_url\": \"https://got.work/ryan_burgers_ryans_radical_rapping_teddy_bears/ad4b4e75\",\n  \"location\": {\n    \"uuid\": \"fc4487ce-67n0-436e-9aa7-a2eb496aff0e\",\n    \"name\": \"SF store\",\n    \"address\": \"string\",\n    \"postal_code\": \"string\",\n    \"city\": \"string\",\n    \"state\": \"string\",\n    \"country\": \"string\"\n  },\n  \"custom_fields\": [\n    {\n      \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"title\": \"custom field title\",\n      \"value\": \"custom field value\"\n    },\n    {\n      \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n      \"title\": \"custom field title\",\n      \"value\": \"custom field value\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b411168a-f941-4326-92b8-f397a01c8b52",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(location, custom_fields)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "adf8fa1f-defb-4718-a3c8-cf175e993f7b",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(location, custom_fields)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7772fa82-b31c-4058-ba59-b2e4164c1a71",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(location, custom_fields)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b90d8a1e-ebc7-46b3-bf32-6b67399333bc",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(location, custom_fields)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b2bc5189-72cd-4c96-a637-ce0c760348f7",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions",
+                    ":uuid"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "embed",
+                      "value": "(location, custom_fields)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<uuid>",
+                      "key": "uuid",
+                      "description": "(Required) "
+                    },
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0ac37abb-eed0-478b-91a1-13635cd47c51",
+          "name": "List existing Positions",
+          "request": {
+            "name": "List existing Positions",
+            "description": {
+              "content": "Lists existing Positions with the input parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "positions"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "title",
+                  "value": "<string>",
+                  "description": "Returns positions with the input `title`."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Returns positions with the input `status`."
+                },
+                {
+                  "disabled": false,
+                  "key": "access",
+                  "value": "<string>",
+                  "description": "Returns positions with input `access`."
+                },
+                {
+                  "disabled": false,
+                  "key": "location[name]",
+                  "value": "<string>",
+                  "description": "Returns positions with the input location's name."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.gte",
+                  "value": "<timestamp>",
+                  "description": "Returns positions created after or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "created_at.lte",
+                  "value": "<string>",
+                  "description": "Returns positions created before or equals to the input date."
+                },
+                {
+                  "disabled": false,
+                  "key": "embed",
+                  "value": "<string>",
+                  "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "af741e60-b27c-47e4-bfd3-483317ff9eff",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "title",
+                      "value": "Cook"
+                    },
+                    {
+                      "key": "status",
+                      "value": "published"
+                    },
+                    {
+                      "key": "access",
+                      "value": "link_only"
+                    },
+                    {
+                      "key": "location[name]",
+                      "value": "SF%20Store"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(location, custom_fields)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "A randomly generated request-id to uniquely identify each request sent.",
+                  "key": "X-Request-ID",
+                  "value": "string"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"data\": [\n    {\n      \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n      \"digest_key\": \"40ad0bd6836b9e5cfedbf28e7c907fe229a99a2a\",\n      \"title\": \"Customer Success Associate\",\n      \"overview\": \"We are looking for a full-time, dedicated, and passionate individual to join our growing team.\",\n      \"status\": \"published\",\n      \"number\": \"1845\",\n      \"access\": \"public\",\n      \"pay_amount\": \"15$\",\n      \"pay_frequency\": \"hourly\",\n      \"job_type\": \"full_time\",\n      \"normalized_titles\": \"string\",\n      \"remote_type\": \"on_site\",\n      \"job_url\": \"https://got.work/ryan_burgers_ryans_radical_rapping_teddy_bears/ad4b4e75\",\n      \"location\": {\n        \"uuid\": \"fc4487ce-67n0-436e-9aa7-a2eb496aff0e\",\n        \"name\": \"SF store\",\n        \"address\": \"string\",\n        \"postal_code\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"country\": \"string\"\n      },\n      \"custom_fields\": [\n        {\n          \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n          \"title\": \"custom field title\",\n          \"value\": \"custom field value\"\n        },\n        {\n          \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n          \"title\": \"custom field title\",\n          \"value\": \"custom field value\"\n        }\n      ]\n    },\n    {\n      \"uuid\": \"c59c9852-2584-11ee-be56-0242ac120002\",\n      \"digest_key\": \"40ad0bd6836b9e5cfedbf28e7c907fe229a99a2a\",\n      \"title\": \"Customer Success Associate\",\n      \"overview\": \"We are looking for a full-time, dedicated, and passionate individual to join our growing team.\",\n      \"status\": \"published\",\n      \"number\": \"1845\",\n      \"access\": \"public\",\n      \"pay_amount\": \"15$\",\n      \"pay_frequency\": \"hourly\",\n      \"job_type\": \"full_time\",\n      \"normalized_titles\": \"string\",\n      \"remote_type\": \"on_site\",\n      \"job_url\": \"https://got.work/ryan_burgers_ryans_radical_rapping_teddy_bears/ad4b4e75\",\n      \"location\": {\n        \"uuid\": \"fc4487ce-67n0-436e-9aa7-a2eb496aff0e\",\n        \"name\": \"SF store\",\n        \"address\": \"string\",\n        \"postal_code\": \"string\",\n        \"city\": \"string\",\n        \"state\": \"string\",\n        \"country\": \"string\"\n      },\n      \"custom_fields\": [\n        {\n          \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n          \"title\": \"custom field title\",\n          \"value\": \"custom field value\"\n        },\n        {\n          \"uuid\": \"509a251a-93af-41e3-8416-23b29dc293cc\",\n          \"title\": \"custom field title\",\n          \"value\": \"custom field value\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "670d07b3-db45-4388-a4bf-3ef53fa56c07",
+              "name": "Unauthorized - Credentials are not valid for the target resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "title",
+                      "value": "Cook"
+                    },
+                    {
+                      "key": "status",
+                      "value": "published"
+                    },
+                    {
+                      "key": "access",
+                      "value": "link_only"
+                    },
+                    {
+                      "key": "location[name]",
+                      "value": "SF%20Store"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(location, custom_fields)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Unauthorized\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "07e32e9b-dbc9-4c44-8d05-461c889a6977",
+              "name": "Forbidden - The user is not authorized to use this resource.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "title",
+                      "value": "Cook"
+                    },
+                    {
+                      "key": "status",
+                      "value": "published"
+                    },
+                    {
+                      "key": "access",
+                      "value": "link_only"
+                    },
+                    {
+                      "key": "location[name]",
+                      "value": "SF%20Store"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(location, custom_fields)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13403,\n  \"message\": \"Forbidden - The user is not authorized to use this resource.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fdc73ba3-fd62-48af-b538-80965d4ed0d0",
+              "name": "Not found - The requested resource is not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "title",
+                      "value": "Cook"
+                    },
+                    {
+                      "key": "status",
+                      "value": "published"
+                    },
+                    {
+                      "key": "access",
+                      "value": "link_only"
+                    },
+                    {
+                      "key": "location[name]",
+                      "value": "SF%20Store"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(location, custom_fields)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13404,\n  \"message\": \"The requested resource is not found.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c110e15b-9284-4802-9490-53c1e8bd2711",
+              "name": "Unprocessable Entity - Invalid query params or request body.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "title",
+                      "value": "Cook"
+                    },
+                    {
+                      "key": "status",
+                      "value": "published"
+                    },
+                    {
+                      "key": "access",
+                      "value": "link_only"
+                    },
+                    {
+                      "key": "location[name]",
+                      "value": "SF%20Store"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(location, custom_fields)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13422,\n  \"message\": \"(forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "54f8923f-a7a5-43c0-aa14-45da976e2337",
+              "name": "Too many requests.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "positions"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "title",
+                      "value": "Cook"
+                    },
+                    {
+                      "key": "status",
+                      "value": "published"
+                    },
+                    {
+                      "key": "access",
+                      "value": "link_only"
+                    },
+                    {
+                      "key": "location[name]",
+                      "value": "SF%20Store"
+                    },
+                    {
+                      "key": "created_at.gte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "created_at.lte",
+                      "value": "2022-09-30 00:00:00.000Z"
+                    },
+                    {
+                      "key": "embed",
+                      "value": "(location, custom_fields)"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13429,\n  \"message\": \"Throttle limit reached. Limit to 100 requests in 60 seconds.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Public API URI",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "public-api.workstream.us",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a870cea5-d755-49f2-88e8-09beb3a9a31a",
+    "name": "Workstream Public Applicants Positions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# API Reference\n\nThe Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.\n\n**Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.\n\n\nContact Support:\n Email: help@workstream.is",
+      "type": "text/plain"
+    }
+  }
+}

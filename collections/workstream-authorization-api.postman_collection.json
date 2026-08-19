@@ -1,0 +1,599 @@
+{
+  "item": [
+    {
+      "id": "6c68b6fa-3b40-4561-8c96-8955caedfbcf",
+      "name": "Authorization",
+      "description": {
+        "content": "The Workstream API uses OAuth 2.0 Bearer access tokens to authenticate requests. You can view and manage your access tokens in the [Workstream Dashboard](https://hr.workstream.us/#/company?currentPanel=integrations&integrationItem=accesstoken).\n\nTo generate an access token, simply click on `Generate token`, give it a name, and select the permissions(i.e. Applicants, Employees, Positions) to attach to it. **The token expires in 7 days.**\n\nYou can also manage your tokens through API, as shown in the next section.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "08891eb6-771c-4b54-b90d-a0480965a4cd",
+          "name": "Create a new access token",
+          "request": {
+            "name": "Create a new access token",
+            "description": {
+              "content": "Creates a new access token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokens"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "grant_type",
+                  "value": "<string>",
+                  "description": "(Required) Grant type of access token, please use `client_credentials`."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Client credentials provided as part of your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_secret",
+                  "value": "<string>",
+                  "description": "(Required) The password used to authenticate your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`."
+                },
+                {
+                  "disabled": false,
+                  "key": "name",
+                  "value": "<string>",
+                  "description": "(Required) Name of the access token displayed in the Dashboard."
+                },
+                {
+                  "disabled": false,
+                  "key": "scopes",
+                  "value": "<string>%20<string>",
+                  "description": "(Required) Permission scopes of access token."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "4a88f07e-c19d-42c2-8314-0e26babf1ac7",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scopes",
+                      "value": "<string>%20<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"token1\",\n  \"token\": \"OtrQV4Gz7nwLouCm-ZLqiSxdwJEMEAFGx___GcNxES8\",\n  \"created_at\": \"2001-10-21T11:48:05.643Z\",\n  \"expires_in\": 604800,\n  \"scopes\": [\n    \"positions\",\n    \"company_users\",\n    \"company_roles\",\n    \"position_applications\",\n    \"employees\",\n    \"locations\",\n    \"departments\",\n    \"team_members\",\n    \"imported_employee_infos\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "5f13a7a1-54be-48ad-835e-a5a06b34339e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "name",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "scopes",
+                      "value": "<string>%20<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f6aace95-42a1-4651-9978-fa2c39220c93",
+          "name": "Refresh the access token",
+          "request": {
+            "name": "Refresh the access token",
+            "description": {
+              "content": "Refresh the access token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tokens",
+                "refresh_token"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "grant_type",
+                  "value": "<string>",
+                  "description": "(Required) Grant type of access token, please use `client_credentials`."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Client credentials provided as part of your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_secret",
+                  "value": "<string>",
+                  "description": "(Required) The password used to authenticate your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`."
+                },
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) The access token needs to be refreshed"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1faa14fb-9779-43aa-9c5b-dbb207fb389c",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    "refresh_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"name\": \"token1\",\n  \"token\": \"OtrQV4Gz7nwLouCm-ZLqiSxdwJEMEAFGx___GcNxES8\",\n  \"created_at\": \"1989-05-05T08:44:49.894Z\",\n  \"expires_in\": 604800,\n  \"scopes\": [\n    \"positions\",\n    \"company_users\",\n    \"company_roles\",\n    \"position_applications\",\n    \"employees\",\n    \"locations\",\n    \"departments\",\n    \"team_members\",\n    \"imported_employee_infos\"\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "289b89b7-f211-42ff-b701-b0df17d96b63",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tokens",
+                    "refresh_token"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "grant_type",
+                      "value": "client_credentials"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "token",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error_code\": 13401,\n  \"message\": \"Client authentication failed due to unknown client, no client authentication included, or unsupported authentication method.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7aaa442b-f1dd-4151-8df7-45c8952f8b84",
+          "name": "Revoke an existing access token",
+          "request": {
+            "name": "Revoke an existing access token",
+            "description": {
+              "content": "Revokes an existing access token.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "revoke"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "token",
+                  "value": "<string>",
+                  "description": "(Required) The access token to revoke."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_id",
+                  "value": "<string>",
+                  "description": "(Required) Client credentials provided as part of your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`."
+                },
+                {
+                  "disabled": false,
+                  "key": "client_secret",
+                  "value": "<string>",
+                  "description": "(Required) The password used to authenticate your application. This can be retrieved from the Dashboard under `Company->Integrations->Access Tokens`."
+                }
+              ],
+              "variable": [
+                {
+                  "description": "Public API URI",
+                  "type": "any",
+                  "value": "{{tenant}}",
+                  "key": "tenant"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "646bfac9-a17b-4242-9125-88049e6da021",
+              "name": "OK",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revoke"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "AqrqBVwadstAdr_Ens0j5iHLug3gVKkOnTnDXvSDhmo"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1ec8c558-d10a-4439-b386-00d2ac1fee40",
+              "name": "Unauthorized Client",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "revoke"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "token",
+                      "value": "AqrqBVwadstAdr_Ens0j5iHLug3gVKkOnTnDXvSDhmo"
+                    },
+                    {
+                      "key": "client_id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "client_secret",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "Public API URI",
+                      "type": "any",
+                      "value": "{{tenant}}",
+                      "key": "tenant"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/problem+json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/problem+json"
+                }
+              ],
+              "body": "{\n  \"error\": \"unauthorized_client\",\n  \"error_description\": \"You are not authorized to revoke this token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "Public API URI",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "public-api.workstream.us",
+      "key": "tenant"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant}}",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2c2cb435-6ac6-463f-a01d-074fc0f07940",
+    "name": "Workstream Public Applicants Authorization API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "# API Reference\n\nThe Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.\n\n**Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.\n\n\nContact Support:\n Email: help@workstream.is",
+      "type": "text/plain"
+    }
+  }
+}

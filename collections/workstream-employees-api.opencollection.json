@@ -1,0 +1,135 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workstream Public Applicants Employees API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Employees",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve an existing Employee",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/employees/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves an existing Employee."
+        },
+        {
+          "info": {
+            "name": "List existing employees",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/employees",
+            "params": [
+              {
+                "name": "first_name",
+                "value": "",
+                "type": "query",
+                "description": "Returns employees with the input `first_name`."
+              },
+              {
+                "name": "last_name",
+                "value": "",
+                "type": "query",
+                "description": "Returns employees with the input `last_name`."
+              },
+              {
+                "name": "onboarding_status",
+                "value": "",
+                "type": "query",
+                "description": "Returns employees with the input `onboarding_status`."
+              },
+              {
+                "name": "start_date.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employees with `start_date` after or equals to the input date."
+              },
+              {
+                "name": "start_date.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employees with `start_date` before or equals to the input date."
+              },
+              {
+                "name": "hired_date.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employees with `hired_date` after or equals to the input date."
+              },
+              {
+                "name": "hired_date.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employees with `hired_date` before or equals to the input date."
+              },
+              {
+                "name": "applied_date.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employees with `applied_date` after or equals to the input date."
+              },
+              {
+                "name": "applied_date.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employees with `applied_date` before or equals to the input date."
+              },
+              {
+                "name": "onboard_date.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employees with `onboard_date` after or equals to the input date."
+              },
+              {
+                "name": "onboard_date.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns employees with `onboard_date` before or equals to the input date."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists existing employees with the input parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Workstream Public Applicants Positions API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Positions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve an existing Position",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/positions/:uuid",
+            "params": [
+              {
+                "name": "uuid",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Retrieves an existing Position."
+        },
+        {
+          "info": {
+            "name": "List existing Positions",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant}/positions",
+            "params": [
+              {
+                "name": "title",
+                "value": "",
+                "type": "query",
+                "description": "Returns positions with the input `title`."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Returns positions with the input `status`."
+              },
+              {
+                "name": "access",
+                "value": "",
+                "type": "query",
+                "description": "Returns positions with input `access`."
+              },
+              {
+                "name": "location[name]",
+                "value": "",
+                "type": "query",
+                "description": "Returns positions with the input location's name."
+              },
+              {
+                "name": "created_at.gte",
+                "value": "",
+                "type": "query",
+                "description": "Returns positions created after or equals to the input date."
+              },
+              {
+                "name": "created_at.lte",
+                "value": "",
+                "type": "query",
+                "description": "Returns positions created before or equals to the input date."
+              },
+              {
+                "name": "embed",
+                "value": "",
+                "type": "query",
+                "description": "Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Lists existing Positions with the input parameters."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
