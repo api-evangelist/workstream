@@ -44,7 +44,7 @@ created: '2026-07-17'
 modified: '2026-07-21'
 tags:
 - Company
-- HR Tech
+- Human Resources
 - Hiring
 - Payroll
 - Onboarding
@@ -209,6 +209,8 @@ apis:
   humanURL: https://docs.workstream.us/
   baseURL: https://public-api.workstream.us
   tags:
+  - Location
+  tags_raw:
   - Locations
   properties:
   - type: OpenAPI
