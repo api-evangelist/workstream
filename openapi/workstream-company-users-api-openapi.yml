@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Workstream Public Applicants Company Users API
+  title: Workstream Public Company Users API
   termsOfService: https://workstream.us/terms/
   contact:
     email: help@workstream.is
@@ -15,12 +15,10 @@ info:
   description: '# API Reference
 
 
-    The Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
+    The Workstream API is a modern, RESTful API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
 
 
-    **Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.
-
-    '
+    **Note:** Old APIs will be deprecated, please refer to this API documentation for new API usages.'
 servers:
 - url: https://{tenant}
   variables:
@@ -243,73 +241,47 @@ paths:
         '429':
           $ref: '#/components/responses/429'
 components:
-  responses:
-    '422':
-      description: Unprocessable Entity - Invalid query params or request body.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13422
-              message:
-                type: string
-                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
-    '403':
-      description: Forbidden - The user is not authorized to use this resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13403
-              message:
-                type: string
-                example: Forbidden - The user is not authorized to use this resource.
-    '401':
-      description: Unauthorized - Credentials are not valid for the target resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13401
-              message:
-                type: string
-                example: Unauthorized
-    '429':
-      description: Too many requests.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13429
-              message:
-                type: string
-                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
-    '404':
-      description: Not found - The requested resource is not found.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13404
-              message:
-                type: string
-                example: The requested resource is not found.
   schemas:
+    creation:
+      type: object
+      title: Comapny Staff Creation Payload
+      required:
+      - user
+      - name
+      - company_role_uuid
+      properties:
+        user:
+          type: object
+          required:
+          - email
+          properties:
+            email:
+              type: string
+              description: User's email.
+              format: email
+              example: test@test.com
+            password:
+              type: string
+              format: password
+              description: User's password.
+              example: password
+        name:
+          type: string
+          description: Company User's full name.
+          example: Andy Lee
+        company_role_uuid:
+          type: string
+          description: Company Role's unique identifier.
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        region_number:
+          type: string
+          description: Contry code of Company User's phone number. Server will set it "1" as default if the request not set the parameter.
+          default: '1'
+          example: '1'
+        phone:
+          type: string
+          description: Company User's phone number.
+          example: '7789882873'
     company_user:
       type: object
       title: Company User
@@ -365,46 +337,6 @@ components:
           $ref: '#/components/schemas/company_role'
         permission_config:
           $ref: '#/components/schemas/permission_config'
-    creation:
-      type: object
-      title: Comapny Staff Creation Payload
-      required:
-      - user
-      - name
-      - company_role_uuid
-      properties:
-        user:
-          type: object
-          required:
-          - email
-          properties:
-            email:
-              type: string
-              description: User's email.
-              format: email
-              example: test@test.com
-            password:
-              type: string
-              format: password
-              description: User's password.
-              example: password
-        name:
-          type: string
-          description: Company User's full name.
-          example: Andy Lee
-        company_role_uuid:
-          type: string
-          description: Company Role's unique identifier.
-          example: c59c9852-2584-11ee-be56-0242ac120002
-        region_number:
-          type: string
-          description: Contry code of Company User's phone number. Server will set it "1" as default if the request not set the parameter.
-          default: '1'
-          example: '1'
-        phone:
-          type: string
-          description: Company User's phone number.
-          example: '7789882873'
     permission_config:
       type: object
       description: Location & Department Permission configuration.
@@ -472,6 +404,72 @@ components:
           type: string
           format: date-time
           example: '2022-09-30T00:00:00.000Z'
+  responses:
+    '422':
+      description: Unprocessable Entity - Invalid query params or request body.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13422
+              message:
+                type: string
+                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
+    '429':
+      description: Too many requests.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13429
+              message:
+                type: string
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
+    '404':
+      description: Not found - The requested resource is not found.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13404
+              message:
+                type: string
+                example: The requested resource is not found.
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13403
+              message:
+                type: string
+                example: Forbidden - The user is not authorized to use this resource.
   securitySchemes:
     oauth2:
       type: oauth2

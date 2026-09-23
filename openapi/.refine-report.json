@@ -1,18 +1,7 @@
 {
   "provider": "workstream",
   "sources": [
-    "workstream-applicants-api-openapi.yml",
-    "workstream-authorization-api-openapi.yml",
-    "workstream-company-roles-api-openapi.yml",
-    "workstream-company-users-api-openapi.yml",
-    "workstream-custom-field-api-openapi.yml",
-    "workstream-departments-api-openapi.yml",
-    "workstream-employee-documents-api-openapi.yml",
-    "workstream-employees-api-openapi.yml",
-    "workstream-imported-employee-infos-api-openapi.yml",
-    "workstream-locations-api-openapi.yml",
-    "workstream-positions-api-openapi.yml",
-    "workstream-team-members-api-openapi.yml"
+    "_original/workstream-public-api-openapi-original.json"
   ],
   "outputs": [
     "workstream-applicants-api-openapi.yml",
@@ -31,6 +20,23 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "workstream-public-api-openapi-original.json: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "workstream-applicants-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workstream-authorization-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workstream-company-roles-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workstream-company-users-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workstream-custom-field-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workstream-departments-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workstream-employee-documents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workstream-employees-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workstream-imported-employee-infos-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workstream-locations-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workstream-positions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "workstream-team-members-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

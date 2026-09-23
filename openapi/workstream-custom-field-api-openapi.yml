@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Workstream Public Applicants Custom Field API
+  title: Workstream Public Custom Field API
   termsOfService: https://workstream.us/terms/
   contact:
     email: help@workstream.is
@@ -15,12 +15,10 @@ info:
   description: '# API Reference
 
 
-    The Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
+    The Workstream API is a modern, RESTful API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
 
 
-    **Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.
-
-    '
+    **Note:** Old APIs will be deprecated, please refer to this API documentation for new API usages.'
 servers:
 - url: https://{tenant}
   variables:
@@ -37,7 +35,6 @@ paths:
       tags:
       - Custom Field
       summary: List existing Custom Fields
-      description: List existing Custom Fields
       security:
       - bearerAuth: []
       parameters:
@@ -81,7 +78,6 @@ paths:
       tags:
       - Custom Field
       summary: Create Custom Field
-      description: Create Custom Field
       security:
       - bearerAuth: []
       requestBody:
@@ -163,7 +159,6 @@ paths:
       tags:
       - Custom Field
       summary: Update an existing Custom Field
-      description: Update an existing Custom Field
       security:
       - bearerAuth: []
       parameters:
@@ -252,7 +247,6 @@ paths:
       tags:
       - Custom Field
       summary: Create or update custom field value
-      description: Create or update custom field value
       security:
       - bearerAuth: []
       parameters:
@@ -349,32 +343,6 @@ components:
               message:
                 type: string
                 example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
-    '403':
-      description: Forbidden - The user is not authorized to use this resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13403
-              message:
-                type: string
-                example: Forbidden - The user is not authorized to use this resource.
-    '401':
-      description: Unauthorized - Credentials are not valid for the target resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13401
-              message:
-                type: string
-                example: Unauthorized
     '429':
       description: Too many requests.
       content:
@@ -388,6 +356,32 @@ components:
               message:
                 type: string
                 example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13403
+              message:
+                type: string
+                example: Forbidden - The user is not authorized to use this resource.
   schemas:
     show-2:
       type: object
@@ -426,9 +420,10 @@ components:
           - number
           - date
         options:
-          type: string
+          type:
+          - string
+          - 'null'
           description: When field_type is select, need pre-set options for custom field value
-          nullable: true
         sequence:
           type: integer
           description: Sequence of custom field in entity

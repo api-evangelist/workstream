@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Workstream Public Applicants Team Members API
+  title: Workstream Public Team Members API
   termsOfService: https://workstream.us/terms/
   contact:
     email: help@workstream.is
@@ -15,12 +15,10 @@ info:
   description: '# API Reference
 
 
-    The Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
+    The Workstream API is a modern, RESTful API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
 
 
-    **Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.
-
-    '
+    **Note:** Old APIs will be deprecated, please refer to this API documentation for new API usages.'
 servers:
 - url: https://{tenant}
   variables:
@@ -270,6 +268,46 @@ paths:
           $ref: '#/components/responses/429'
 components:
   schemas:
+    base:
+      type: object
+      title: Team Member
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        first_name:
+          description: Team member's first name.
+          type: string
+          example: Ryan
+        middle_initial:
+          description: Team member's middle initial.
+          type: string
+          example: J
+        last_name:
+          description: Team member's last name.
+          type: string
+          example: Folk
+        preferred_name:
+          description: Team member's preferred name. Returned as `null` for team members who have not set one.
+          type:
+          - string
+          - 'null'
+          example: Johnny
+        termination_note:
+          description: Team member's termination note.
+          type: string
+          format: nullable
+        start_date:
+          description: Team member's start date.
+          type: string
+          format: date
+        status:
+          description: Status of the team member.
+          type: string
+          enum:
+          - hired
+          - active
+          - offboarded
     state_tax-2:
       type: object
       title: State Tax
@@ -287,6 +325,94 @@ components:
         tax_form:
           description: tax form name
           type: string
+    information-2:
+      type: object
+      title: Information
+      description: Need to embed **information** in request query params.
+      properties:
+        phone:
+          description: Team member's phone number.
+          type: string
+          example: '+17789882873'
+        email:
+          description: Team member's email address.
+          type: string
+          example: wadam@example.fr
+        dob:
+          description: Team member's date of birth.
+          type: string
+          format: date
+          example: '2020-04-01'
+        ethnicity:
+          description: Team member's ethnicity.
+          type: string
+          enum:
+          - white
+          - black_or_african_american
+          - hispanic_or_latino
+          - american_indian_or_alaskan_native
+          - asian
+          - native_hawaiian_or_other_pacific_islander
+          - two_or_more_races
+          - not_specified
+          example: black_or_african_american
+        gender:
+          description: Team member's gender.
+          type: string
+          enum:
+          - female
+          - male
+          - non_binary
+          example: male
+        ssn:
+          description: Team member's social security number.
+          type: string
+          example: '222521248'
+        marital_status:
+          description: Team member's marital status.
+          type: string
+          enum:
+          - never_married
+          - married
+          - separated
+          - divorced
+          - widowed
+          example: never_married
+    job_title:
+      type: object
+      title: Job Title
+      description: Need to embed **job_title** in request query params
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        title:
+          type: string
+          example: Bus Driver
+    state_tax:
+      type: object
+      title: employee's state tax info
+      description: Need to embed **state_tax** in request query params.
+      properties:
+        allowances_exemptions:
+          description: allowed exemptions amount
+          type: integer
+        extra_withholding:
+          description: extra withholding amount
+          type: integer
+        filing_status:
+          description: filing status
+          type: string
+        tax_form:
+          description: tax form name
+          type: string
+        state:
+          description: tax form state
+          type: string
+        tax_form_details:
+          description: tax form details
+          type: object
     custom_field:
       type: array
       title: custom field
@@ -306,6 +432,44 @@ components:
             description: Custom field value
             type: string
             example: custom field value
+    location-3:
+      type: object
+      title: Location
+      description: Need to embed **location** in request query params
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        name:
+          type: string
+          example: SF store
+    team_member:
+      allOf:
+      - $ref: '#/components/schemas/base'
+      - type: object
+        properties:
+          job_title:
+            $ref: '#/components/schemas/job_title'
+          location:
+            $ref: '#/components/schemas/location-3'
+          department:
+            $ref: '#/components/schemas/department-3'
+          information:
+            $ref: '#/components/schemas/information-2'
+          direct_deposits:
+            type: array
+            description: Need to embed **direct_deposits** in request query params.
+            items:
+              $ref: '#/components/schemas/direct_deposit'
+          state_tax:
+            $ref: '#/components/schemas/state_tax'
+          federal_tax:
+            $ref: '#/components/schemas/federal_tax-2'
+          eligibility:
+            $ref: '#/components/schemas/state_tax-2'
+          custom_fields:
+            $ref: '#/components/schemas/custom_field'
     federal_tax-2:
       type: object
       title: Federal Tax
@@ -332,45 +496,43 @@ components:
         two_jobs:
           description: whether the employee has two jobs or not
           type: boolean
-    base:
+    direct_deposit:
       type: object
-      title: Team Member
+      title: employee's direct_deposit
+      properties:
+        account_number:
+          description: bank account number
+          type: string
+          example: '112223344'
+        account_type:
+          description: bank account type
+          type: string
+          example: saving
+        percentage:
+          description: percentage of compensation credited into this account
+          type: integer
+        routing_number:
+          description: bank rounting number
+          type: string
+          example: '00356'
+        status:
+          description: bank account status
+          type: string
+          enum:
+          - active
+          - inactive
+    department-3:
+      type: object
+      title: Department
+      description: Need to embed **department** in request query params
       properties:
         uuid:
           type: string
           format: uuid
-        first_name:
-          description: Team member's first name.
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        name:
           type: string
-          example: Ryan
-        middle_initial:
-          description: Team member's middle initial.
-          type: string
-          example: J
-        last_name:
-          description: Team member's last name.
-          type: string
-          example: Folk
-        preferred_name:
-          description: Team member's preferred name. Returned as `null` for team members who have not set one.
-          type: string
-          nullable: true
-          example: Johnny
-        termination_note:
-          description: Team member's termination note.
-          type: string
-          format: nullable
-        start_date:
-          description: Team member's start date.
-          type: string
-          format: date
-        status:
-          description: Status of the team member.
-          type: string
-          enum:
-          - hired
-          - active
-          - offboarded
+          example: Marketing
     creation-2:
       required:
       - first_name
@@ -476,169 +638,6 @@ components:
         metadata:
           type: object
           description: Customer-defined key-value pairs. Use this parameter to store additional information on your candidate.
-    location-3:
-      type: object
-      title: Location
-      description: Need to embed **location** in request query params
-      properties:
-        uuid:
-          type: string
-          format: uuid
-          example: c59c9852-2584-11ee-be56-0242ac120002
-        name:
-          type: string
-          example: SF store
-    state_tax:
-      type: object
-      title: employee's state tax info
-      description: Need to embed **state_tax** in request query params.
-      properties:
-        allowances_exemptions:
-          description: allowed exemptions amount
-          type: integer
-        extra_withholding:
-          description: extra withholding amount
-          type: integer
-        filing_status:
-          description: filing status
-          type: string
-        tax_form:
-          description: tax form name
-          type: string
-        state:
-          description: tax form state
-          type: string
-        tax_form_details:
-          description: tax form details
-          type: object
-    job_title:
-      type: object
-      title: Job Title
-      description: Need to embed **job_title** in request query params
-      properties:
-        uuid:
-          type: string
-          format: uuid
-          example: c59c9852-2584-11ee-be56-0242ac120002
-        title:
-          type: string
-          example: Bus Driver
-    information-2:
-      type: object
-      title: Information
-      description: Need to embed **information** in request query params.
-      properties:
-        phone:
-          description: Team member's phone number.
-          type: string
-          example: '+17789882873'
-        email:
-          description: Team member's email address.
-          type: string
-          example: wadam@example.fr
-        dob:
-          description: Team member's date of birth.
-          type: string
-          format: date
-          example: '2020-04-01'
-        ethnicity:
-          description: Team member's ethnicity.
-          type: string
-          enum:
-          - white
-          - black_or_african_american
-          - hispanic_or_latino
-          - american_indian_or_alaskan_native
-          - asian
-          - native_hawaiian_or_other_pacific_islander
-          - two_or_more_races
-          - not_specified
-          example: black_or_african_american
-        gender:
-          description: Team member's gender.
-          type: string
-          enum:
-          - female
-          - male
-          - non_binary
-          example: male
-        ssn:
-          description: Team member's social security number.
-          type: string
-          example: '222521248'
-        marital_status:
-          description: Team member's marital status.
-          type: string
-          enum:
-          - never_married
-          - married
-          - separated
-          - divorced
-          - widowed
-          example: never_married
-    department-3:
-      type: object
-      title: Department
-      description: Need to embed **department** in request query params
-      properties:
-        uuid:
-          type: string
-          format: uuid
-          example: c59c9852-2584-11ee-be56-0242ac120002
-        name:
-          type: string
-          example: Marketing
-    direct_deposit:
-      type: object
-      title: employee's direct_deposit
-      properties:
-        account_number:
-          description: bank account number
-          type: string
-          example: '112223344'
-        account_type:
-          description: bank account type
-          type: string
-          example: saving
-        percentage:
-          description: percentage of compensation credited into this account
-          type: integer
-        routing_number:
-          description: bank rounting number
-          type: string
-          example: '00356'
-        status:
-          description: bank account status
-          type: string
-          enum:
-          - active
-          - inactive
-    team_member:
-      allOf:
-      - $ref: '#/components/schemas/base'
-      - type: object
-        properties:
-          job_title:
-            $ref: '#/components/schemas/job_title'
-          location:
-            $ref: '#/components/schemas/location-3'
-          department:
-            $ref: '#/components/schemas/department-3'
-          information:
-            $ref: '#/components/schemas/information-2'
-          direct_deposits:
-            type: array
-            description: Need to embed **direct_deposits** in request query params.
-            items:
-              $ref: '#/components/schemas/direct_deposit'
-          state_tax:
-            $ref: '#/components/schemas/state_tax'
-          federal_tax:
-            $ref: '#/components/schemas/federal_tax-2'
-          eligibility:
-            $ref: '#/components/schemas/state_tax-2'
-          custom_fields:
-            $ref: '#/components/schemas/custom_field'
   responses:
     '422':
       description: Unprocessable Entity - Invalid query params or request body.
@@ -653,8 +652,8 @@ components:
               message:
                 type: string
                 example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
-    '403':
-      description: Forbidden - The user is not authorized to use this resource.
+    '429':
+      description: Too many requests.
       content:
         application/problem+json:
           schema:
@@ -662,10 +661,10 @@ components:
             properties:
               error_code:
                 type: integer
-                example: 13403
+                example: 13429
               message:
                 type: string
-                example: Forbidden - The user is not authorized to use this resource.
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
     '401':
       description: Unauthorized - Credentials are not valid for the target resource.
       content:
@@ -692,8 +691,8 @@ components:
               message:
                 type: string
                 example: The requested resource is not found.
-    '429':
-      description: Too many requests.
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
       content:
         application/problem+json:
           schema:
@@ -701,10 +700,10 @@ components:
             properties:
               error_code:
                 type: integer
-                example: 13429
+                example: 13403
               message:
                 type: string
-                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+                example: Forbidden - The user is not authorized to use this resource.
   securitySchemes:
     oauth2:
       type: oauth2

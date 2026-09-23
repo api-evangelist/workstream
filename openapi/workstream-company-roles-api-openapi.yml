@@ -1,7 +1,7 @@
-openapi: 3.0.2
+openapi: 3.2.0
 info:
   version: 1.0.0
-  title: Workstream Public Applicants Company Roles API
+  title: Workstream Public Company Roles API
   termsOfService: https://workstream.us/terms/
   contact:
     email: help@workstream.is
@@ -15,12 +15,10 @@ info:
   description: '# API Reference
 
 
-    The Workstream API is a modern, [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer) API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
+    The Workstream API is a modern, RESTful API. Our API has predictable resource-oriented URLs, supports HTTPS authentication, verbs and response codes, and returns JSON-encoded responses.
 
 
-    **Note:** [Old APIs](https://old-api-doc.workstream.us/) will be deprecated, please refer to this API documentation for new API usages.
-
-    '
+    **Note:** Old APIs will be deprecated, please refer to this API documentation for new API usages.'
 servers:
 - url: https://{tenant}
   variables:
@@ -110,32 +108,6 @@ components:
               message:
                 type: string
                 example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
-    '403':
-      description: Forbidden - The user is not authorized to use this resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13403
-              message:
-                type: string
-                example: Forbidden - The user is not authorized to use this resource.
-    '401':
-      description: Unauthorized - Credentials are not valid for the target resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13401
-              message:
-                type: string
-                example: Unauthorized
     '429':
       description: Too many requests.
       content:
@@ -149,6 +121,19 @@ components:
               message:
                 type: string
                 example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
     '404':
       description: Not found - The requested resource is not found.
       content:
@@ -162,6 +147,19 @@ components:
               message:
                 type: string
                 example: The requested resource is not found.
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13403
+              message:
+                type: string
+                example: Forbidden - The user is not authorized to use this resource.
   schemas:
     company_role:
       type: object
