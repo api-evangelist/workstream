@@ -242,6 +242,73 @@ paths:
           $ref: '#/components/responses/429'
 components:
   schemas:
+    company_role:
+      type: object
+      title: Company Role
+      properties:
+        uuid:
+          description: Company Role's unique identifier.
+          type: string
+          format: uuid
+          example: 509a251a-93af-41e3-8416-23b29dc293cc
+        name:
+          description: Company Role's name.
+          type: string
+          example: General Manager
+        editable:
+          description: Whether the Company Role is editable.
+          type: boolean
+          example: true
+        permissions_set:
+          description: Company Role's permissions set.
+          type: array
+          example:
+          - edit_user edit_location
+          - edit_department
+          - customize_notifications
+          - edit_position
+          - edit_custom_reports
+          - edit_custom_field
+          - edit_integration
+          - edit_company
+          items:
+            type: string
+        created_at:
+          description: The date that the Company Role was created.
+          type: string
+          format: date-time
+          example: '2022-09-30T00:00:00.000Z'
+    permission_config:
+      type: object
+      description: Location & Department Permission configuration.
+      properties:
+        all_locations:
+          type: boolean
+          description: Permission to access all locations. Set to `true` if the Company User should have access to all locations.
+          example: false
+        locations:
+          type: array
+          description: List of locations' unique identifiers that the Company User should have permission to. Use if `all_locations` is set to `false`.
+          items:
+            type: object
+            properties:
+              uuid:
+                type: string
+                format: uuid
+                example: 67161b3c-2584-11ee-be56-0242ac120002
+              all_departments:
+                type: boolean
+                example: false
+                description: Permission to access all departments in the location. Set to `true` if the Company User should have access to all departments in the location.
+              departments:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    uuid:
+                      type: string
+                      format: uuid
+                      example: 47161b3c-2584-11ee-be56-0242ac120002
     creation:
       type: object
       title: Comapny Staff Creation Payload
@@ -337,73 +404,6 @@ components:
           $ref: '#/components/schemas/company_role'
         permission_config:
           $ref: '#/components/schemas/permission_config'
-    permission_config:
-      type: object
-      description: Location & Department Permission configuration.
-      properties:
-        all_locations:
-          type: boolean
-          description: Permission to access all locations. Set to `true` if the Company User should have access to all locations.
-          example: false
-        locations:
-          type: array
-          description: List of locations' unique identifiers that the Company User should have permission to. Use if `all_locations` is set to `false`.
-          items:
-            type: object
-            properties:
-              uuid:
-                type: string
-                format: uuid
-                example: 67161b3c-2584-11ee-be56-0242ac120002
-              all_departments:
-                type: boolean
-                example: false
-                description: Permission to access all departments in the location. Set to `true` if the Company User should have access to all departments in the location.
-              departments:
-                type: array
-                items:
-                  type: object
-                  properties:
-                    uuid:
-                      type: string
-                      format: uuid
-                      example: 47161b3c-2584-11ee-be56-0242ac120002
-    company_role:
-      type: object
-      title: Company Role
-      properties:
-        uuid:
-          description: Company Role's unique identifier.
-          type: string
-          format: uuid
-          example: 509a251a-93af-41e3-8416-23b29dc293cc
-        name:
-          description: Company Role's name.
-          type: string
-          example: General Manager
-        editable:
-          description: Whether the Company Role is editable.
-          type: boolean
-          example: true
-        permissions_set:
-          description: Company Role's permissions set.
-          type: array
-          example:
-          - edit_user edit_location
-          - edit_department
-          - customize_notifications
-          - edit_position
-          - edit_custom_reports
-          - edit_custom_field
-          - edit_integration
-          - edit_company
-          items:
-            type: string
-        created_at:
-          description: The date that the Company Role was created.
-          type: string
-          format: date-time
-          example: '2022-09-30T00:00:00.000Z'
   responses:
     '422':
       description: Unprocessable Entity - Invalid query params or request body.
@@ -418,32 +418,6 @@ components:
               message:
                 type: string
                 example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
-    '429':
-      description: Too many requests.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13429
-              message:
-                type: string
-                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
-    '401':
-      description: Unauthorized - Credentials are not valid for the target resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13401
-              message:
-                type: string
-                example: Unauthorized
     '404':
       description: Not found - The requested resource is not found.
       content:
@@ -470,6 +444,32 @@ components:
               message:
                 type: string
                 example: Forbidden - The user is not authorized to use this resource.
+    '429':
+      description: Too many requests.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13429
+              message:
+                type: string
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
   securitySchemes:
     oauth2:
       type: oauth2
