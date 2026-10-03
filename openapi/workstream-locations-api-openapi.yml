@@ -123,7 +123,86 @@ paths:
         '429':
           $ref: '#/components/responses/429'
 components:
+  responses:
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13403
+              message:
+                type: string
+                example: Forbidden - The user is not authorized to use this resource.
+    '429':
+      description: Too many requests.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13429
+              message:
+                type: string
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+    '422':
+      description: Unprocessable Entity - Invalid query params or request body.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13422
+              message:
+                type: string
+                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
+    '404':
+      description: Not found - The requested resource is not found.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13404
+              message:
+                type: string
+                example: The requested resource is not found.
   schemas:
+    location-4:
+      type: object
+      title: Location
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          example: 8b9ad790-2584-11ee-be56-0242ac120002
+        name:
+          type: string
+          example: San Francisco store
+        custom_fields:
+          $ref: '#/components/schemas/custom_field'
     custom_field:
       type: array
       title: custom field
@@ -143,85 +222,6 @@ components:
             description: Custom field value
             type: string
             example: custom field value
-    location-4:
-      type: object
-      title: Location
-      properties:
-        uuid:
-          type: string
-          format: uuid
-          example: 8b9ad790-2584-11ee-be56-0242ac120002
-        name:
-          type: string
-          example: San Francisco store
-        custom_fields:
-          $ref: '#/components/schemas/custom_field'
-  responses:
-    '404':
-      description: Not found - The requested resource is not found.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13404
-              message:
-                type: string
-                example: The requested resource is not found.
-    '422':
-      description: Unprocessable Entity - Invalid query params or request body.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13422
-              message:
-                type: string
-                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
-    '403':
-      description: Forbidden - The user is not authorized to use this resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13403
-              message:
-                type: string
-                example: Forbidden - The user is not authorized to use this resource.
-    '401':
-      description: Unauthorized - Credentials are not valid for the target resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13401
-              message:
-                type: string
-                example: Unauthorized
-    '429':
-      description: Too many requests.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13429
-              message:
-                type: string
-                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
   securitySchemes:
     oauth2:
       type: oauth2

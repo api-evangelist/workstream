@@ -238,16 +238,20 @@ paths:
           $ref: '#/components/responses/429'
 components:
   schemas:
-    tags:
+    candidate_info:
       type: array
-      title: Applicant Tags
-      description: Need to embed **tags** in request query params
+      title: Applicant Candidate Info
+      description: Need to embed **candidate_info** in request query params
       items:
         properties:
-          name:
-            description: The name of the tag
+          question:
+            description: Name of field
             type: string
-            example: cook
+            example: Street Address
+          answer:
+            description: Value of field
+            type: string
+            example: 110 W 5 st
     position-2:
       type: object
       title: Position
@@ -286,6 +290,29 @@ components:
           description: location name
           type: string
           example: SF store
+    tags:
+      type: array
+      title: Applicant Tags
+      description: Need to embed **tags** in request query params
+      items:
+        properties:
+          name:
+            description: The name of the tag
+            type: string
+            example: cook
+    department:
+      type: object
+      title: Department
+      description: Need to embed **department** in request query params
+      properties:
+        name:
+          description: Department name
+          type: string
+          example: Marketing
+        description:
+          description: Department description
+          type: string
+          example: The marketing department
     pay_info:
       type: object
       title: Applicant Pay Info
@@ -432,86 +459,7 @@ components:
           $ref: '#/components/schemas/candidate_info'
         pay_info:
           $ref: '#/components/schemas/pay_info'
-    candidate_info:
-      type: array
-      title: Applicant Candidate Info
-      description: Need to embed **candidate_info** in request query params
-      items:
-        properties:
-          question:
-            description: Name of field
-            type: string
-            example: Street Address
-          answer:
-            description: Value of field
-            type: string
-            example: 110 W 5 st
-    department:
-      type: object
-      title: Department
-      description: Need to embed **department** in request query params
-      properties:
-        name:
-          description: Department name
-          type: string
-          example: Marketing
-        description:
-          description: Department description
-          type: string
-          example: The marketing department
   responses:
-    '404':
-      description: Not found - The requested resource is not found.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13404
-              message:
-                type: string
-                example: The requested resource is not found.
-    '422':
-      description: Unprocessable Entity - Invalid query params or request body.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13422
-              message:
-                type: string
-                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
-    '403':
-      description: Forbidden - The user is not authorized to use this resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13403
-              message:
-                type: string
-                example: Forbidden - The user is not authorized to use this resource.
-    '401':
-      description: Unauthorized - Credentials are not valid for the target resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13401
-              message:
-                type: string
-                example: Unauthorized
     '429':
       description: Too many requests.
       content:
@@ -525,6 +473,58 @@ components:
               message:
                 type: string
                 example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13403
+              message:
+                type: string
+                example: Forbidden - The user is not authorized to use this resource.
+    '422':
+      description: Unprocessable Entity - Invalid query params or request body.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13422
+              message:
+                type: string
+                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
+    '404':
+      description: Not found - The requested resource is not found.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13404
+              message:
+                type: string
+                example: The requested resource is not found.
   parameters:
     applicant_embed:
       name: embed
