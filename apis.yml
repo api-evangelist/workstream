@@ -254,6 +254,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/workstream-capability-edges.yml
+  name: Workstream Business Capability Map
 - type: DomainSecurity
   url: security/workstream-domain-security.yml
 - type: Authentication

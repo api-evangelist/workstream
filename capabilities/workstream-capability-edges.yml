@@ -1,0 +1,56 @@
+slug: workstream
+provider: Workstream
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 4
+edges:
+- tag: Applicants
+  spec_file: workstream-applicants-api-openapi.yml
+  capability_id: BC-300.10
+  capability_id_l1: BC-300
+  capability_name: Talent Acquisition Management
+  confidence: 0.95
+  evidence: GET /position_applications GetApplicants "List existing Applicants"; schemas candidate_info,
+    application_notes, position-2
+  reason: Operations retrieve job applicants and their application forms — applicant tracking, squarely
+    Talent Acquisition Management.
+- tag: Employees
+  spec_file: workstream-employees-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.85
+  evidence: 'GET /employees/{uuid} Retrieve an existing Employee; schemas: direct_deposit, federal_tax,
+    compensation, employment_details, i9_section_one'
+  reason: Operations expose employee master records including employment details, compensation, tax withholding
+    and direct deposit — core HR operations / employee records administration, not a homograph.
+- tag: Employee Documents
+  spec_file: workstream-employee-documents-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: GET /employee/docs GetEmployeeDocuments "List existing Employee Documents"; GET /employee/docs/{document_id}
+    "Download a employee document"
+  reason: Listing and retrieval of employee documents is employee-record keeping within HR Operations
+    Management; slight ambiguity over whether onboarding/compliance sub-capability applies keeps it at
+    0.8.
+- tag: Team Members
+  spec_file: workstream-team-members-api-openapi.yml
+  capability_id: BC-300.70
+  capability_id_l1: BC-300
+  capability_name: HR Operations Management
+  confidence: 0.8
+  evidence: 'POST /team_members  CreateTeamMember  Create a new Team Member resource; schemas: job_title,
+    department-3, direct_deposit, federal_tax, state_tax'
+  reason: Create/retrieve/update-status of worker records carrying job title, department, tax and direct-deposit
+    data — employee record and payroll administration.
