@@ -242,32 +242,6 @@ paths:
           $ref: '#/components/responses/429'
 components:
   responses:
-    '403':
-      description: Forbidden - The user is not authorized to use this resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13403
-              message:
-                type: string
-                example: Forbidden - The user is not authorized to use this resource.
-    '429':
-      description: Too many requests.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13429
-              message:
-                type: string
-                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
     '422':
       description: Unprocessable Entity - Invalid query params or request body.
       content:
@@ -281,8 +255,8 @@ components:
               message:
                 type: string
                 example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
-    '401':
-      description: Unauthorized - Credentials are not valid for the target resource.
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
       content:
         application/problem+json:
           schema:
@@ -290,10 +264,10 @@ components:
             properties:
               error_code:
                 type: integer
-                example: 13401
+                example: 13403
               message:
                 type: string
-                example: Unauthorized
+                example: Forbidden - The user is not authorized to use this resource.
     '404':
       description: Not found - The requested resource is not found.
       content:
@@ -307,43 +281,33 @@ components:
               message:
                 type: string
                 example: The requested resource is not found.
+    '429':
+      description: Too many requests.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13429
+              message:
+                type: string
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
   schemas:
-    company_role:
-      type: object
-      title: Company Role
-      properties:
-        uuid:
-          description: Company Role's unique identifier.
-          type: string
-          format: uuid
-          example: 509a251a-93af-41e3-8416-23b29dc293cc
-        name:
-          description: Company Role's name.
-          type: string
-          example: General Manager
-        editable:
-          description: Whether the Company Role is editable.
-          type: boolean
-          example: true
-        permissions_set:
-          description: Company Role's permissions set.
-          type: array
-          example:
-          - edit_user edit_location
-          - edit_department
-          - customize_notifications
-          - edit_position
-          - edit_custom_reports
-          - edit_custom_field
-          - edit_integration
-          - edit_company
-          items:
-            type: string
-        created_at:
-          description: The date that the Company Role was created.
-          type: string
-          format: date-time
-          example: '2022-09-30T00:00:00.000Z'
     permission_config:
       type: object
       description: Location & Department Permission configuration.
@@ -375,6 +339,46 @@ components:
                       type: string
                       format: uuid
                       example: 47161b3c-2584-11ee-be56-0242ac120002
+    creation:
+      type: object
+      title: Comapny Staff Creation Payload
+      required:
+      - user
+      - name
+      - company_role_uuid
+      properties:
+        user:
+          type: object
+          required:
+          - email
+          properties:
+            email:
+              type: string
+              description: User's email.
+              format: email
+              example: test@test.com
+            password:
+              type: string
+              format: password
+              description: User's password.
+              example: password
+        name:
+          type: string
+          description: Company User's full name.
+          example: Andy Lee
+        company_role_uuid:
+          type: string
+          description: Company Role's unique identifier.
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        region_number:
+          type: string
+          description: Contry code of Company User's phone number. Server will set it "1" as default if the request not set the parameter.
+          default: '1'
+          example: '1'
+        phone:
+          type: string
+          description: Company User's phone number.
+          example: '7789882873'
     company_user:
       type: object
       title: Company User
@@ -430,46 +434,42 @@ components:
           $ref: '#/components/schemas/company_role'
         permission_config:
           $ref: '#/components/schemas/permission_config'
-    creation:
+    company_role:
       type: object
-      title: Comapny Staff Creation Payload
-      required:
-      - user
-      - name
-      - company_role_uuid
+      title: Company Role
       properties:
-        user:
-          type: object
-          required:
-          - email
-          properties:
-            email:
-              type: string
-              description: User's email.
-              format: email
-              example: test@test.com
-            password:
-              type: string
-              format: password
-              description: User's password.
-              example: password
-        name:
-          type: string
-          description: Company User's full name.
-          example: Andy Lee
-        company_role_uuid:
-          type: string
+        uuid:
           description: Company Role's unique identifier.
-          example: c59c9852-2584-11ee-be56-0242ac120002
-        region_number:
           type: string
-          description: Contry code of Company User's phone number. Server will set it "1" as default if the request not set the parameter.
-          default: '1'
-          example: '1'
-        phone:
+          format: uuid
+          example: 509a251a-93af-41e3-8416-23b29dc293cc
+        name:
+          description: Company Role's name.
           type: string
-          description: Company User's phone number.
-          example: '7789882873'
+          example: General Manager
+        editable:
+          description: Whether the Company Role is editable.
+          type: boolean
+          example: true
+        permissions_set:
+          description: Company Role's permissions set.
+          type: array
+          example:
+          - edit_user edit_location
+          - edit_department
+          - customize_notifications
+          - edit_position
+          - edit_custom_reports
+          - edit_custom_field
+          - edit_integration
+          - edit_company
+          items:
+            type: string
+        created_at:
+          description: The date that the Company Role was created.
+          type: string
+          format: date-time
+          example: '2022-09-30T00:00:00.000Z'
   securitySchemes:
     oauth2:
       type: oauth2

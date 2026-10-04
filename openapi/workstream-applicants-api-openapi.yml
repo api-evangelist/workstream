@@ -238,68 +238,6 @@ paths:
           $ref: '#/components/responses/429'
 components:
   schemas:
-    candidate_info:
-      type: array
-      title: Applicant Candidate Info
-      description: Need to embed **candidate_info** in request query params
-      items:
-        properties:
-          question:
-            description: Name of field
-            type: string
-            example: Street Address
-          answer:
-            description: Value of field
-            type: string
-            example: 110 W 5 st
-    position-2:
-      type: object
-      title: Position
-      description: Need to embed **position** in request query params
-      properties:
-        uuid:
-          description: Position uuid
-          type: string
-          format: uuid
-          example: c59c9852-2584-11ee-be56-0242ac120002
-        title:
-          description: Position title
-          type: string
-          example: Cook
-    application_notes:
-      type: array
-      title: Applicant Notes
-      description: Need to embed **notes** in request query params
-      items:
-        properties:
-          content:
-            description: Content of note
-            type: string
-            example: He is a good applicant!
-    location-2:
-      type: object
-      title: Location
-      description: Need to embed **location** in request query params
-      properties:
-        uuid:
-          description: Location uuid
-          type: string
-          format: uuid
-          example: c59c9852-2584-11ee-be56-0242ac120002
-        name:
-          description: location name
-          type: string
-          example: SF store
-    tags:
-      type: array
-      title: Applicant Tags
-      description: Need to embed **tags** in request query params
-      items:
-        properties:
-          name:
-            description: The name of the tag
-            type: string
-            example: cook
     department:
       type: object
       title: Department
@@ -313,25 +251,6 @@ components:
           description: Department description
           type: string
           example: The marketing department
-    pay_info:
-      type: object
-      title: Applicant Pay Info
-      description: Need to embed **pay_info** in request query params
-      properties:
-        pay_amount:
-          description: Pay amount
-          type: number
-          example: 20
-        pay_frequency:
-          description: Pay frequency
-          type: string
-          enum:
-          - hour
-          - day
-          - week
-          - month
-          - year
-          example: hour
     form:
       type: object
       title: Form Submission
@@ -374,6 +293,20 @@ components:
                 description: The answer to the question.
                 type: string
                 example: 'yes'
+    candidate_info:
+      type: array
+      title: Applicant Candidate Info
+      description: Need to embed **candidate_info** in request query params
+      items:
+        properties:
+          question:
+            description: Name of field
+            type: string
+            example: Street Address
+          answer:
+            description: Value of field
+            type: string
+            example: 110 W 5 st
     applicant:
       type: object
       title: Applicant
@@ -459,33 +392,82 @@ components:
           $ref: '#/components/schemas/candidate_info'
         pay_info:
           $ref: '#/components/schemas/pay_info'
+    location-2:
+      type: object
+      title: Location
+      description: Need to embed **location** in request query params
+      properties:
+        uuid:
+          description: Location uuid
+          type: string
+          format: uuid
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        name:
+          description: location name
+          type: string
+          example: SF store
+    tags:
+      type: array
+      title: Applicant Tags
+      description: Need to embed **tags** in request query params
+      items:
+        properties:
+          name:
+            description: The name of the tag
+            type: string
+            example: cook
+    pay_info:
+      type: object
+      title: Applicant Pay Info
+      description: Need to embed **pay_info** in request query params
+      properties:
+        pay_amount:
+          description: Pay amount
+          type: number
+          example: 20
+        pay_frequency:
+          description: Pay frequency
+          type: string
+          enum:
+          - hour
+          - day
+          - week
+          - month
+          - year
+          example: hour
+    position-2:
+      type: object
+      title: Position
+      description: Need to embed **position** in request query params
+      properties:
+        uuid:
+          description: Position uuid
+          type: string
+          format: uuid
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        title:
+          description: Position title
+          type: string
+          example: Cook
+    application_notes:
+      type: array
+      title: Applicant Notes
+      description: Need to embed **notes** in request query params
+      items:
+        properties:
+          content:
+            description: Content of note
+            type: string
+            example: He is a good applicant!
+  parameters:
+    applicant_embed:
+      name: embed
+      in: query
+      schema:
+        type: string
+        example: (position, location, department, notes, tags, candidate_info, pay_info)
+      description: Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated
   responses:
-    '429':
-      description: Too many requests.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13429
-              message:
-                type: string
-                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
-    '403':
-      description: Forbidden - The user is not authorized to use this resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13403
-              message:
-                type: string
-                example: Forbidden - The user is not authorized to use this resource.
     '422':
       description: Unprocessable Entity - Invalid query params or request body.
       content:
@@ -499,19 +481,6 @@ components:
               message:
                 type: string
                 example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
-    '401':
-      description: Unauthorized - Credentials are not valid for the target resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13401
-              message:
-                type: string
-                example: Unauthorized
     '404':
       description: Not found - The requested resource is not found.
       content:
@@ -525,14 +494,45 @@ components:
               message:
                 type: string
                 example: The requested resource is not found.
-  parameters:
-    applicant_embed:
-      name: embed
-      in: query
-      schema:
-        type: string
-        example: (position, location, department, notes, tags, candidate_info, pay_info)
-      description: Specifies the names of resources that should be embedded in the response. Resources to embed must have parentheses and be comma-separated
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13403
+              message:
+                type: string
+                example: Forbidden - The user is not authorized to use this resource.
+    '429':
+      description: Too many requests.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13429
+              message:
+                type: string
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
   securitySchemes:
     oauth2:
       type: oauth2

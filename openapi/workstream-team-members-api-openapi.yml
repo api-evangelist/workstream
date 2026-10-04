@@ -267,72 +267,6 @@ paths:
         '429':
           $ref: '#/components/responses/429'
 components:
-  responses:
-    '403':
-      description: Forbidden - The user is not authorized to use this resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13403
-              message:
-                type: string
-                example: Forbidden - The user is not authorized to use this resource.
-    '429':
-      description: Too many requests.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13429
-              message:
-                type: string
-                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
-    '422':
-      description: Unprocessable Entity - Invalid query params or request body.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13422
-              message:
-                type: string
-                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
-    '401':
-      description: Unauthorized - Credentials are not valid for the target resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13401
-              message:
-                type: string
-                example: Unauthorized
-    '404':
-      description: Not found - The requested resource is not found.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13404
-              message:
-                type: string
-                example: The requested resource is not found.
   schemas:
     state_tax-2:
       type: object
@@ -351,43 +285,6 @@ components:
         tax_form:
           description: tax form name
           type: string
-    direct_deposit:
-      type: object
-      title: employee's direct_deposit
-      properties:
-        account_number:
-          description: bank account number
-          type: string
-          example: '112223344'
-        account_type:
-          description: bank account type
-          type: string
-          example: saving
-        percentage:
-          description: percentage of compensation credited into this account
-          type: integer
-        routing_number:
-          description: bank rounting number
-          type: string
-          example: '00356'
-        status:
-          description: bank account status
-          type: string
-          enum:
-          - active
-          - inactive
-    department-3:
-      type: object
-      title: Department
-      description: Need to embed **department** in request query params
-      properties:
-        uuid:
-          type: string
-          format: uuid
-          example: c59c9852-2584-11ee-be56-0242ac120002
-        name:
-          type: string
-          example: Marketing
     federal_tax-2:
       type: object
       title: Federal Tax
@@ -414,6 +311,50 @@ components:
         two_jobs:
           description: whether the employee has two jobs or not
           type: boolean
+    direct_deposit:
+      type: object
+      title: employee's direct_deposit
+      properties:
+        account_number:
+          description: bank account number
+          type: string
+          example: '112223344'
+        account_type:
+          description: bank account type
+          type: string
+          example: saving
+        percentage:
+          description: percentage of compensation credited into this account
+          type: integer
+        routing_number:
+          description: bank rounting number
+          type: string
+          example: '00356'
+        status:
+          description: bank account status
+          type: string
+          enum:
+          - active
+          - inactive
+    custom_field:
+      type: array
+      title: custom field
+      description: Need to embed **custom_fields** in request query params.
+      items:
+        type: object
+        properties:
+          uuid:
+            description: Custom field uuid
+            type: string
+            example: 509a251a-93af-41e3-8416-23b29dc293cc
+          title:
+            description: Custom field title
+            type: string
+            example: custom field title
+          value:
+            description: Custom field value
+            type: string
+            example: custom field value
     location-3:
       type: object
       title: Location
@@ -426,6 +367,59 @@ components:
         name:
           type: string
           example: SF store
+    information-2:
+      type: object
+      title: Information
+      description: Need to embed **information** in request query params.
+      properties:
+        phone:
+          description: Team member's phone number.
+          type: string
+          example: '+17789882873'
+        email:
+          description: Team member's email address.
+          type: string
+          example: wadam@example.fr
+        dob:
+          description: Team member's date of birth.
+          type: string
+          format: date
+          example: '2020-04-01'
+        ethnicity:
+          description: Team member's ethnicity.
+          type: string
+          enum:
+          - white
+          - black_or_african_american
+          - hispanic_or_latino
+          - american_indian_or_alaskan_native
+          - asian
+          - native_hawaiian_or_other_pacific_islander
+          - two_or_more_races
+          - not_specified
+          example: black_or_african_american
+        gender:
+          description: Team member's gender.
+          type: string
+          enum:
+          - female
+          - male
+          - non_binary
+          example: male
+        ssn:
+          description: Team member's social security number.
+          type: string
+          example: '222521248'
+        marital_status:
+          description: Team member's marital status.
+          type: string
+          enum:
+          - never_married
+          - married
+          - separated
+          - divorced
+          - widowed
+          example: never_married
     creation-2:
       required:
       - first_name
@@ -531,6 +525,67 @@ components:
         metadata:
           type: object
           description: Customer-defined key-value pairs. Use this parameter to store additional information on your candidate.
+    state_tax:
+      type: object
+      title: employee's state tax info
+      description: Need to embed **state_tax** in request query params.
+      properties:
+        allowances_exemptions:
+          description: allowed exemptions amount
+          type: integer
+        extra_withholding:
+          description: extra withholding amount
+          type: integer
+        filing_status:
+          description: filing status
+          type: string
+        tax_form:
+          description: tax form name
+          type: string
+        state:
+          description: tax form state
+          type: string
+        tax_form_details:
+          description: tax form details
+          type: object
+    job_title:
+      type: object
+      title: Job Title
+      description: Need to embed **job_title** in request query params
+      properties:
+        uuid:
+          type: string
+          format: uuid
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        title:
+          type: string
+          example: Bus Driver
+    team_member:
+      allOf:
+      - $ref: '#/components/schemas/base'
+      - type: object
+        properties:
+          job_title:
+            $ref: '#/components/schemas/job_title'
+          location:
+            $ref: '#/components/schemas/location-3'
+          department:
+            $ref: '#/components/schemas/department-3'
+          information:
+            $ref: '#/components/schemas/information-2'
+          direct_deposits:
+            type: array
+            description: Need to embed **direct_deposits** in request query params.
+            items:
+              $ref: '#/components/schemas/direct_deposit'
+          state_tax:
+            $ref: '#/components/schemas/state_tax'
+          federal_tax:
+            $ref: '#/components/schemas/federal_tax-2'
+          eligibility:
+            $ref: '#/components/schemas/state_tax-2'
+          custom_fields:
+            $ref: '#/components/schemas/custom_field'
     base:
       type: object
       title: Team Member
@@ -571,139 +626,84 @@ components:
           - hired
           - active
           - offboarded
-    information-2:
+    department-3:
       type: object
-      title: Information
-      description: Need to embed **information** in request query params.
-      properties:
-        phone:
-          description: Team member's phone number.
-          type: string
-          example: '+17789882873'
-        email:
-          description: Team member's email address.
-          type: string
-          example: wadam@example.fr
-        dob:
-          description: Team member's date of birth.
-          type: string
-          format: date
-          example: '2020-04-01'
-        ethnicity:
-          description: Team member's ethnicity.
-          type: string
-          enum:
-          - white
-          - black_or_african_american
-          - hispanic_or_latino
-          - american_indian_or_alaskan_native
-          - asian
-          - native_hawaiian_or_other_pacific_islander
-          - two_or_more_races
-          - not_specified
-          example: black_or_african_american
-        gender:
-          description: Team member's gender.
-          type: string
-          enum:
-          - female
-          - male
-          - non_binary
-          example: male
-        ssn:
-          description: Team member's social security number.
-          type: string
-          example: '222521248'
-        marital_status:
-          description: Team member's marital status.
-          type: string
-          enum:
-          - never_married
-          - married
-          - separated
-          - divorced
-          - widowed
-          example: never_married
-    job_title:
-      type: object
-      title: Job Title
-      description: Need to embed **job_title** in request query params
+      title: Department
+      description: Need to embed **department** in request query params
       properties:
         uuid:
           type: string
           format: uuid
           example: c59c9852-2584-11ee-be56-0242ac120002
-        title:
+        name:
           type: string
-          example: Bus Driver
-    team_member:
-      allOf:
-      - $ref: '#/components/schemas/base'
-      - type: object
-        properties:
-          job_title:
-            $ref: '#/components/schemas/job_title'
-          location:
-            $ref: '#/components/schemas/location-3'
-          department:
-            $ref: '#/components/schemas/department-3'
-          information:
-            $ref: '#/components/schemas/information-2'
-          direct_deposits:
-            type: array
-            description: Need to embed **direct_deposits** in request query params.
-            items:
-              $ref: '#/components/schemas/direct_deposit'
-          state_tax:
-            $ref: '#/components/schemas/state_tax'
-          federal_tax:
-            $ref: '#/components/schemas/federal_tax-2'
-          eligibility:
-            $ref: '#/components/schemas/state_tax-2'
-          custom_fields:
-            $ref: '#/components/schemas/custom_field'
-    state_tax:
-      type: object
-      title: employee's state tax info
-      description: Need to embed **state_tax** in request query params.
-      properties:
-        allowances_exemptions:
-          description: allowed exemptions amount
-          type: integer
-        extra_withholding:
-          description: extra withholding amount
-          type: integer
-        filing_status:
-          description: filing status
-          type: string
-        tax_form:
-          description: tax form name
-          type: string
-        state:
-          description: tax form state
-          type: string
-        tax_form_details:
-          description: tax form details
-          type: object
-    custom_field:
-      type: array
-      title: custom field
-      description: Need to embed **custom_fields** in request query params.
-      items:
-        type: object
-        properties:
-          uuid:
-            description: Custom field uuid
-            type: string
-            example: 509a251a-93af-41e3-8416-23b29dc293cc
-          title:
-            description: Custom field title
-            type: string
-            example: custom field title
-          value:
-            description: Custom field value
-            type: string
-            example: custom field value
+          example: Marketing
+  responses:
+    '422':
+      description: Unprocessable Entity - Invalid query params or request body.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13422
+              message:
+                type: string
+                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13403
+              message:
+                type: string
+                example: Forbidden - The user is not authorized to use this resource.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
+    '404':
+      description: Not found - The requested resource is not found.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13404
+              message:
+                type: string
+                example: The requested resource is not found.
+    '429':
+      description: Too many requests.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13429
+              message:
+                type: string
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
   securitySchemes:
     oauth2:
       type: oauth2

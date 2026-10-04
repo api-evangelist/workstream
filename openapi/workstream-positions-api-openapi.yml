@@ -163,32 +163,6 @@ paths:
           $ref: '#/components/responses/429'
 components:
   responses:
-    '403':
-      description: Forbidden - The user is not authorized to use this resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13403
-              message:
-                type: string
-                example: Forbidden - The user is not authorized to use this resource.
-    '429':
-      description: Too many requests.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13429
-              message:
-                type: string
-                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
     '422':
       description: Unprocessable Entity - Invalid query params or request body.
       content:
@@ -202,8 +176,8 @@ components:
               message:
                 type: string
                 example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
-    '401':
-      description: Unauthorized - Credentials are not valid for the target resource.
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
       content:
         application/problem+json:
           schema:
@@ -211,10 +185,10 @@ components:
             properties:
               error_code:
                 type: integer
-                example: 13401
+                example: 13403
               message:
                 type: string
-                example: Unauthorized
+                example: Forbidden - The user is not authorized to use this resource.
     '404':
       description: Not found - The requested resource is not found.
       content:
@@ -228,7 +202,52 @@ components:
               message:
                 type: string
                 example: The requested resource is not found.
+    '429':
+      description: Too many requests.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13429
+              message:
+                type: string
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
   schemas:
+    custom_field:
+      type: array
+      title: custom field
+      description: Need to embed **custom_fields** in request query params.
+      items:
+        type: object
+        properties:
+          uuid:
+            description: Custom field uuid
+            type: string
+            example: 509a251a-93af-41e3-8416-23b29dc293cc
+          title:
+            description: Custom field title
+            type: string
+            example: custom field title
+          value:
+            description: Custom field value
+            type: string
+            example: custom field value
     position:
       type: object
       title: Position
@@ -322,25 +341,6 @@ components:
         country:
           description: location's country
           type: string
-    custom_field:
-      type: array
-      title: custom field
-      description: Need to embed **custom_fields** in request query params.
-      items:
-        type: object
-        properties:
-          uuid:
-            description: Custom field uuid
-            type: string
-            example: 509a251a-93af-41e3-8416-23b29dc293cc
-          title:
-            description: Custom field title
-            type: string
-            example: custom field title
-          value:
-            description: Custom field value
-            type: string
-            example: custom field value
   securitySchemes:
     oauth2:
       type: oauth2

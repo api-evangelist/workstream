@@ -196,128 +196,92 @@ paths:
         '429':
           $ref: '#/components/responses/429'
 components:
-  responses:
-    '403':
-      description: Forbidden - The user is not authorized to use this resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13403
-              message:
-                type: string
-                example: Forbidden - The user is not authorized to use this resource.
-    '429':
-      description: Too many requests.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13429
-              message:
-                type: string
-                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
-    '401':
-      description: Unauthorized - Credentials are not valid for the target resource.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13401
-              message:
-                type: string
-                example: Unauthorized
-    '404':
-      description: Not found - The requested resource is not found.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13404
-              message:
-                type: string
-                example: The requested resource is not found.
-    '422':
-      description: Unprocessable Entity - Invalid query params or request body.
-      content:
-        application/problem+json:
-          schema:
-            type: object
-            properties:
-              error_code:
-                type: integer
-                example: 13422
-              message:
-                type: string
-                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
   schemas:
-    direct_deposit:
+    work_location:
       type: object
-      title: employee's direct_deposit
+      title: employee's work location
+      description: Need to embed **work_location** in request query params.
       properties:
-        account_number:
-          description: bank account number
+        name:
+          description: work location name
           type: string
-          example: '112223344'
-        account_type:
-          description: bank account type
+          example: Store
+        address:
+          description: work location street address
           type: string
-          example: saving
-        percentage:
-          description: percentage of compensation credited into this account
-          type: integer
-        routing_number:
-          description: bank rounting number
+          example: 800 Kings Way
+        city:
+          description: work location city
           type: string
-          example: '00356'
-        status:
-          description: bank account status
+          example: Vancouver
+        state:
+          description: work location state
           type: string
-          enum:
-          - active
-          - inactive
-    eligibility:
+          example: VA
+        country:
+          description: work location country
+          type: string
+          example: US
+        zipcode:
+          description: work location zipcode
+          type: string
+          example: '23321'
+    eligibility_details:
       type: object
-      title: employee's eligibility information
-      description: Need to embed **eligibility** in request query params.
+      title: Employee's detailed eligibility information
+      description: Need to embed **eligibility_details** in request query params.
       properties:
-        admission_number:
-          description: I-94 admission number, if applicable
+        i9_section_one:
+          $ref: '#/components/schemas/i9_section_one'
+        i9_section_two:
+          $ref: '#/components/schemas/i9_section_two'
+    information:
+      type: object
+      title: employee's information details
+      description: Need to embed **information** in request query params.
+      properties:
+        phone:
+          description: employee phone
           type: string
-        alien_authorized_to_work_expiration_date:
-          description: alien authorized to work expiration date, if applicable
+          example: '+17789882873'
+        email:
+          description: employee email
+          type: string
+          example: wadam@example.fr
+        birthday:
+          description: employee birthday
           type: string
           format: date
-        alien_registration_or_uscis_number:
-          description: alien registration or uscis number
+        ethnicity:
+          description: employee ethnicity
           type: string
-        country_of_issuance:
-          description: country of issuance of passport
+          example: black_or_african_american
+        gender:
+          description: employee gender
           type: string
-        lawful_permanent_resident_alien_registration_or_uscis_number:
-          description: lawful permanent resident alien registration or uscis number
-          type: integer
-        passport_number:
-          description: passport number
+          example: male
+        ssn:
+          description: employee social security number
           type: string
-        resident_status_code:
-          description: resident status code
+          example: 0015594
+        marital_status:
+          description: employee marital status
           type: string
-        social_security_number:
-          description: social security number, if applicable
+          example: never_married
+    department-2:
+      type: object
+      title: Department
+      description: Need to embed **department** in request query params
+      properties:
+        uuid:
+          description: Department uuid
           type: string
+          format: uuid
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        name:
+          description: Department name
+          type: string
+          example: Marketing
     list_a:
       type: object
       title: List A - Documents that establish both identity and employment authorization
@@ -370,219 +334,6 @@ components:
         list_a_issuing_authority_3:
           description: Authority that issued the third List A document
           type: string
-    address:
-      type: object
-      title: employee's address
-      description: Need to embed **address** in request query params.
-      properties:
-        address:
-          description: street address
-          type: string
-          example: 6488 Gateway dr
-        city:
-          description: city
-          type: string
-          example: Washington
-        state:
-          description: state
-          type: string
-          example: United States
-        country:
-          description: country
-          type: string
-          example: Virginia
-        zipcode:
-          description: zipcode
-          type: string
-          example: '23703'
-    information:
-      type: object
-      title: employee's information details
-      description: Need to embed **information** in request query params.
-      properties:
-        phone:
-          description: employee phone
-          type: string
-          example: '+17789882873'
-        email:
-          description: employee email
-          type: string
-          example: wadam@example.fr
-        birthday:
-          description: employee birthday
-          type: string
-          format: date
-        ethnicity:
-          description: employee ethnicity
-          type: string
-          example: black_or_african_american
-        gender:
-          description: employee gender
-          type: string
-          example: male
-        ssn:
-          description: employee social security number
-          type: string
-          example: 0015594
-        marital_status:
-          description: employee marital status
-          type: string
-          example: never_married
-    list_b:
-      type: object
-      title: List B - Documents that establish identity and employment authorization
-      properties:
-        list_b_document_title_1:
-          description: Title of the first List B document provided by the employee
-          type: string
-        list_b_document_code:
-          description: Code associated with List B documents
-          type: string
-        list_b_document_number_1:
-          description: Number associated with the List B document provided by the employee
-          type: string
-        list_b_issuing_authority_1:
-          description: Authority that issued the first List B document
-          type: string
-        list_b_us_state_code_1:
-          description: Two-letter code representing the U.S. state for List B documents
-          type: string
-          example: CA
-        list_b_expiration_date_1:
-          description: Expiration date of the first List B document
-          type: string
-          format: date
-        list_b_no_expiration_date:
-          description: Indicates if List B documents have no expiration date
-          type: boolean
-    compensation:
-      type: object
-      title: employee's compensation
-      description: Need to embed **compensation** in request query params.
-      properties:
-        additional_remuneration:
-          description: additional remuneration amount
-          type: string
-          example: '2'
-        additional_remuneration_currency_code:
-          description: additional remuneration currency code
-          type: string
-          example: USD
-        employment_status:
-          description: employment status
-          type: string
-          enum:
-          - full_time
-          - part_time
-          - contract
-          - internship
-          - temporary
-          - commission
-        status:
-          description: compensation status
-          type: string
-          example: non_exempt
-        wage_amount:
-          description: wage amount
-          type: string
-          example: '12'
-        wage_currency_code:
-          description: wage currency code
-          type: string
-          example: USD
-        wage_pay_frequency:
-          description: wage pay frequency
-          type: string
-          enum:
-          - hour
-          - day
-          - week
-          - month
-          - year
-    eligibility_details:
-      type: object
-      title: Employee's detailed eligibility information
-      description: Need to embed **eligibility_details** in request query params.
-      properties:
-        i9_section_one:
-          $ref: '#/components/schemas/i9_section_one'
-        i9_section_two:
-          $ref: '#/components/schemas/i9_section_two'
-    work_location:
-      type: object
-      title: employee's work location
-      description: Need to embed **work_location** in request query params.
-      properties:
-        name:
-          description: work location name
-          type: string
-          example: Store
-        address:
-          description: work location street address
-          type: string
-          example: 800 Kings Way
-        city:
-          description: work location city
-          type: string
-          example: Vancouver
-        state:
-          description: work location state
-          type: string
-          example: VA
-        country:
-          description: work location country
-          type: string
-          example: US
-        zipcode:
-          description: work location zipcode
-          type: string
-          example: '23321'
-    federal_tax:
-      type: object
-      title: employee's federal tax info
-      description: Need to embed **federal_tax** in request query params.
-      properties:
-        deductions:
-          description: tax deductions amount
-          type: integer
-        extra_withholding:
-          description: extra withholding amount
-          type: integer
-        filing_status:
-          description: filing status
-          type: string
-        other_income:
-          description: other income amount
-          type: integer
-        qualifying_children_num:
-          description: qualifying children amount
-          type: integer
-        qualifying_other_num:
-          description: qualifying other amount
-          type: integer
-        dependents:
-          description: dependents amount
-          type: integer
-        two_jobs:
-          description: whether the employee has two jobs or not
-          type: boolean
-        exempt_from_withholding:
-          description: whether the employee is exempt from withholding or not
-          type: string
-    department-2:
-      type: object
-      title: Department
-      description: Need to embed **department** in request query params
-      properties:
-        uuid:
-          description: Department uuid
-          type: string
-          format: uuid
-          example: c59c9852-2584-11ee-be56-0242ac120002
-        name:
-          description: Department name
-          type: string
-          example: Marketing
     employee:
       type: object
       title: Employee
@@ -668,6 +419,20 @@ components:
           $ref: '#/components/schemas/location-2'
         department:
           $ref: '#/components/schemas/department-2'
+    location-2:
+      type: object
+      title: Location
+      description: Need to embed **location** in request query params
+      properties:
+        uuid:
+          description: Location uuid
+          type: string
+          format: uuid
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        name:
+          description: location name
+          type: string
+          example: SF store
     i9_section_one:
       type: object
       title: Form I-9 section 1 details
@@ -701,6 +466,128 @@ components:
           description: Date at which employee signed section 1
           type: string
           format: date
+    emergency_contact:
+      type: object
+      title: employee's emergency contact information
+      description: Need to embed **emergency_contact** in request query params.
+      properties:
+        name:
+          description: emergency contact name
+          type: string
+          example: Melinda Folk
+        email:
+          description: emergency contact email
+          type: string
+          example: folk@example.fr
+        phone:
+          description: emergency contact phone
+          type: string
+          example: '+16084559135'
+        relationship:
+          description: emergency contact relationship
+          type: string
+          example: Father
+    direct_deposit:
+      type: object
+      title: employee's direct_deposit
+      properties:
+        account_number:
+          description: bank account number
+          type: string
+          example: '112223344'
+        account_type:
+          description: bank account type
+          type: string
+          example: saving
+        percentage:
+          description: percentage of compensation credited into this account
+          type: integer
+        routing_number:
+          description: bank rounting number
+          type: string
+          example: '00356'
+        status:
+          description: bank account status
+          type: string
+          enum:
+          - active
+          - inactive
+    eligibility:
+      type: object
+      title: employee's eligibility information
+      description: Need to embed **eligibility** in request query params.
+      properties:
+        admission_number:
+          description: I-94 admission number, if applicable
+          type: string
+        alien_authorized_to_work_expiration_date:
+          description: alien authorized to work expiration date, if applicable
+          type: string
+          format: date
+        alien_registration_or_uscis_number:
+          description: alien registration or uscis number
+          type: string
+        country_of_issuance:
+          description: country of issuance of passport
+          type: string
+        lawful_permanent_resident_alien_registration_or_uscis_number:
+          description: lawful permanent resident alien registration or uscis number
+          type: integer
+        passport_number:
+          description: passport number
+          type: string
+        resident_status_code:
+          description: resident status code
+          type: string
+        social_security_number:
+          description: social security number, if applicable
+          type: string
+    position-2:
+      type: object
+      title: Position
+      description: Need to embed **position** in request query params
+      properties:
+        uuid:
+          description: Position uuid
+          type: string
+          format: uuid
+          example: c59c9852-2584-11ee-be56-0242ac120002
+        title:
+          description: Position title
+          type: string
+          example: Cook
+    federal_tax:
+      type: object
+      title: employee's federal tax info
+      description: Need to embed **federal_tax** in request query params.
+      properties:
+        deductions:
+          description: tax deductions amount
+          type: integer
+        extra_withholding:
+          description: extra withholding amount
+          type: integer
+        filing_status:
+          description: filing status
+          type: string
+        other_income:
+          description: other income amount
+          type: integer
+        qualifying_children_num:
+          description: qualifying children amount
+          type: integer
+        qualifying_other_num:
+          description: qualifying other amount
+          type: integer
+        dependents:
+          description: dependents amount
+          type: integer
+        two_jobs:
+          description: whether the employee has two jobs or not
+          type: boolean
+        exempt_from_withholding:
+          description: whether the employee is exempt from withholding or not
+          type: string
     list_c:
       type: object
       title: List C - Documents that establish employment authorization only
@@ -724,6 +611,107 @@ components:
         list_c_no_expiration_date:
           description: Indicates if the first List C document has no expiration date
           type: boolean
+    list_b:
+      type: object
+      title: List B - Documents that establish identity and employment authorization
+      properties:
+        list_b_document_title_1:
+          description: Title of the first List B document provided by the employee
+          type: string
+        list_b_document_code:
+          description: Code associated with List B documents
+          type: string
+        list_b_document_number_1:
+          description: Number associated with the List B document provided by the employee
+          type: string
+        list_b_issuing_authority_1:
+          description: Authority that issued the first List B document
+          type: string
+        list_b_us_state_code_1:
+          description: Two-letter code representing the U.S. state for List B documents
+          type: string
+          example: CA
+        list_b_expiration_date_1:
+          description: Expiration date of the first List B document
+          type: string
+          format: date
+        list_b_no_expiration_date:
+          description: Indicates if List B documents have no expiration date
+          type: boolean
+    address:
+      type: object
+      title: employee's address
+      description: Need to embed **address** in request query params.
+      properties:
+        address:
+          description: street address
+          type: string
+          example: 6488 Gateway dr
+        city:
+          description: city
+          type: string
+          example: Washington
+        state:
+          description: state
+          type: string
+          example: United States
+        country:
+          description: country
+          type: string
+          example: Virginia
+        zipcode:
+          description: zipcode
+          type: string
+          example: '23703'
+    state_tax:
+      type: object
+      title: employee's state tax info
+      description: Need to embed **state_tax** in request query params.
+      properties:
+        allowances_exemptions:
+          description: allowed exemptions amount
+          type: integer
+        extra_withholding:
+          description: extra withholding amount
+          type: integer
+        filing_status:
+          description: filing status
+          type: string
+        tax_form:
+          description: tax form name
+          type: string
+        state:
+          description: tax form state
+          type: string
+        tax_form_details:
+          description: tax form details
+          type: object
+    i9_section_two:
+      type: object
+      title: Form I-9 section 2 details
+      properties:
+        employer_fname:
+          description: Employer's first name
+          type: string
+        employer_lname:
+          description: Employer's last name
+          type: string
+        employer_job_title:
+          description: Employer's job title
+          type: string
+        employee_start_date:
+          description: Employee's first day of employment
+          type: string
+        employer_signed_date:
+          description: Date at which employer signed section 2
+          format: date
+          type: string
+        list_a:
+          $ref: '#/components/schemas/list_a'
+        list_b:
+          $ref: '#/components/schemas/list_b'
+        list_c:
+          $ref: '#/components/schemas/list_c'
     custom_forms:
       type: array
       title: employee's custom forms
@@ -786,104 +774,116 @@ components:
           description: employee start date
           type: string
           format: date
-    position-2:
+    compensation:
       type: object
-      title: Position
-      description: Need to embed **position** in request query params
+      title: employee's compensation
+      description: Need to embed **compensation** in request query params.
       properties:
-        uuid:
-          description: Position uuid
+        additional_remuneration:
+          description: additional remuneration amount
           type: string
-          format: uuid
-          example: c59c9852-2584-11ee-be56-0242ac120002
-        title:
-          description: Position title
+          example: '2'
+        additional_remuneration_currency_code:
+          description: additional remuneration currency code
           type: string
-          example: Cook
-    location-2:
-      type: object
-      title: Location
-      description: Need to embed **location** in request query params
-      properties:
-        uuid:
-          description: Location uuid
+          example: USD
+        employment_status:
+          description: employment status
           type: string
-          format: uuid
-          example: c59c9852-2584-11ee-be56-0242ac120002
-        name:
-          description: location name
+          enum:
+          - full_time
+          - part_time
+          - contract
+          - internship
+          - temporary
+          - commission
+        status:
+          description: compensation status
           type: string
-          example: SF store
-    emergency_contact:
-      type: object
-      title: employee's emergency contact information
-      description: Need to embed **emergency_contact** in request query params.
-      properties:
-        name:
-          description: emergency contact name
+          example: non_exempt
+        wage_amount:
+          description: wage amount
           type: string
-          example: Melinda Folk
-        email:
-          description: emergency contact email
+          example: '12'
+        wage_currency_code:
+          description: wage currency code
           type: string
-          example: folk@example.fr
-        phone:
-          description: emergency contact phone
+          example: USD
+        wage_pay_frequency:
+          description: wage pay frequency
           type: string
-          example: '+16084559135'
-        relationship:
-          description: emergency contact relationship
-          type: string
-          example: Father
-    i9_section_two:
-      type: object
-      title: Form I-9 section 2 details
-      properties:
-        employer_fname:
-          description: Employer's first name
-          type: string
-        employer_lname:
-          description: Employer's last name
-          type: string
-        employer_job_title:
-          description: Employer's job title
-          type: string
-        employee_start_date:
-          description: Employee's first day of employment
-          type: string
-        employer_signed_date:
-          description: Date at which employer signed section 2
-          format: date
-          type: string
-        list_a:
-          $ref: '#/components/schemas/list_a'
-        list_b:
-          $ref: '#/components/schemas/list_b'
-        list_c:
-          $ref: '#/components/schemas/list_c'
-    state_tax:
-      type: object
-      title: employee's state tax info
-      description: Need to embed **state_tax** in request query params.
-      properties:
-        allowances_exemptions:
-          description: allowed exemptions amount
-          type: integer
-        extra_withholding:
-          description: extra withholding amount
-          type: integer
-        filing_status:
-          description: filing status
-          type: string
-        tax_form:
-          description: tax form name
-          type: string
-        state:
-          description: tax form state
-          type: string
-        tax_form_details:
-          description: tax form details
-          type: object
+          enum:
+          - hour
+          - day
+          - week
+          - month
+          - year
+  responses:
+    '422':
+      description: Unprocessable Entity - Invalid query params or request body.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13422
+              message:
+                type: string
+                example: (forbidden_embedded_resources}) is not a supported 'embed'. Valid 'embed' keys are (permitted_embedded_resources).
+    '404':
+      description: Not found - The requested resource is not found.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13404
+              message:
+                type: string
+                example: The requested resource is not found.
+    '401':
+      description: Unauthorized - Credentials are not valid for the target resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13401
+              message:
+                type: string
+                example: Unauthorized
+    '403':
+      description: Forbidden - The user is not authorized to use this resource.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13403
+              message:
+                type: string
+                example: Forbidden - The user is not authorized to use this resource.
+    '429':
+      description: Too many requests.
+      content:
+        application/problem+json:
+          schema:
+            type: object
+            properties:
+              error_code:
+                type: integer
+                example: 13429
+              message:
+                type: string
+                example: Throttle limit reached. Limit to 100 requests in 60 seconds.
   securitySchemes:
     oauth2:
       type: oauth2
